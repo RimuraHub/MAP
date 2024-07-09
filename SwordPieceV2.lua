@@ -19,46 +19,50 @@ local Section = Tab1:AddSection({"Select Weapon - เลือกอาวุธ
 
 local Weaponlist = {}
 local Weapon = nil
+local drop -- เพิ่มตัวแปร drop เพื่อเก็บ Dropdown
 
 for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
     table.insert(Weaponlist,v.Name)
 end
 
 local Dropdown = Tab1:AddDropdown({
-  Name = "Select Weapon",
-  Description = "เลือกอาวุธ",
-  Options = Weaponlist,
-  Default = nil,
-  Flag = "dropdown teste",
-  Callback = function(B)
-     Weapon = B
-  end
+    Name = "Select Weapon",
+    Description = "เลือกอาวุธ",
+    Options = Weaponlist,
+    Default = nil,
+    Flag = "dropdown teste",
+    Callback = function(B)
+        Weapon = B
+    end
 })
 
-local Button = Tab2:AddButton({"RefreshWeaponlist", "รีเฟรชอาวุธ", function()
-    drop:Refresh(Weaponlist)
-   end})
-  
+local Button = Tab1:AddButton({
+    Name = "RefreshWeaponList",
+    Description = "รีเฟรชอาวุธ",
+    Callback = function()
+        drop:Refresh(Weaponlist)
+    end
+})
 
 local Toggle1 = Tab1:AddToggle({
-  Name = "Auto Equip",
-  Description = "ออโต้ถือ",
-  Default = false,
-  Callback = function(GG)
-  AutoEquiped = GG
-  end
+    Name = "Auto Equip",
+    Description = "ออโต้ถือ",
+    Default = false,
+    Callback = function(GG)
+        AutoEquiped = GG
+    end
 })
 
-
 spawn(function()
-while wait() do
-if AutoEquiped then
-pcall(function()
-game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Weapon))
+    while wait() do
+        if AutoEquiped then
+            pcall(function()
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(Weapon))
+            end)
+        end
+    end
 end)
-end
-end
-end)
+
 
 
 
@@ -67,48 +71,47 @@ local Section = Tab1:AddSection({"Auto Farm[bug] - ออโต้ฟาม[บ�
 
 
 local Mob = {}
+local folderToRead = game.Workspace:WaitForChild("MobFolder") -- เปลี่ยน "MobFolder" เป็นชื่อของโฟลเดอร์ Mob ที่คุณต้องการ
 
-for i, v in pairs(game:GetService("Workspace").Mob: GetChildren()) do
-    table.insert(Mob, v.Name)
+local function GetModelsInFolder(folder)
+    local models = {}
+    for _, child in ipairs(folder:GetChildren()) do
+        if child:IsA("Model") then
+            table.insert(models, child.Name)
+        end
+    end
+    return models
+end
+
+local modelsInFolder = GetModelsInFolder(folderToRead)
+
+for _, modelName in ipairs(modelsInFolder) do
+    table.insert(Mob, modelName)
 end
 
 local Dropdown = Tab1:AddDropdown({
-  Name = "Select Mob",
-  Description = "เลือกมอน",
-  Options = Mob,
-  Default = nil,
-  Flag = "dropdown teste",
-  Callback = function(Value)
-    MonFarm = Value
-  end
+    Name = "Select Mob",
+    Description = "เลือกมอน",
+    Options = Mob,
+    Default = nil,
+    Flag = "dropdown teste",
+    Callback = function(Value)
+        MonFarm = Value
+    end
 })
 
-local Toggle1 = Tab1:AddToggle({
-  Name = "Auto Farm",
-  Description = "ออโต้ฟาม",
-  Default = false,
-  Callback = function(Hee)
-  _G.a = Hee
-  end
-})
-
-function A()
-  game:GetService'VirtualUser':CaptureController()
-game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-end
-
-
+-- ส่วนของ Toggle1 และ Function A ยังคงเดิม
 
 spawn(function()
     while wait() do
         pcall(function()
             if _G.a then
-                for i, v in pairs(game:GetService("Workspace").Mob:GetDescendants()) do
-                    if v.Name == MonFarm and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
+                for _, v in ipairs(folderToRead:GetChildren()) do
+                    if v:IsA("Model") and v.Name == MonFarm and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health >= 1 then
                         repeat
-                           A()
+                            A()
                             wait()
- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2)
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2)
                         until _G.a == false or v.Humanoid.Health <= 0
                     end
                 end
@@ -116,6 +119,7 @@ spawn(function()
         end)
     end
 end)
+
 
 local Section = Tab2:AddSection({
 	Name = "TeleportPlayer- วาปไปหาผู้เล่น:"
@@ -126,12 +130,13 @@ local plrs = game.Players
 -- Fetch all player names
 local playerNames = {}
 local players = plrs:GetPlayers()
+local drop2
 
 for _, player in ipairs(players) do
     table.insert(playerNames, player.Name)
 end
 
-Tab2:AddDropdown({
+drop2 = Tab2:AddDropdown({
     Name = "Players",
     Default = playerNames[1] or "No Players",
     Options = playerNames,
@@ -139,7 +144,6 @@ Tab2:AddDropdown({
         local targetPlayer = plrs:FindFirstChild(selectedplrName)
         
         if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            -- Teleporting your character to the selected player's position
             local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
             local localPlayerRoot = plrs.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             
@@ -152,7 +156,7 @@ Tab2:AddDropdown({
 })
 
 local Button = Tab2:AddButton({"RefreshPlayer[bug]", "รีเฟรชเพลเยอร์[บัค]", function()
-    drop:Refresh(Plr)
+    drop2:Refresh(Plr)
    end})
 
 local Section = Tab2:AddSection({"Teleport - วาป"})
@@ -299,18 +303,18 @@ local Dropdown = Tab4:AddDropdown({
 
 local Section= Tab4:AddSection({"Summon Melee - เสกหมัด"})
 
-local Weaponlist = {}
+local WeaponlistMelee = {}
 
 for i, v in pairs(game.Players.LocalPlayer.InventoryListMelee:GetChildren()) do
-    table.insert(Weaponlist, v.Name)
+    table.insert(WeaponlistMelee, v.Name)
 end
 
-local Dropdown = Tab4:AddDropdown({
-    Name = "Select Weapon",
-    Description = "เลือกอาวุธ",
-    Options = Weaponlist,
+Tab4:AddDropdown({
+    Name = "Select Melee Weapon",
+    Description = "เลือกหมัด",
+    Options = WeaponlistMelee,
     Default = nil,
-    Flag = "dropdown teste",
+    Flag = "dropdown melee",
     Callback = function(selectedOption)
         local args = {
             [1] = selectedOption
