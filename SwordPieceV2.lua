@@ -20,14 +20,11 @@ local Section = Tab1:AddSection({"Select Weapon - เลือกอาวุธ
 local Weaponlist = {}
 local Weapon = nil
 
-local function refreshWeaponList()
-    Weaponlist = {}
     for _,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
         table.insert(Weaponlist,v.Name)
     end
 end
 
-refreshWeaponList()
 
 local Dropdown = Tab1:AddDropdown({
   Name = "Select Weapon",
@@ -40,35 +37,12 @@ local Dropdown = Tab1:AddDropdown({
   end
 })
 
-Tab1:AddButton({
-  Name = "RefreshWeaponList",
-  Description = "รีเฟรชรายการอาวุธ",
-  Callback = function()
-    refreshWeaponList()
-    Dropdown:Refresh(Weaponlist, true)
-  end
-})
-
 local Toggle1 = Tab1:AddToggle({
   Name = "Auto Equip",
   Description = "ออโต้ถือ",
   Default = false,
   Callback = function(GG)
     AutoEquiped = GG
-  end
-})
-
-local Toggle1 = Tab1:AddToggle({
-  Name = "Auto Attack",
-  Description = "ออโต้ถือ",
-  Default = false,
-  Callback = function(GG)
-         _G.Auto = GG
-    while _G.Auto do
-        wait()
-        game:GetService('VirtualUser'):CaptureController()
-        game:GetService('VirtualUser'):Button1Down(Vector2.new(1280, 672))
-    end
   end
 })
 
