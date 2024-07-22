@@ -33,10 +33,6 @@ Section:NewButton("dex mobile", "อ่านทำมะเขืออะไ�
 __function(__function)
 end)
 
-Section:NewButton("dex mobile", "อ่านทำมะเขืออะไร", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RS/main/SimpleSpyMobile"))()
-end)
-
 Section:NewButton("X spy mobile X", "อ่านทำมะเขืออะไร", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RS/main/SimpleSpyMobile"))()
 end)
