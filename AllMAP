@@ -2,6 +2,9 @@ if game.PlaceId == 12004594806 then
     print ("Sword Piece")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/SwordPiece.txt"))()
 elseif game.PlaceId == 18271034370 then
-    print ("Sakura Fruit")
+    print ("Sakura piece")
     loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/SakuraPiece.lua"))()
+elseif game.PlaceId == 15049111150 then
+    print ("Second piece")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/SecondPiece.lua"))()
     end
