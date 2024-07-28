@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/AllMAP.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/AllMAP"))()
