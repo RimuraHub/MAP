@@ -7,4 +7,7 @@ elseif game.PlaceId == 18271034370 then
 elseif game.PlaceId == 15049111150 then
     print ("Second piece")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/SecondPiece.lua"))()
-    end
+elseif game.PlaceId == 10260193230 then
+    print ("Meme Sea")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/MemeSea.lua"))()
+end
