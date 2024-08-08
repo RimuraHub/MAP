@@ -36,3 +36,7 @@ end)
 Section:NewButton("X spy mobile X", "อ่านทำมะเขืออะไร", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RS/main/SimpleSpyMobile"))()
 end)
+
+Section:NewButton("httpsSpy", "อ่านทำมะเขืออะไร", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/httpspy.lua"))()
+end)
