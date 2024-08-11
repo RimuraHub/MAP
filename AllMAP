@@ -10,7 +10,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/Se
 elseif game.PlaceId == 10260193230 then
     print ("Meme Sea")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/MemeSea.lua"))()
-elseif game.PlaceId == 17415731457 then
-    print ("XDAX Piece piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/XADX%20PIECE.lua"))()
 end
