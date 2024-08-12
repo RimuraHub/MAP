@@ -13,4 +13,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/Me
 elseif game.PlaceId == 17415731457 then
     print ("XDAX Piece piece")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/XADX%20PIECE.lua"))()
+elseif game.PlaceId == 14288176792 then
+    print ("Condi piece")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"))()
 end
