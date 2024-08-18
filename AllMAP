@@ -19,4 +19,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/Co
 elseif game.PlaceId == 15030260251 then
     print ("Condi sea2 piece")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"))()
+elseif game.PlaceId == 18688206652 then
+    print ("ijul piece 2")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/ijul.lua"))()
 end
+
