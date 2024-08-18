@@ -23,4 +23,3 @@ elseif game.PlaceId == 18688206652 then
     print ("ijul piece 2")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/ijul.lua"))()
 end
-
