@@ -25,4 +25,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/ij
 elseif game.PlaceId == 17545130379 then
     print ("Royal sea")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/RoyalSea.lua"))()
+elseif game.PlaceId == 17167990958 then
+    print ("Rock Fruit")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/RockFruit.lua"))()
 end
