@@ -35,6 +35,6 @@ elseif game.PlaceId == 15700946653 then
     print ("G pirate")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Gpi.lua"))()
 elseif game.PlaceId == 16448761503 then
-    print ("Rush sea")
+    print ("Rung sea")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Rush%20sea.lua"))()
 end
