@@ -36,5 +36,5 @@ elseif game.PlaceId == 15700946653 then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Gpi.lua"))()
 elseif game.PlaceId == 16448761503 then
     print ("Rung sea")
-loadstring(game:HttpGet("https://github.com/Godmey/Rungsea/blob/main/Ruakak.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"))()
 end
