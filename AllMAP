@@ -38,6 +38,6 @@ elseif game.PlaceId == 16448761503 then
     print ("Rung sea")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"))()
 elseif game.PlaceId == 75972208642796 then
-    print ("Rung sea")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"))()
+    print ("Blox Legacy")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Blox%20Legacy.lua.txt"))()
 end
