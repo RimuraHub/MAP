@@ -42,5 +42,5 @@ elseif game.PlaceId == 75972208642796 then
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Blox%20Legacy.lua.txt"))()
 elseif game.PlaceId == 18968803452 then
     print ("Muyong-Piece")
-loadstring(game:HttpGet("https://pastebin.com/raw/v2JcCL3u"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyo.lua"))()
 end
