@@ -125,6 +125,15 @@ T5:AddToggle({
         _gv.OH = hhh
     end
 })
+
+T5:AddButton({"Redeem All Code", function()
+   for _, v in pairs(game:GetService("Players").LocalPlayer.Codes:GetChildren()) do
+       if v.Name then
+game:GetService("ReplicatedStorage").RedeemCode:FireServer(v.Name)
+       end
+    end
+end
+})
 ------[[ Spawn Function ]]------
 
 spawn(function()
