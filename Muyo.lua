@@ -26,7 +26,18 @@ game:GetService('VirtualUser'):CaptureController()
 game:GetService('VirtualUser'):ClickButton1(Vector2.new(851, 158),game:GetService("Workspace").Camera.CFrame)
 end
 function EquipTool()
-game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(_G.Weapon))
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") and v.ToolTip == _G.Weapon then
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+    end
+  end
+end
+function SpamSkill() 
+  for _, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
+    if v:IsA("Tool") and v.ToolTip == _gv.SLK and v:IsA("RemoteEvent") then
+        v:FireServer()
+    end
+  end
 end
 local function TP(cframe)
     pcall(function()
@@ -40,8 +51,9 @@ end
 
 local Wsp = game:GetService("Workspace")
 local Ply = game:GetService("Players")
+local ChaPly = Ply.LocalPlayer.Character or Ply.LocalPlayer.CharacterAdded:Wait()
 local NameMap = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
-local Wea = GetN_Child(Ply.LocalPlayer.Backpack, "Tool")
+local Wea = {"Melee","Sword","DevilFruit"}
 local island = GetN_Child(Wsp.Map.island,"Model")
 local Shop = GetN_Child(Wsp.Map.Shop,"Model")
 local Mon = {}
@@ -52,10 +64,12 @@ for _, v in pairs(Wsp.Map.Monster:GetDescendants()) do
     table.insert(Mon, v.Name)
   end
 end
+local Delay = {"Fast","Slow"}
+
 ------[[ Ui library ]]------
 
 local Window = redzlib:MakeWindow({
-    Title = "Rimura Hub : " .. NameMap,
+    Title = "Rimura Hub : " .. NameMap, -- muyoug piece
     SubTitle = "",
     SaveFolder = "",
 })
@@ -65,6 +79,7 @@ Window:AddMinimizeButton({
 })
 local T1 = Window:MakeTab({"Discord", "Info"})
 local T2 = Window:MakeTab({"Auto Farm", "Home"})
+local T3 = Window:MakeTab({"item", "Sword"})
 local T4 = Window:MakeTab({"Teleport", "Signal"})
 local T5 = Window:MakeTab({"Misc", "Settings"})
 T1:AddDiscordInvite({
@@ -90,10 +105,28 @@ T2:AddToggle({
       _gv.ATB = e
     end
 })
-T4:AddSection({"| Island"})
-AddDropdown(T4, "Select island", island, "nil", "island", function(gay)
-_gv.SLIS = gay
-end)
+T4:AddSection({"| Item Click"})
+T5:AddToggle({
+    Name = "Click Beil",
+    Default = false,
+    Callback = function(Beil)
+        _gv.FreeBeil = Beil
+    end
+})
+T5:AddToggle({
+    Name = "Click Gem",
+    Default = false,
+    Callback = function(Gem)
+        _gv.FreeGem = Gem
+    end
+})
+T5:AddToggle({
+    Name = "Click Exp",
+    Default = false,
+    Callback = function(Exp)
+        _gv.FreeExp = Exp
+    end
+})
 T4:AddButton({"Teleport Island", function()
    for _, v in pairs(Wsp.Map.island[_gv.SLIS]:GetDescendants()) do
       if v:IsA("Part") then
@@ -125,17 +158,47 @@ T5:AddToggle({
         _gv.OH = hhh
     end
 })
-
+T5:AddSection({"| Code"})
 T5:AddButton({"Redeem All Code", function()
    for _, v in pairs(game:GetService("Players").LocalPlayer.Codes:GetChildren()) do
        if v.Name then
-game:GetService("ReplicatedStorage").RedeemCode:FireServer(v.Name)
+          game:GetService("ReplicatedStorage").RedeemCode:FireServer(v.Name)
        end
     end
 end
 })
 ------[[ Spawn Function ]]------
 
+spawn(function()
+  while task.wait() do
+    pcall(function()
+      if _gv.FreeGem then
+        fireproximityprompt(workspace.Map["Free items"]["Free  Gem"]:GetChildren()[2].ProximityPrompt, 100)
+        TP(workspace.Map["Free items"]["Free  Gem"]:GetChildren()[2].CFrame)
+      end
+    end)
+  end
+end)
+spawn(function()
+  while task.wait() do
+    pcall(function()
+      if _gv.FreeExp then
+        fireproximityprompt(workspace.Map["Free items"]["Free Ex"]:GetChildren()[2].ProximityPrompt, 100)
+        TP(workspace.Map["Free items"]["Free Ex"]:GetChildren()[2].CFrame)
+      end
+    end)
+  end
+end)
+spawn(function()
+  while task.wait() do
+    pcall(function()
+      if _gv.FreeBeil then
+      fireproximityprompt(workspace.Map["Free items"]["Free  Beli"]:GetChildren()[2].ProximityPrompt, 100)
+      TP(workspace.Map["Free items"]["Free  Beli"]:GetChildren()[2].CFrame)
+      end
+    end)
+  end
+end)
 spawn(function()
     while wait() do
         pcall(function()
