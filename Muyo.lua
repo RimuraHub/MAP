@@ -105,22 +105,22 @@ T2:AddToggle({
       _gv.ATB = e
     end
 })
-T4:AddSection({"| Item Click"})
-T5:AddToggle({
+T3:AddSection({"| Item Click"})
+T3:AddToggle({
     Name = "Click Beil",
     Default = false,
     Callback = function(Beil)
         _gv.FreeBeil = Beil
     end
 })
-T5:AddToggle({
+T3:AddToggle({
     Name = "Click Gem",
     Default = false,
     Callback = function(Gem)
         _gv.FreeGem = Gem
     end
 })
-T5:AddToggle({
+T3:AddToggle({
     Name = "Click Exp",
     Default = false,
     Callback = function(Exp)
