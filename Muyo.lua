@@ -127,6 +127,10 @@ T3:AddToggle({
         _gv.FreeExp = Exp
     end
 })
+T4:AddSection({"| Island"})
+AddDropdown(T4, "Select island", island, "nil", "island", function(gay)
+_gv.SLIS = gay
+end)
 T4:AddButton({"Teleport Island", function()
    for _, v in pairs(Wsp.Map.island[_gv.SLIS]:GetDescendants()) do
       if v:IsA("Part") then
