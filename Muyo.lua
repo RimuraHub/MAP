@@ -162,6 +162,14 @@ T5:AddToggle({
         _gv.OH = hhh
     end
 })
+T5:AddSection({"| Tools"})
+T5:AddToggle({
+    Name = "Grab Tools",
+    Default = false,
+    Callback = function(hee)
+        _G.GrabTool = hee
+    end
+})
 T5:AddSection({"| Code"})
 T5:AddButton({"Redeem All Code", function()
    for _, v in pairs(game:GetService("Players").LocalPlayer.Codes:GetChildren()) do
@@ -173,6 +181,19 @@ end
 })
 ------[[ Spawn Function ]]------
 
+spawn(function()
+  while wait() do 
+    pcall(function()
+      if _G.GrabTool then
+        for _, v in pairs(workspace:GetChildren()) do
+          if v:IsA("Tool") then
+            v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+          end
+        end
+      end
+    end)
+  end
+end)
 spawn(function()
   while task.wait() do
     pcall(function()
