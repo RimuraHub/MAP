@@ -43,4 +43,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/h
 elseif game.PlaceId == 18968803452 then
     print ("Muyong-Piece")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyo.lua"))()
+elseif game.PlaceId == 105557873963854 then
+    print ("CeeTo Fruit")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/CeeTo%20Piece.lua"))()
 end
