@@ -89,6 +89,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local island = GetN_Child(workspace.Island,"Model")
 local Shop = GetN_Child(Wsp.Sell,"Model")
 local Mon = {}
+local itemsName = {"Sword", "DevilFruit"}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
 for _, v in pairs(Wsp.Mon:GetDescendants()) do
@@ -180,11 +181,50 @@ AddDropdown(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
     _G.Weapon = ooooo
 end)
 T5:AddSection({"| Skill"})
+T5:AddToggle({
+    Name = "Z",
+    Default = false,
+    Callback = function(Z)
+      _G.Z = Z
+    end
+})
+T5:AddToggle({
+    Name = "X",
+    Default = false,
+    Callback = function(C)
+      _G.X = X
+    end
+})
+T5:AddToggle({
+    Name = "C",
+    Default = false,
+    Callback = function(C)
+      _G.C = C
+    end
+})
+T5:AddToggle({
+    Name = "V",
+    Default = false,
+    Callback = function(V)
+      _G.V = V
+    end
+})
 T5:AddButton({"NoCooldown", function()
 z = hookfunction(wait, function(seconds)
 return z()
 end)
 end})
+T5:AddTextBox({
+  Name = "Delay",
+  Description = "", 
+  PlaceholderText = "",
+  Callback = function(Num)
+    _G.Delay = Num
+  end
+})
+AddDropdown(T5, "Select Weapon", itemsName, "Sword", "Weapon", function(itemsNamee)
+    _G.itemName = itemsNamee -- เก็บค่าอาวุธที่เลือกใน _G.itemName
+end)
 
 ------[[ Spawn function ]]------
 
@@ -263,6 +303,25 @@ spawn(function()
     end
 end)
 spawn(function()
+    while true do
+        task.wait(_G.Delay or 0)
+        local player = game:GetService("Players").LocalPlayer
+        local playerGui = player.PlayerGui
+        if _G.Z then
+            game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileZ.LocalScript.RemoteEvent:FireServer()
+        end
+        if _G.X then
+            game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileX.LocalScript.RemoteEvent:FireServer()
+        end
+        if _G.C then
+            game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileC.LocalScript.RemoteEvent:FireServer()
+        end
+        if _G.V then
+            game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileV.LocalScript.RemoteEvent:FireServer()
+        end
+    end
+end)
+spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
         if _gv.ATF or _gv.ATB then
             local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -281,4 +340,3 @@ spawn(function()
         end
     end)
 end)
-
