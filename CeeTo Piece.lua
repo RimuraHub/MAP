@@ -163,7 +163,7 @@ T3:AddToggle({
     Name = "PumkinBoss",
     Default = false,
     Callback = function(PumkinBossChest)
-        _G.PumkinBossChest = SnowChest
+        _G.PumkinBossChest = PumkinBossChest
     end
 })
 T4:AddSection({"| Island"})
