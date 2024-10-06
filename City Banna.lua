@@ -87,8 +87,8 @@ local Dropdown = Tab.Ra2:AddDropdown("Dropdown", {
     _G.SelectBox = He
   end
 })
-local Toggle = Tab.Ra1:AddToggle("MyToggle",{
-  Title = "ออโต้ ขายทอง",
+local Toggle = Tab.Ra2:AddToggle("MyToggle",{
+  Title = "ออโต้ สุ่ม",
   Default = false,
   Callback = function(KK)
     _G.Ran = KK
