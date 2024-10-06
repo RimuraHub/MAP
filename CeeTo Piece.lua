@@ -40,7 +40,6 @@ local function TP(cframe)
         end
     end)
 end
-
 local function setPlayerSimulationRadius(radius)
     local player = game.Players.LocalPlayer
     if player then
@@ -53,8 +52,7 @@ local function setPlayerSimulationRadius(radius)
         end
     end
 end
-
-local function handleChestAndEnemy(autoKey, chestName, enemyName, chestPosition, enemyPosition)
+local function handleChestAndEnemy(autoKey, chestName, enemyFolder, enemyName, chestPosition, enemyPosition)
     spawn(function()
         while wait() do
             pcall(function()
@@ -62,10 +60,18 @@ local function handleChestAndEnemy(autoKey, chestName, enemyName, chestPosition,
                     setPlayerSimulationRadius(112412400000)
                     local chest = workspace:FindFirstChild(chestName)
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = chestPosition
-                    local enemy = workspace.Mon:FindFirstChild(enemyName)
+                    
+                    local enemy
+                    if enemyFolder == nil then
+                        enemy = workspace:FindFirstChild(enemyName)
+                    else
+                        enemy = workspace:FindFirstChild(enemyFolder):FindFirstChild(enemyName)
+                    end
+
                     if enemy then
                         enemy.Humanoid.Health = 0
                     end
+
                     if chest then
                         for _, v in pairs(chest:GetDescendants()) do
                             if v:IsA("ProximityPrompt") then
@@ -150,6 +156,14 @@ T3:AddToggle({
     Default = false,
     Callback = function(SnowChest)
         _G.AutoChestSnow = SnowChest
+    end
+})
+T3:AddSection({"| 🎃 Halloween Event 🎃"})
+T3:AddToggle({
+    Name = "PumkinBoss",
+    Default = false,
+    Callback = function(PumkinBossChest)
+        _G.PumkinBossChest = SnowChest
     end
 })
 T4:AddSection({"| Island"})
@@ -260,48 +274,66 @@ spawn(function()
         end)
     end
 end)
-spawn(function()
+coroutine.wrap(function()
     while true do
         task.wait(0)
         if _G.AutoChestMeehawkV1 then
             handleChestAndEnemy(
                 "AutoChestMeehawkV1",
                 "MeehawkChest",
+                "Mon",
                 "Meehawk  LV10000",
                 CFrame.new(-538.1447, 137.0595, 1083.0084),
                 CFrame.new(0, 0, 5)
             )
         end
     end
-end)
-spawn(function()
+end)()
+coroutine.wrap(function()
     while true do
         task.wait(0)
         if _G.AutoChestMeehawkV2 then
             handleChestAndEnemy(
                 "AutoChestMeehawkV2",
                 "MeehawkV2Chest",
+                "Mon",
                 "MeehawkV2  LV10000",
                 CFrame.new(-1570.245, 87.7786, -368.3696),
                 CFrame.new(0, 0, 5)
             )
         end
     end
-end)
-spawn(function()
+end)()
+coroutine.wrap(function()
     while true do
         task.wait(0)
         if _G.AutoChestSnow then
             handleChestAndEnemy(
                 "AutoChestSnow",
                 "DummySnowChest",
-                "DummySnow  LV20000",
+                "Mon",
+                "MeehawkV2  LV10000",
                 CFrame.new(-1855.7095, 100.1431, 510.1954),
                 CFrame.new(0, 0, 5)
             )
         end
     end
-end)
+end)()
+coroutine.wrap(function()
+    while true do
+        task.wait(0)
+        if _G.AutoPumkinBossChest then
+            handleChestAndEnemy(
+                "AutoPumkinBossChest",
+                "PumkinBossChest",
+                nil,
+                "PumkinBoss  LV20000",
+                CFrame.new(-1308.737060546875, 91.65947723388672, -1529.1876220703125),
+                CFrame.new(0, 0, 5)
+            )
+        end
+    end
+end)()
 spawn(function()
     while true do
         task.wait(_G.Delay or 0)
@@ -309,14 +341,11 @@ spawn(function()
         local playerGui = player.PlayerGui
         if _G.Z then
             game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileZ.LocalScript.RemoteEvent:FireServer()
-        end
-        if _G.X then
+        elseif _G.X then
             game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileX.LocalScript.RemoteEvent:FireServer()
-        end
-        if _G.C then
+        elseif _G.C then
             game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileC.LocalScript.RemoteEvent:FireServer()
-        end
-        if _G.V then
+        elseif _G.V then
             game:GetService("Players")[player.Name].PlayerGui[player.Name .. _G.itemName].MobileV.LocalScript.RemoteEvent:FireServer()
         end
     end
