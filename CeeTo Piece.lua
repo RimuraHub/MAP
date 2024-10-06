@@ -191,7 +191,7 @@ T5:AddToggle({
 T5:AddToggle({
     Name = "X",
     Default = false,
-    Callback = function(C)
+    Callback = function(X)
       _G.X = X
     end
 })
