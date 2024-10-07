@@ -1,3 +1,5 @@
+--ใครReskinขอให้ล่มจม
+
 local function GetN_Child(Folder, Class)
     local names = {}
     for _, v in pairs(Folder:GetChildren()) do
