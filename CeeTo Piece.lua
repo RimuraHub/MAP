@@ -162,8 +162,8 @@ T3:AddSection({"| 🎃 Halloween Event 🎃"})
 T3:AddToggle({
     Name = "PumkinBoss",
     Default = false,
-    Callback = function(PumkinBossChest)
-        _G.PumkinBossChest = PumkinBossChest
+    Callback = function(PumkinBossChesttoggle)
+        _G.PumkinBossChest = PumkinBossChesttoggle
     end
 })
 T4:AddSection({"| Island"})
