@@ -122,10 +122,51 @@ T5:AddToggle({
     Name = "One Hit",
     Default = false,
     Callback = function(eee)
-        _G.OneHit = eee
+getgenv().Config = {
+    ["Folder Mon"] = "Main",
+    ["Instant Kill"] = eee,
+    ["Radius"] = 15
+}
     end
 })
 
+
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if getgenv().Config["Instant Kill"] then
+                local player = game.Players.LocalPlayer
+                local character = player.Character or player.CharacterAdded:Wait()
+                sethiddenproperty(player, "SimulationRadius", 112412400000)
+                sethiddenproperty(player, "MaxSimulationRadius", 112412400000)
+                
+                local Den
+                if getgenv().Config["Folder Mon"] == "nil" then
+                    Den = game.Workspace:GetDescendants()
+                else
+                    Den = game.Workspace[getgenv().Config["Folder Mon"]]:GetDescendants()
+                end
+                
+                for _, v in pairs(Den) do
+                    if v:IsA("Humanoid") and v.Parent and v.Parent:IsA("Model") then
+                        local MonPoz = v.Parent:FindFirstChild("HumanoidRootPart") and v.Parent.HumanoidRootPart.Position
+                        local PlayerPoz = character:FindFirstChild("HumanoidRootPart") and character.HumanoidRootPart.Position
+                        
+                        if not game.Players:GetPlayerFromCharacter(v.Parent) then
+                            if MonPoz and PlayerPoz and (MonPoz - PlayerPoz).Magnitude <= getgenv().Config["Radius"] then
+                                if v.Health <= v.MaxHealth * 0.9 then
+                                    wait(.1)
+                                    v.Health = 0
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
 spawn(function()
     while wait() do
         pcall(function()
