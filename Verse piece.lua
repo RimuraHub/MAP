@@ -1,4 +1,5 @@
 --ใครReskinขอให้ล่มจม
+
 --[[ Farm lv ]]--
 
 
@@ -220,9 +221,41 @@ getgenv().Config = {
     ["Folder Mon"] = "Main",
     ["Instant Kill"] = MNae,
     ["Radius"] = 15
-}
-    end
-})
+    }
+    end})
+Tab.T4:AddSection("| Skill")
+Tab.T4:AddToggle("Toggle", {
+    Title = "Z",
+    Default = false,
+    Callback = function(Z)
+    _G.Z = Z
+    end})
+Tab.T4:AddToggle("Toggle", {
+    Title = "X",
+    Default = false,
+    Callback = function(X)
+    _G.X = X
+   end})
+Tab.T4:AddToggle("Toggle", {
+    Title = "C",
+    Default = false,
+    Callback = function(C)
+    _G.C = C
+    end})
+Tab.T4:AddToggle("Toggle", {
+    Title = "V",
+    Default = false,
+    Callback = function(V)
+    _G.V = V
+    end})
+Tab.T4:AddToggle("Toggle", {
+    Title = "F",
+    Default = false,
+    Callback = function(F)
+    _G.F = F
+    end})
+
+
 
 spawn(function()
     while true do
@@ -320,7 +353,61 @@ spawn(function()
         end)
     end
 end)
-
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.Z then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.X then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.C then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.V then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 118, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 118, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.F then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 102, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 102, false, game)
+            end
+        end)
+    end
+end)
 spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
         if _gv.ATF or _gv.ATB then
