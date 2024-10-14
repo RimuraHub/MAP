@@ -55,4 +55,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/he
 elseif game.PlaceId == 86639052909924 then
     print ("Verse Piece")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Verse%20piece.lua"))()
+elseif game.PlaceId == 87081024978735 then
+    print ("Soy Piece")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Soy%20Piece.lua"))()
 end
