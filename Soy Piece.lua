@@ -224,7 +224,7 @@ spawn(
             pcall(
                 function()
                     if _gv.ATF then
-                        local Monster = game:GetService("Workspace")
+                        local Monster = game:GetService("Workspace")["มอน"]
                         for _, v in pairs(Monster:GetChildren()) do
                             if v.Name == _gv.SLM then
                                 local humanoid = v:FindFirstChild("Humanoid")
@@ -263,7 +263,7 @@ spawn(
             pcall(
                 function()
                     if _gv.ATB then
-                        local BossFil = game:GetService("Workspace")
+                        local BossFil = game:GetService("Workspace")["มอน"]
                         for _, y in pairs(BossFil:GetChildren()) do
                             if y.Name == _gv.SLB then
                                 local humanoid = y:FindFirstChild("Humanoid")
