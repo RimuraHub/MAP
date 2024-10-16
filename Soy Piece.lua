@@ -269,12 +269,12 @@ spawn(
                                 local humanoid = y:FindFirstChild("Humanoid")
                                 local hrp = y:FindFirstChild("HumanoidRootPart")
                                 if hrp and humanoid and humanoid.Health > 0 then
-                                    v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
-                                    v.HumanoidRootPart.Transparency = 0.9
-                                    v.HumanoidRootPart.CanCollide = false
-                                    v.Head.CanCollide = false
-                                    v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
-                                    v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                                    y.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
+                                    y.HumanoidRootPart.Transparency = 0.9
+                                    y.HumanoidRootPart.CanCollide = false
+                                    y.Head.CanCollide = false
+                                    y:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                                    y:FindFirstChildOfClass("Humanoid").JumpPower = 0
                                     repeat
                                         task.wait()
                                         _Attack()
