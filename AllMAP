@@ -60,4 +60,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/he
 elseif game.PlaceId == 87081024978735 then
     print ("Soy Piece")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Soy%20Piece.lua"))()
+elseif game.PlaceId == 18874085388 then
+    print ("exotic sea")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Exotic%20sea.lua"))()
 end
