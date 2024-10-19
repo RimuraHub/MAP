@@ -240,7 +240,7 @@ z = hookfunction(wait, function(seconds)
 return z()
 end)
 end})
-T5:AddSection({"| Item"})
+--[[T5:AddSection({"| Item"})
 T5:AddTextBox({
   Name = "Name item",
   Description = "1 Item on 1 Server", 
@@ -257,7 +257,7 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Inventory:FireServer(unpack(args))
-end})
+end})]]
 
 
 
