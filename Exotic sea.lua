@@ -138,6 +138,15 @@ T6:AddButton({"Halloween Island", function()
   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2882.78174, 89.0025787, -297.369751, -0.290816337, 8.34218454e-08, -0.956778884, 3.43456108e-08, 1, 7.67508368e-08, 0.956778884, -1.05407594e-08, -0.290816337)
 end})
 T3:AddSection({"| Up Stats"})
+T3:AddButton({"Get Stats 999999999", function()
+  wait(.1)
+local args = {
+    [1] = "Sword",
+    [2] =  -999999999
+}
+
+game:GetService("ReplicatedStorage").Remote.Event.Add:FireServer(unpack(args))
+end})
 T3:AddToggle({
   Name = "Up Strength",
   Default = false,
