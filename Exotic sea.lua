@@ -264,6 +264,7 @@ getgenv().Config = {
     ["Instant Kill"] = Monee,
     ["Radius"] = 15
 }
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Godmey/Inkillallmap/main/inkill.lua'))()
     end
 })
 T5:AddSection({"| Skill"})
@@ -293,42 +294,6 @@ end})
 
 ------[[ Spawn function ]]------
 
-spawn(function()
-    while wait() do
-        pcall(function()
-            if getgenv().Config["Instant Kill"] then
-                local player = game.Players.LocalPlayer
-                local character = player.Character or player.CharacterAdded:Wait()
-                sethiddenproperty(player, "SimulationRadius", 112412400000)
-                sethiddenproperty(player, "MaxSimulationRadius", 112412400000)
-                
-                local Den
-                if getgenv().Config["Folder Mon"] == "nil" then
-                    Den = game.Workspace:GetDescendants()
-                else
-                    Den = game.Workspace[getgenv().Config["Folder Mon"]]:GetDescendants()
-                end
-                
-                for _, v in pairs(Den) do
-                    if v:IsA("Humanoid") and v.Parent and v.Parent:IsA("Model") then
-                        -- ตรวจสอบว่าตัวละครไม่ใช่ผู้เล่น
-                        if v.Parent.Name ~= player.Name then
-                            local MonPoz = v.Parent:FindFirstChild("HumanoidRootPart") and v.Parent.HumanoidRootPart.Position
-                            local PlayerPoz = character:FindFirstChild("HumanoidRootPart") and character.HumanoidRootPart.Position
-                            
-                            if MonPoz and PlayerPoz and (MonPoz - PlayerPoz).Magnitude <= getgenv().Config["Radius"] then
-                                if v.Health < v.MaxHealth then
-                                    wait(.1)
-                                    v.Health = 0
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end)
-    end
-end)
 spawn(function()
     while true do
         task.wait()
@@ -440,93 +405,7 @@ spawn(function()
         end)
     end
 end)
-spawn(function()
-    while true do
-        task.wait()
-        pcall(function()
-            if _G.autobossevshadoen then
-            if workspace:FindFirstChild("Summoned Blood Knight") then
-                for _, v in pairs(game:GetService("Workspace"):GetChildren()) do
-                    if v:IsA("Model") and v.Name == "Summoned Blood Knight" then
-                        local humanoid = v:FindFirstChild("Humanoid")
-                        local hrp = v:FindFirstChild("HumanoidRootPart")
-                        if hrp and humanoid and humanoid.Health > 0 then
-                      v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
-                      v.HumanoidRootPart.Transparency = 0.9
-                      v.HumanoidRootPart.CanCollide = false
-                      v.Head.CanCollide = false
-                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
-                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
-                            repeat
-                                task.wait()
-                                _Attack()
-                                EquipTool()
-if _G.OneHit and Humanoidml.Health < Humanoidml.MaxHealth and Humanoidml.Health > 0 then sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                        wait(0.1)
-                                      Humanoidml.Health = 0
-                                  end
-                                if _G.autobossevshadoen and humanoid.Health > 1 then
-                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                end
-                            until not _G.autobossevshadoen or humanoid.Health <= 0
-                        end
-                    end
-                end
-                    else
-                        TP(CFrame.new(-1093.20081, 106.200363, 660.434326, -0.191619843, -9.18834502e-08, -0.981469214, -5.91114571e-08, 1, -8.20774844e-08, 0.981469214, 4.22883986e-08, -0.191619843))
-                        task.wait(0)
-                        Eqtool("Shadow Orb")
-                      task.wait(0)
-                    isntpp()
-                end
-            end
-        end)
-    end
-end)
 
-spawn(function()
-    while true do
-        task.wait()
-        pcall(function()
-            if _G.autobossevHaloew then
-            if workspace:FindFirstChild("Hallow Reaper") then
-                for _, v in pairs(game:GetService("Workspace"):GetChildren()) do
-                    if v:IsA("Model") and v.Name == "Hallow Reaper" then
-                        local humanoid = v:FindFirstChild("Humanoid")
-                        local hrp = v:FindFirstChild("HumanoidRootPart")
-                        if hrp and humanoid and humanoid.Health > 0 then
-                      v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
-                      v.HumanoidRootPart.Transparency = 0.9
-                      v.HumanoidRootPart.CanCollide = false
-                      v.Head.CanCollide = false
-                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
-                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
-                            repeat
-                                task.wait()
-                                _Attack()
-                                EquipTool()
-                                  if _G.OneHit and Humanoidml.Health < Humanoidml.MaxHealth and Humanoidml.Health > 0 then sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                        wait(0.1)
-                                      Humanoidml.Health = 0
-                                  end
-                                if _G.autobossevHaloew and humanoid.Health > 1 then
-                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                end
-                            until not _G.autobossevHaloew or humanoid.Health <= 0
-                        end
-                    end
-                end
-                    else
-                        TP(CFrame.new(-3226.13037, 188.063705, -370.422729, 0.999373078, 0, -0.0354049206, 0, 1, 0, 0.0354049206, 0, 0.999373078))
-                        task.wait(0)
-                        Eqtool("Pumpkin")
-                      task.wait(0)
-                    isntpp()
-                end
-            end
-        end)
-    end
-end)
 spawn(function()
   while true do
     task.wait()
@@ -634,3 +513,145 @@ spawn(function()
         end
     end)
 end)
+
+--[[ Auto boss ]]
+
+
+function _Attack99()
+game:GetService('VirtualUser'):CaptureController()
+game:GetService('VirtualUser'):ClickButton1(Vector2.new(851, 158),game:GetService("Workspace").Camera.CFrame)
+end
+function EquipTool99()
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") and v.Name == _G.Weapon then
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+    end
+  end
+end
+local function TP99(cframe)
+    pcall(function()
+        local character = game.Players.LocalPlayer.Character
+        if character and character.PrimaryPart then
+            character:SetPrimaryPartCFrame(cframe)
+        end
+    end)
+end
+function Eqtool99(Wapmo)
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.Name == Wapmo then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+        end
+    end
+end
+function isntpp99()
+      for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+        if v:FindFirstChild("ProximityPrompt") then
+            fireproximityprompt(v.ProximityPrompt, 10)
+        end
+    end
+end
+
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.autobossevshadoen then
+            if workspace:FindFirstChild("Summoned Blood Knight") then
+                for _, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if v:IsA("Model") and v.Name == "Summoned Blood Knight" then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
+                      v.HumanoidRootPart.Transparency = 0.9
+                      v.HumanoidRootPart.CanCollide = false
+                      v.Head.CanCollide = false
+                      humanoid.WalkSpeed = 0
+                      humanoid.JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack99()
+                                EquipTool99()
+                                  if _G.OneHit and humanoid.Health < humanoid.MaxHealth and humanoid.Health > 0 then
+                                      sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                      task.wait(0)
+                                      humanoid.Health = 0
+                                  end
+                                if _G.autobossevshadoen and humanoid.Health > 1 then
+                                    TP99(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                end
+                            until not _G.autobossevshadoen or humanoid.Health <= 0
+                        end
+                    end
+                end
+                    else
+                        TP99(CFrame.new(-1093.20081, 106.200363, 660.434326))
+                        task.wait(0)
+                        Eqtool99("Shadow Orb")
+                        task.wait(0)
+                        isntpp99()
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.autobossevHaloew then
+            if workspace:FindFirstChild("Hallow Reaper") then
+                for _, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if v:IsA("Model") and v.Name == "Hallow Reaper" then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
+                      v.HumanoidRootPart.Transparency = 0.9
+                      v.HumanoidRootPart.CanCollide = false
+                      v.Head.CanCollide = false
+                      humanoid.WalkSpeed = 0
+                      humanoid.JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack99()
+                                EquipTool99()
+                                  if _G.OneHit and humanoid.Health < humanoid.MaxHealth and humanoid.Health > 0 then
+                                      sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                      task.wait(0)
+                                      humanoid.Health = 0
+                                  end
+                                if _G.autobossevHaloew and humanoid.Health > 1 then
+                                    TP99(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                end
+                            until not _G.autobossevHaloew or humanoid.Health <= 0
+                        end
+                    end
+                end
+                    else
+                        TP99(CFrame.new(-3226.13037, 188.063705, -370.422729))
+                        task.wait(0)
+                        Eqtool99("Pumpkin")
+                        task.wait(0)
+                        isntpp99()
+                end
+            end
+        end)
+    end
+end)
+--[[
+local args = {
+    [1] = "Sword",
+    [2] =  -999999999
+}
+
+game:GetService("ReplicatedStorage").Remote.Event.Add:FireServer(unpack(args))
+local args = {
+    [1] = "Change",
+    [2] = "Pumpkin",
+    [3] = "Inv"
+}
+
+game:GetService("ReplicatedStorage").Inventory:FireServer(unpack(args))
+]]
