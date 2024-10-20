@@ -1,6 +1,6 @@
 --[[ steal = Gay ]]--
 
------[[ function ]]------
+------[[ function ]]------
 
 local function GetN_Child(Folder, Class)
     local names = {}
@@ -34,6 +34,13 @@ function EquipTool()
     end
   end
 end
+function Eqtool(Wapmo)
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.Name == Wapmo then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+        end
+    end
+end
 local function TP(cframe)
     pcall(function()
         local character = game.Players.LocalPlayer.Character
@@ -41,6 +48,13 @@ local function TP(cframe)
             character:SetPrimaryPartCFrame(cframe)
         end
     end)
+end
+function isntpp()
+      for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+        if v:FindFirstChild("ProximityPrompt") then
+            fireproximityprompt(v.ProximityPrompt, 10)
+        end
+    end
 end
 
 ------[[ Local Global ]]------
@@ -96,7 +110,10 @@ T2:AddToggle({
       _gv.ATF = w
     end
 })
-T6:AddSection({"| Farm"})
+
+T2:AddSection({"| Boss spawn[Soon]"})
+
+T6:AddSection({"| Mon Farm"})
 T6:AddToggle({
     Name = "Shadow Farm",
     Default = false,
@@ -107,12 +124,28 @@ T6:AddToggle({
 T6:AddToggle({
     Name = "Halloween Farm",
     Default = false,
-    Callback = function(wmk)
-        _G.ATFhawo = wmk
+    Callback = function(wkkmk)
+        _G.ATFhawo = wkkmk
+    end 
+})
+T6:AddSection({"| Boss Farm"})
+T6:AddToggle({
+    Name = "Shadow Boss Farm",
+    Default = false,
+    Callback = function(lknk)
+        _G.autobossevshadoen = lknk
     end 
 })
 T6:AddToggle({
-    Name = "Auto Trick or Treat[candy]",
+    Name = "Halloween Boss Farm",
+    Default = false,
+    Callback = function(wmklmk)
+        _G.autobossevHaloew = wmklmk
+    end 
+})
+T6:AddSection({"| Candy"})
+T6:AddToggle({
+    Name = "Auto Trick or Treat",
     Default = false,
     Callback = function(wmll)
         _G.AuyoTot = wmll
@@ -249,8 +282,7 @@ T5:AddTextBox({
     itemnamenaku = Value
   end
 })
-T5:AddButton({"Get item[Please wait 3 seconds.]", function()
-wait(3)
+T5:AddButton({"Get item", function()
 local args = {
     [1] = "Change",
     [2] = itemnamenaku,
@@ -259,10 +291,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").Inventory:FireServer(unpack(args))
 end})
-
-
-
-
 
 ------[[ Spawn function ]]------
 
@@ -378,6 +406,93 @@ spawn(function()
     end
 end)
 spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.autobossevshadoen then
+            if workspace:FindFirstChild("Summoned Blood Knight") then
+                for _, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if v:IsA("Model") and v.Name == "Summoned Blood Knight" then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
+                      v.HumanoidRootPart.Transparency = 0.9
+                      v.HumanoidRootPart.CanCollide = false
+                      v.Head.CanCollide = false
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+if _G.OneHit and Humanoidml.Health < Humanoidml.MaxHealth and Humanoidml.Health > 0 then sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                        wait(0.1)
+                                      Humanoidml.Health = 0
+                                  end
+                                if _G.autobossevshadoen and humanoid.Health > 1 then
+                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                end
+                            until not _G.autobossevshadoen or humanoid.Health <= 0
+                        end
+                    end
+                end
+                    else
+                        TP(CFrame.new(-1093.20081, 106.200363, 660.434326, -0.191619843, -9.18834502e-08, -0.981469214, -5.91114571e-08, 1, -8.20774844e-08, 0.981469214, 4.22883986e-08, -0.191619843))
+                        task.wait(0)
+                        Eqtool("Shadow Orb")
+                      task.wait(0)
+                    isntpp()
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.autobossevHaloew then
+            if workspace:FindFirstChild("Hallow Reaper") then
+                for _, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if v:IsA("Model") and v.Name == "Hallow Reaper" then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
+                      v.HumanoidRootPart.Transparency = 0.9
+                      v.HumanoidRootPart.CanCollide = false
+                      v.Head.CanCollide = false
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                  if _G.OneHit and Humanoidml.Health < Humanoidml.MaxHealth and Humanoidml.Health > 0 then sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                        wait(0.1)
+                                      Humanoidml.Health = 0
+                                  end
+                                if _G.autobossevHaloew and humanoid.Health > 1 then
+                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                end
+                            until not _G.autobossevHaloew or humanoid.Health <= 0
+                        end
+                    end
+                end
+                    else
+                        TP(CFrame.new(-3226.13037, 188.063705, -370.422729, 0.999373078, 0, -0.0354049206, 0, 1, 0, 0.0354049206, 0, 0.999373078))
+                        task.wait(0)
+                        Eqtool("Pumpkin")
+                      task.wait(0)
+                    isntpp()
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
   while true do
     task.wait()
      pcall(function()
@@ -399,8 +514,8 @@ spawn(function()
      pcall(function()
        if _G.Melee then
         local args = {
-            [1] = "Str",
-            [2] = 1
+            [1] = "Str", --Str = หมัด Def = เลือด Swo = ดาบ Fru = ผล Gu = ปืน
+            [2] = 1 --จำนวนเช่น จากเดิม 1 เปลี่ยนเป็น 1000 มันจะอัพ1พัน
         }
         
         game:GetService("ReplicatedStorage").Remote.Event.Add:FireServer(unpack(args))
@@ -470,20 +585,17 @@ spawn(function()
 end)
 spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
-        if _gv.ATF and _G.ATFSha and _G.ATFhawo then
-            local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            if hrp and not hrp:FindFirstChild("BodyClip") then
+        local hrp998 = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if _gv.ATF and _G.ATFSha and _G.ATFhawo and _G.autobossevHaloew and _G.autobossevshadoen then
+            if hrp998 and not hrp998:FindFirstChild("BodyClip") then
                 local noclip = Instance.new("BodyVelocity")
                 noclip.Name = "BodyClip"
-                noclip.Parent = hrp
+                noclip.Parent = hrp998
                 noclip.MaxForce = Vector3.new(100000, 100000, 100000)
                 noclip.Velocity = Vector3.new(0, 0, 0)
             end
-        else
-            local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            if hrp and hrp:FindFirstChild("BodyClip") then
-                hrp.BodyClip:Destroy()
-            end
+        elseif hrp998 and hrp998:FindFirstChild("BodyClip") then
+            hrp998.BodyClip:Destroy()
         end
     end)
 end)
