@@ -65,7 +65,7 @@ local ChaPly = Ply.LocalPlayer.Character or Ply.LocalPlayer.CharacterAdded:Wait(
 local NameMap = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local Shop = GetN_Des(workspace.AllGames.Seller,"Model")
-local Shopev = {"Shadow Monarch", "Kazumi The Crafter", "Jack , The GraveKeeper"}
+local Shopev = {"Shadow Monarch", "Kazumi The Crafter", "Jack , The GraveKeeper", "The Strongest of today", "The Strongest in History"}
 local Mon = {}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
@@ -115,7 +115,7 @@ T2:AddSection({"| Boss spawn[Soon]"})
 
 T6:AddSection({"| Mon Farm"})
 T6:AddToggle({
-    Name = "Shadow Farm",
+    Name = "Events Mon Farm",
     Default = false,
     Callback = function(wm)
         _G.ATFSha = wm
@@ -129,13 +129,14 @@ T6:AddToggle({
     end 
 })
 T6:AddSection({"| Boss Farm"})
+--[[
 T6:AddToggle({
     Name = "Shadow Boss Farm",
     Default = false,
     Callback = function(lknk)
         _G.autobossevshadoen = lknk
     end 
-})
+})]]
 T6:AddToggle({
     Name = "Halloween Boss Farm",
     Default = false,
@@ -164,14 +165,17 @@ T6:AddButton({"Teleport Shop", function()
   end
 })
 T6:AddSection({"| Island"})
-T6:AddButton({"Shadow Island", function()
+T6:AddButton({"Events Island", function()
   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1144.94385, 282.879974, 629.762024, -0.0163918976, 0, -0.999865651, 0, 1, 0, 0.999865651, 0, -0.0163918976)
 end})
 T6:AddButton({"Halloween Island", function()
   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2882.78174, 89.0025787, -297.369751, -0.290816337, 8.34218454e-08, -0.956778884, 3.43456108e-08, 1, 7.67508368e-08, 0.956778884, -1.05407594e-08, -0.290816337)
 end})
+T6:AddButton({"Destrtion Island", function()
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1210.92102, 207.322876, -8979.84766, 0.0734141022, 0, -0.997301519, 0, 1, 0, 0.997301519, 0, 0.0734141022)
+end})
 T3:AddSection({"| Up Stats"})
-T3:AddButton({"Get Stats 999999999", function()
+T3:AddButton({"Get Stats MAX", function()
   wait(.1)
 local args = {
     [1] = "Sword",
@@ -267,6 +271,7 @@ getgenv().Config = {
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Godmey/Inkillallmap/main/inkill.lua'))()
     end
 })
+--[[
 T5:AddSection({"| Skill"})
 T5:AddButton({"NoCooldown", function()
 z = hookfunction(wait, function(seconds)
@@ -290,7 +295,7 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage").Inventory:FireServer(unpack(args))
-end})
+end})]]
 
 ------[[ Spawn function ]]------
 
@@ -429,7 +434,7 @@ spawn(function()
        if _G.Melee then
         local args = {
             [1] = "Str", --Str = หมัด Def = เลือด Swo = ดาบ Fru = ผล Gu = ปืน
-            [2] = 1 --จำนวนเช่น จากเดิม 1 เปลี่ยนเป็น 1000 มันจะอัพ1พัน
+            [2] = 1
         }
         
         game:GetService("ReplicatedStorage").Remote.Event.Add:FireServer(unpack(args))
