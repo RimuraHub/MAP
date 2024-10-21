@@ -247,6 +247,13 @@ end})
 T4:AddButton({"Desert Island", function()
   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1262.80627, 236.770203, -773.207886, -0.99753809, 6.5533257e-08, -0.0701270178, 6.59041959e-08, 1, -2.97578007e-09, 0.0701270178, -7.59011876e-09, -0.99753809)
 end})
+T4:AddButton({"Rock Mountains", function()
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(533.745117, 717.188538, -628.743713, 0.629049838, 3.43040512e-08, 0.777364969, 2.15288809e-09, 1, -4.58707632e-08, -0.777364969, 3.05285752e-08, 0.629049838)
+end})
+
+T4:AddButton({"Snowy Village", function()
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2726.81616, 140.996124, 2558.15576, 0.753392458, 1.04359508e-07, 0.657571137, -1.31506354e-07, 1, -8.03503397e-09, -0.657571137, -8.04212519e-08, 0.753392458)
+end})
 T5:AddSection({"| Weapon"})
 AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
     _G.Weapon = ooooo
@@ -434,7 +441,7 @@ spawn(function()
        if _G.Melee then
         local args = {
             [1] = "Str", --Str = หมัด Def = เลือด Swo = ดาบ Fru = ผล Gu = ปืน
-            [2] = 1
+            [2] = 1 --จำนวนเช่น จากเดิม 1 เปลี่ยนเป็น 1000 มันจะอัพ1พัน
         }
         
         game:GetService("ReplicatedStorage").Remote.Event.Add:FireServer(unpack(args))
