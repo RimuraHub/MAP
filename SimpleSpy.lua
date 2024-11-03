@@ -2632,7 +2632,7 @@ Button.InputBegan:Connect(function(input)
         mousePos = input.Position
         framePos = Button.Position
 
-        local ggmil =  game:GetService("CoreGui")["SimpleSpy Edit By cayvaii"].Background.Visible
+        local ggmil =  game:GetService("CoreGui")["SimpleSpy Edit By cayvaii"].Background
         if ggmil == true then
         ggmil = false
         else
