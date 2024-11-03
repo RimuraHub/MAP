@@ -2633,7 +2633,7 @@ Button.InputBegan:Connect(function(input)
         framePos = Button.Position
 
         local ggmil =  game:GetService("CoreGui")["SimpleSpy Edit By cayvaii"].Background
-        if ggmil == true then
+        if ggmil = true then
         ggmil = false
         else
         ggmil = true
