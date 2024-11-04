@@ -98,13 +98,13 @@ T2:AddToggle({
       _gv.ATF = w
     end
 })
-T2:AddToggle({
+--[[T2:AddToggle({
     Name = "Auto Farm All Boss",
     Default = false,
     Callback = function(e)
       _gv.ATB = e
     end
-})
+})]]
 T4:AddSection({"| Island"})
 AddDropdown(T4, "Select island", island, "nil", "island", function(selectedIsland)
     _gv.SLIS = selectedIsland
