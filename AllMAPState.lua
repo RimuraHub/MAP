@@ -59,6 +59,7 @@ TextLabel.Text = [[
 [🟢] : Soy Piece
 [🟢] : Exotic Sea
 [🟢] : Maze Piece
+[🟢] : Monkey legacy
 >>>------------------------<<<
 ]]
 TextLabel.Parent = Frame
