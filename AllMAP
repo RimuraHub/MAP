@@ -1,82 +1,145 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAPState.lua"))()
 task.wait(0)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()
-task.wait(0)
-if game.PlaceId == 12004594806 then
-    print ("Sword Piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/SwordPiece.txt"))()
-elseif game.PlaceId == 18271034370 then
-    print ("Sakura piece")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/SakuraPiece.lua"))()
-elseif game.PlaceId == 15049111150 then
-    print ("Second piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/SecondPiece.lua"))()
-elseif game.PlaceId == 10260193230 then
-    print ("Meme Sea")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/MemeSea.lua"))()
-elseif game.PlaceId == 17415731457 then
-    print ("XDAX Piece piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/XADX%20PIECE.lua"))()
-elseif game.PlaceId == 14288176792 then
-    print ("Condi piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"))()
-elseif game.PlaceId == 15030260251 then
-    print ("Condi sea2 piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"))()
-elseif game.PlaceId == 18688206652 then
-    print ("ijul piece 2")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/ijul.lua"))()
-elseif game.PlaceId == 17545130379 then
-    print ("Royal sea")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/RoyalSea.lua"))()
-elseif game.PlaceId == 17167990958 then
-    print ("Rock Fruit")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/RockFruit.lua"))()
-elseif game.PlaceId == 94884335664600 then
-    print ("Cool obby")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/main/CoolObby.lua"))()
-elseif game.PlaceId == 15700946653 then
-    print ("G pirate")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Gpi.lua"))()
-elseif game.PlaceId == 16448761503 then
-    print ("Rung sea")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"))()
-elseif game.PlaceId == 75972208642796 then
-    print ("Blox Legacy")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Blox%20Legacy.lua.txt"))()
-elseif game.PlaceId == 18968803452 then
-    print ("Muyong-Piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyo.lua"))()
-elseif game.PlaceId == 137664479590005 then
-    print ("Muyong-Piece World 2")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyosea2.lua"))()
-elseif game.PlaceId == 105557873963854 then
-    print ("CeeTo Fruit")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/CeeTo%20Piece.lua"))()
-elseif game.PlaceId == 6925849909 then
-    print ("City Banna")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/City%20Banna.lua"))()
-elseif game.PlaceId == 116291960732071 then
-    print ("Obito Piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/ObitoPiece.lua"))()
-elseif game.PlaceId == 86639052909924 then
-    print ("Verse Piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Verse%20piece.lua"))()
-elseif game.PlaceId == 87081024978735 then
-    print ("Soy Piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Soy%20Piece.lua"))()
-elseif game.PlaceId == 18874085388 then
-    print ("exotic sea")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Exotic%20sea.lua"))()
-elseif game.PlaceId == 112000728351623 then
-    print ("Maze Piece")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Maze%20piece.lua"))()
-elseif game.PlaceId == 100811961417979 then
-    print ("Monkey legacy")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Monkey%20lega.lua"))()
-elseif game.PlaceId == 16732694052 then
-    print ("Fisch")
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Fisch.lua"))()
+
+local places = {
+    [12004594806] = {
+        message = "Sword Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SwordPiece.txt"
+    },
+    
+    [18271034370] = {
+        message = "Sakura Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SakuraPiece.lua"
+    },
+    
+    [10260193230] = {
+        message = "Meme Sea",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/MemeSea.lua"
+    },
+    
+    [17415731457] = {
+        message = "XDAX Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/XADX%20PIECE.lua"
+    },
+    
+    [14288176792] = {
+        message = "Condi Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"
+    },
+    
+    [15030260251] = {
+        message = "Condi Sea2 Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"
+    },
+    
+    [18688206652] = {
+        message = "Ijul Piece 2",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/ijul.lua"
+    },
+    
+    [17545130379] = {
+        message = "Royal Sea",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/RoyalSea.lua"
+    },
+    
+    [17167990958] = {
+        message = "Rock Fruit",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/RockFruit.lua"
+    },
+    
+    [94884335664600] = {
+        message = "Cool Obby",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/CoolObby.lua"
+    },
+    
+    [15700946653] = {
+        message = "G Pirate",
+        url = "https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Gpi.lua"
+    },
+    
+    [16448761503] = {
+        message = "Rung Sea",
+        url = "https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"
+    },
+    
+    [75972208642796] = {
+        message = "Blox Legacy",
+        url = "https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Blox%20Legacy.lua.txt"
+    },
+    
+    [18968803452] = {
+        message = "Muyong-Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyo.lua"
+    },
+    
+    [137664479590005] = {
+        message = "Muyong-Piece W2",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyosea2.lua"
+    },
+    
+    [105557873963854] = {
+        message = "CeeTo Fruit",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/CeeTo%20Piece.lua"
+    },
+    
+    [6925849909] = {
+        message = "City Banna",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/City%20Banna.lua"
+    },
+    
+    [116291960732071] = {
+        message = "Obito Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/ObitoPiece.lua"
+    },
+    
+    [86639052909924] = {
+        message = "Verse Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Verse%20piece.lua"
+    },
+    
+    [87081024978735] = {
+        message = "Soy Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Soy%20Piece.lua"
+    },
+    
+    [18874085388] = {
+        message = "Exotic Sea",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Exotic%20sea.lua"
+    },
+    
+    [112000728351623] = {
+        message = "Maze Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Maze%20piece.lua"
+    },
+    
+    [100811961417979] = {
+        message = "Monkey Legacy",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Monkey%20lega.lua"
+    },
+    
+    [16732694052] = {
+        message = "Fisch",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Fisch.lua"
+    }
+}
+
+local place = places[game.PlaceId]
+
+if place then
+    print(place.message)
+    loadstring(game:HttpGet(place.url))()
 else
     game.Players.LocalPlayer:Kick("Not Support")
 end
+
+--[[
+--------------------------
+
+    [] = {
+        message = "",
+        url = ""
+    }
+
+--------------------------
+]]
