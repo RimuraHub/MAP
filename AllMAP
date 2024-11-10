@@ -77,4 +77,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/he
 elseif game.PlaceId == 16732694052 then
     print ("Fisch")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Fisch.lua"))()
+else
+    game.Players.LocalPlayer:Kick("Not Support")
 end
