@@ -9,6 +9,38 @@ local function sendLogToDiscord()
     local PlayerName = player.Name
     local playerUserId = player.UserId
     local playerProfileUrl = "https://www.roblox.com/users/" .. playerUserId .. "/profile"
+    local playerCountry = player.Country or "Unknown"
+
+    -- เช็กอุปกรณ์ที่ผู้เล่นใช้
+    local userInputService = game:GetService("UserInputService")
+    local deviceType = "Unknown"
+    local platform = "Unknown"
+
+    -- ตรวจสอบอุปกรณ์ว่าเป็น PC หรือ Mobile/Tablet
+    if userInputService.TouchEnabled then
+        -- อุปกรณ์ที่มี touch screen (Mobile/Tablet)
+        if userInputService.KeyboardEnabled then
+            deviceType = "Tablet"
+        else
+            deviceType = "Mobile"
+        end
+    else
+        -- อุปกรณ์ที่ไม่มี touch screen (PC)
+        deviceType = "PC"
+    end
+
+    -- เช็กระบบปฏิบัติการ (OS)
+    if game:GetService("Players").LocalPlayer.Platform == Enum.Platform.Windows then
+        platform = "Windows"
+    elseif game:GetService("Players").LocalPlayer.Platform == Enum.Platform.OSX then
+        platform = "Mac"
+    elseif game:GetService("Players").LocalPlayer.Platform == Enum.Platform.Linux then
+        platform = "Linux"
+    elseif game:GetService("Players").LocalPlayer.Platform == Enum.Platform.Android then
+        platform = "Android"
+    elseif game:GetService("Players").LocalPlayer.Platform == Enum.Platform.IOS then
+        platform = "iOS"
+    end
 
     local Embed = {
         title = 'Log Script Rimuru Hub',
@@ -21,6 +53,9 @@ local function sendLogToDiscord()
             { name = 'Player Profile', value = playerProfileUrl },
             { name = 'Name', value = PlayerName },
             { name = 'UserId', value = playerUserId },
+            { name = 'Country', value = playerCountry },
+            { name = 'Device Type', value = deviceType },  -- เพิ่มการแสดงประเภทอุปกรณ์
+            { name = 'Platform (OS)', value = platform },  -- เพิ่มการแสดงระบบปฏิบัติการ
             { name = 'Current Local Time', value = formattedLocalTime },
         },
         timestamp = os.date('!%Y-%m-%dT%H:%M:%SZ', OSTime),
@@ -39,11 +74,9 @@ local function sendLogToDiscord()
         }
     end)
 
-    -- Log success or failure if needed
     if not success then
         print("Error sending log: " .. tostring(response))
     end
 end
 
--- Call the function when needed
 sendLogToDiscord()
