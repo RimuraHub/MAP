@@ -1,6 +1,6 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAPState.lua"))()
 task.wait(0)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAPState.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()
 task.wait(0)
 if game.PlaceId == 12004594806 then
     print ("Sword Piece")
