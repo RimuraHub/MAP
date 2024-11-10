@@ -2,31 +2,44 @@ local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local CloseButton = Instance.new("TextButton")
+local UIGradient = Instance.new("UIGradient")
+local UICorner = Instance.new("UICorner")
+local ButtonCorner = Instance.new("UICorner")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ResetOnSpawn = false
+Frame.Parent = ScreenGui
+TextLabel.Parent = Frame
+CloseButton.Parent = Frame
 
-Frame.Size = UDim2.new(0.5, 0, 0.6, 0)
-Frame.Position = UDim2.new(0.25, 0, 0.2, 0)
+Frame.Size = UDim2.new(0.5, 0, 0.55, 0)  -- Adjust size to be more compact
+Frame.Position = UDim2.new(0.5, -Frame.Size.X.Offset / 2, 0.5, -Frame.Size.Y.Offset / 2)  -- Centered position
 Frame.BackgroundColor3 = Color3.new(0, 0, 0)
 Frame.BorderSizePixel = 5
 Frame.BorderColor3 = Color3.new(0.5, 0, 1)
-Frame.Parent = ScreenGui
 
-local UICorner = Instance.new("UICorner")
+UIGradient.Color = ColorSequence.new(Color3.fromRGB(0, 0, 0), Color3.fromRGB(50, 50, 50))
+UIGradient.Rotation = 45
+UIGradient.Parent = Frame
+
 UICorner.CornerRadius = UDim.new(0, 20)
 UICorner.Parent = Frame
 
-TextLabel.Size = UDim2.new(1, 0, 1, 0)
-TextLabel.Position = UDim2.new(0, 0, 0, 0)
+TextLabel.Size = UDim2.new(1, -40, 1, 50)
+TextLabel.Position = UDim2.new(0, 20, 0, -15)
 TextLabel.BackgroundTransparency = 1
 TextLabel.TextColor3 = Color3.new(1, 1, 1)
-TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Font = Enum.Font.GothamBlack
+TextLabel.TextSize = 24
 TextLabel.TextScaled = true
 TextLabel.TextWrapped = true
-TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+TextLabel.TextStrokeTransparency = 0.5
+TextLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left  -- Align text to the left
 TextLabel.Text = [[
->>>------------------------<<<
+
 🔥 | อัพเดทต่อเนื่อง | Continuous Update
 🟢 | ใช้งานได้ปกติ | Can be used normally
 🟡 | กำลังอัปเดต | Wait For Update
@@ -37,43 +50,40 @@ TextLabel.Text = [[
 • เวอร์ชั่นเทสจะสามารถใช้งานได้แต่อาจจะมีบัคและฟังก์ชั่นไม่ครบ
 • The test version will be usable but may have bugs and incomplete functions.
 >>>------------------------<<<
-[🟢] : Sword Piece  
-[🟢] : Sakura Piece  
-[🔴] : Second Piece  
-[🟢] : Meme Sea  
-[🟢] : XDAX Piece  
-[🔵] : Condl Piece  
-[🟢] : Ijul Piece 2  
-[🟢] : Royal Sea  
-[🔵] : Rock Fruit  
-[🟢] : Cool Obby  
-[🟢] : Ijul Piece  
-[🟢] : G piece  
-[🟢] : Rung Sea  
-[🟢] : jood piece 2  
-[🟢] : Muyong Piece
-[🟢] : CeeTo Fruit  
-[🟢] : City BanNa  
-[🔵] : Verse Piece
-[🟢] : Obito Piece
-[🟢] : Soy Piece
-[🟢] : Exotic Sea
-[🟢] : Maze Piece
-[🟢] : Monkey legacy
->>>------------------------<<<
+🟢 Sword Piece        🟢 Sakura Piece        🔴 Second Piece
+🟢 Meme Sea           🟢 XDAX Piece          🔵 Condl Piece
+🟢 Ijul Piece 2       🟢 Royal Sea           🔵 Rock Fruit
+🟢 Cool Obby          🟢 Ijul Piece          🟢 G piece
+🟢 Rung Sea           🟢 jood piece 2        🟢 Muyong Piece
+🟢 CeeTo Fruit        🟢 City BanNa          🔵 Verse Piece
+🟢 Obito Piece        🟢 Soy Piece           🟢 Exotic Sea
+🟢 Maze Piece         🟢 Monkey legacy
+
 ]]
-TextLabel.Parent = Frame
 
 CloseButton.Size = UDim2.new(0.1, 0, 0.1, 0)
 CloseButton.Position = UDim2.new(0.9, 0, 0, 0)
-CloseButton.BackgroundColor3 = Color3.new(1, 0, 0)
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
 CloseButton.Text = "X"
 CloseButton.TextScaled = true
-CloseButton.Parent = Frame
+
+ButtonCorner.CornerRadius = UDim.new(0, 10)
+ButtonCorner.Parent = CloseButton
+
+CloseButton.MouseEnter:Connect(function()
+    TweenService:Create(CloseButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(255, 100, 100)}):Play()
+end)
+
+CloseButton.MouseLeave:Connect(function()
+    TweenService:Create(CloseButton, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(255, 50, 50)}):Play()
+end)
 
 CloseButton.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
+
+local frameTween = TweenService:Create(Frame, TweenInfo.new(0.5), {BackgroundTransparency = 0})
+frameTween:Play()
 
 local dragging
 local dragInput
@@ -107,9 +117,8 @@ Frame.InputChanged:Connect(function(input)
     end
 end)
 
-game:GetService("UserInputService").InputChanged:Connect(function(input)
+UserInputService.InputChanged:Connect(function(input)
     if dragging and input == dragInput then
         update(input)
     end
 end)
-
