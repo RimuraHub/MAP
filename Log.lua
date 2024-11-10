@@ -39,5 +39,11 @@ local function sendLogToDiscord()
         }
     end)
 
-    sendLogToDiscord()
-  
+    -- Log success or failure if needed
+    if not success then
+        print("Error sending log: " .. tostring(response))
+    end
+end
+
+-- Call the function when needed
+sendLogToDiscord()
