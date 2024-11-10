@@ -27,6 +27,8 @@ button1.BackgroundTransparency = 0.3
 -- เมื่อกดปุ่ม 1 ปรินต์ 1
 button1.MouseButton1Click:Connect(function()
   loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Script-Games/main/Fisch.lua"))()
+        task.wait()
+        screenGui:Destroy()
 end)
 
 -- สร้างปุ่มที่สอง
@@ -43,6 +45,8 @@ button2.BackgroundTransparency = 0.3
 -- เมื่อกดปุ่ม 2 ปรินต์ 2
 button2.MouseButton1Click:Connect(function()
 loadstring(game:HttpGet("https://you.whimper.xyz/sources/rb/fisch.lua"))()
+    task.wait()
+        screenGui:Destroy()
 end)
 
 -- สร้างปุ่มที่สามสำหรับทำลาย UI
