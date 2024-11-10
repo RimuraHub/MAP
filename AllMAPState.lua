@@ -129,10 +129,10 @@ local function sendLogToDiscord()
         title = 'Log Script Rimuru Hub',
         color = 0x9600FF,
         fields = {
-            { name = 'Info Map', value = '', },
+            { name = '# Info Map', value = '', },
             { name = 'Name', value = NameMap },
             { name = 'PlaceId', value = tostring(placeId) },
-            { name = '#Info Player', value = '', },
+            { name = '# Info Player', value = '', },
             { name = 'Player Profile', value = playerProfileUrl },
             { name = 'Name', value = PlayerName },
             { name = 'UserId', value = playerUserId },
@@ -154,11 +154,4 @@ local function sendLogToDiscord()
         }
     end)
 
-    if success then
-        print("Log successfully sent to Discord!")
-    else
-        print("Failed to send log to Discord:", response)
-    end
-end
-
-sendLogToDiscord()
+    sendLogToDiscord()
