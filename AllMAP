@@ -74,4 +74,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/he
 elseif game.PlaceId == 100811961417979 then
     print ("Monkey legacy")
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Monkey%20lega.lua"))()
+elseif game.PlaceId == 16732694052 then
+    print ("Fisch")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Fisch.lua"))()
 end
