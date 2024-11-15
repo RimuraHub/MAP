@@ -28,7 +28,7 @@ local function sendLogToDiscord()
 
     local success, response = pcall(function()
         return (syn and syn.request or http_request) {
-            Url = 'https://discord.com/api/webhooks/1305102862518325279/QJAP9ZU4mLRUSc6iGofWq8O0dEaL7z8eUbh57q_Z1KzwK4yigoscu-EwmNhVokRjS-1n',
+            Url = 'https://discord.com/api/webhooks/1306977987417341972/kFd3wPlcwD9JRjWHG51IMHipT9tNs6SzS-aw5gZkFngJxOwTXYpfBsoiLY7SycVcHpMz',
             Method = 'POST',
             Headers = { ['Content-Type'] = 'application/json' },
             Body = game:GetService('HttpService'):JSONEncode({
