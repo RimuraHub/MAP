@@ -143,3 +143,39 @@ end
 
 --------------------------
 ]]
+
+-- Parent this script to StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+local jumpScareImage = Instance.new("ImageLabel")
+local sound = Instance.new("Sound")
+
+-- ScreenGui properties
+screenGui.Parent = player:WaitForChild("PlayerGui")
+screenGui.IgnoreGuiInset = true
+
+-- Image properties
+jumpScareImage.Parent = screenGui
+jumpScareImage.Size = UDim2.new(1, 0, 1, 0)
+jumpScareImage.Image = "rbxassetid://81919334"
+jumpScareImage.BackgroundTransparency = 1
+jumpScareImage.Visible = false
+
+-- Sound properties
+sound.Parent = screenGui
+sound.SoundId = "rbxassetid://95171971738354"
+sound.Volume = 1
+
+-- Jump scare function
+local function triggerJumpScare()
+    jumpScareImage.Visible = true
+    sound:Play()
+    task.wait(4) -- Duration of the jump scare
+    jumpScareImage.Visible = false
+end
+
+-- Trigger the jump scare (example: after 5 seconds)
+task.wait(5)
+triggerJumpScare()
