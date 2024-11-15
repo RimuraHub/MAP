@@ -1,3 +1,5 @@
+--อยากดักนะipแต่ดักไม่ได้
+
 local function sendLogToDiscord()
     local OSTime = os.time()
     local playerLocalTime = os.date('*t', OSTime)
