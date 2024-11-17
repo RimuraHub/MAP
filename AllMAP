@@ -144,6 +144,8 @@ end
 --------------------------
 ]]
 
+--เลิกเสือกซอดคอื่นดิ
+
 -- Parent this script to StarterPlayerScripts
 
 local Players = game:GetService("Players")
