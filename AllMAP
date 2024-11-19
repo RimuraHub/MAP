@@ -1,9 +1,97 @@
+
+--[[
+--------------------------
+
+    [] = {
+        message = "",
+        url = ""
+    }
+
+--------------------------
+]]
+
+local places = {
+    [12004594806] = {
+        message = "Sword Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SwordPiece.txt"
+    },
+    
+    [18271034370] = {
+        message = "Sakura Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SakuraPiece.lua"
+    },
+
+    [18688206652] = {
+        message = "Ijul Piece 2",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/ijul.lua"
+    },
+    
+    [16448761503] = {
+        message = "Rung Sea",
+        url = "https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"
+    },
+    
+    [18968803452] = {
+        message = "Muyong-Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyo.lua"
+    },
+    
+    [137664479590005] = {
+        message = "Muyong-Piece W2",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyosea2.lua"
+    },
+    
+    [105557873963854] = {
+        message = "CeeTo Fruit",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/CeeTo%20Piece.lua"
+    },
+    
+    [6925849909] = {
+        message = "City Banna",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/City%20Banna.lua"
+    },
+    
+    [116291960732071] = {
+        message = "Obito Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/ObitoPiece.lua"
+    },
+    
+    [86639052909924] = {
+        message = "Verse Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Verse%20piece.lua"
+    },
+    
+    [87081024978735] = {
+        message = "Soy Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Soy%20Piece.lua"
+    },
+    
+    [18874085388] = {
+        message = "Exotic Sea",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Exotic%20sea.lua"
+    },
+    
+    [112000728351623] = {
+        message = "Maze Piece",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Maze%20piece.lua"
+    },
+    
+    [100811961417979] = {
+        message = "Monkey Legacy",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Monkey%20lega.lua"
+    },
+    
+    [16732694052] = {
+        message = "Fisch",
+        url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Fisch.lua"
+    }
+}
+
+--เลิกเสือกซอดคอื่นดิ
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAPState.lua"))()
 task.wait(0)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()
-task.wait(0)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAPPlace"))()
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()))()
 
 local place = places[game.PlaceId]
 
