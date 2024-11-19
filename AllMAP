@@ -20,60 +20,15 @@ local places = {
         message = "Sakura Piece",
         url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SakuraPiece.lua"
     },
-    
-    [10260193230] = {
-        message = "Meme Sea",
-        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/MemeSea.lua"
-    },
-    
-    [17415731457] = {
-        message = "XDAX Piece",
-        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/XADX%20PIECE.lua"
-    },
-    
-    [14288176792] = {
-        message = "Condi Piece",
-        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"
-    },
-    
-    [15030260251] = {
-        message = "Condi Sea2 Piece",
-        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/CondiPiece.lua"
-    },
-    
+
     [18688206652] = {
         message = "Ijul Piece 2",
         url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/ijul.lua"
     },
     
-    [17545130379] = {
-        message = "Royal Sea",
-        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/RoyalSea.lua"
-    },
-    
-    [17167990958] = {
-        message = "Rock Fruit",
-        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/RockFruit.lua"
-    },
-    
-    [94884335664600] = {
-        message = "Cool Obby",
-        url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/CoolObby.lua"
-    },
-    
-    [15700946653] = {
-        message = "G Pirate",
-        url = "https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Gpi.lua"
-    },
-    
     [16448761503] = {
         message = "Rung Sea",
         url = "https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"
-    },
-    
-    [75972208642796] = {
-        message = "Blox Legacy",
-        url = "https://raw.githubusercontent.com/RimuraHub/Test/refs/heads/main/Blox%20Legacy.lua.txt"
     },
     
     [18968803452] = {
