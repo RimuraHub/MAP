@@ -87,6 +87,4 @@ local places = {
     }
 }
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAPPlace"))()
-
 --เลิกเสือกซอดคอื่นดิ
