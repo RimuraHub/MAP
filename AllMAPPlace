@@ -1,0 +1,12 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAPState.lua"))()
+task.wait(0)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()
+
+local place = places[game.PlaceId]
+
+if place then
+    print(place.message)
+    loadstring(game:HttpGet(place.url))()
+else
+    game.Players.LocalPlayer:Kick("Not Support")
+end
