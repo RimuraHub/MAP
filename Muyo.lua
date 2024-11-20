@@ -57,7 +57,7 @@ local Wea = {"Melee","Sword","DevilFruit"}
 local island = GetN_Child(Wsp.Map.island,"Model")
 local Shop = GetN_Child(Wsp.Map.Shop,"Model")
 local Mon = {}
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
 for _, v in pairs(Wsp.Map.Monster:GetDescendants()) do
   if v:IsA("Model") and string.find(v.Name, "%[") and string.find(v.Name, "%]") then
