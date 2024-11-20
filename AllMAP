@@ -2,7 +2,7 @@ local places = {
     [12004594806] = {message = "Sword Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SwordPiece.txt"},
     [18271034370] = {message = "Sakura Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SakuraPiece.lua"},
     [18688206652] = {message = "Ijul Piece 2", url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/ijul.lua"},
-    [16448761503] = {message = "Rung Sea", url = "https://raw.githubusercontent.com/Godmey/Rungsea/refs/heads/main/Ruakak.lua"},
+    [16448761503] = {message = "Rung Sea", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Rung%20Sea.lua%20(3)%20(1).txt"},
     [18968803452] = {message = "Muyong-Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyo.lua"},
     [137664479590005] = {message = "Muyong-Piece W2", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muyosea2.lua"},
     [105557873963854] = {message = "CeeTo Fruit", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/CeeTo%20Piece.lua"},
