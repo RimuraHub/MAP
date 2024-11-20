@@ -67,7 +67,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local Shop = GetN_Des(workspace.AllGames.Seller,"Model")
 local Shopev = {"Shadow Monarch", "Kazumi The Crafter", "Jack , The GraveKeeper", "The Strongest of today", "The Strongest in History"}
 local Mon = {}
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
 for _, v in pairs(workspace.AllGames.Island:GetChildren()) do
     if v:FindFirstChild("Enemy") then
