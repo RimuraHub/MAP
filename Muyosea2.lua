@@ -58,7 +58,7 @@ local island = GetN_Child(workspace.Map.Island,"Model")
 local Shop = GetN_Child(workspace.Map.Shop,"Model")
 local Mon = {}
 local BossSpwann = {"Waybig", "Chicken", "Gojo"}
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
 for _, v in pairs(workspace.Map.Monster:GetDescendants()) do
   if v:IsA("Model") and string.find(v.Name, "%[") and string.find(v.Name, "%]") then
