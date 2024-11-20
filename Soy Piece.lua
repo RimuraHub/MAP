@@ -56,7 +56,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack, "Tool")
 local Shop = GetN_Child(Wsp.Shop, "Model")
 local Mon = {"Bandit", "Monkey", "Pirate", "Rock Mon", "Sky Mon", "TreeMod"}
 local boss = {"Bandit Boss", " Buggy", "God", "Monkey Boss", "Pirate Boss", "Rock Mon Boss", "TreeMod Boss"}
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
 
 ------[[ Ui library ]]------
