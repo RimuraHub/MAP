@@ -96,7 +96,7 @@ local island = GetN_Child(workspace.Island,"Model")
 local Shop = GetN_Child(Wsp.Sell,"Model")
 local Mon = {}
 local itemsName = {"Sword", "DevilFruit"}
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
 for _, v in pairs(Wsp.Mon:GetDescendants()) do
   if v:IsA("Model") then
