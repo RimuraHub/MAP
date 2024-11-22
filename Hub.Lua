@@ -27,7 +27,7 @@ Section:NewButton("dex mobile [Key]", "อ่านทำมะเขืออ�
 __function(__function)
 end)
 Section:NewButton("dex mobile [NoKey]", "อ่านทำมะเขืออะไร", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/DEX-Explorer/main/Mobile.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/DEX-Explorer/refs/heads/main/Mobile.lua"))()
 end)
 Section:NewButton("X spy mobile X", "อ่านทำมะเขืออะไร", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/SimpleSpy/refs/heads/main/Mobile.lua"))()
