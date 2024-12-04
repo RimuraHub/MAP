@@ -54,7 +54,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local island = GetN_Child(workspace.Map.Island,"Model")
 local Shop = GetN_Child(workspace.Map.Shop,"Model")
 local Mon = {}
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Godmey/Redz-Ui/refs/heads/main/Ui.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 local _gv = getgenv()
 for _, v in pairs(workspace.Map.Mon:GetChildren()) do
   if v:IsA("Model") then
