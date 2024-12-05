@@ -1,4 +1,4 @@
-local function sendLogToDiscord(errorMessage, extraDetails)
+local function sendErrorLogToDiscord(errorMessage)
     local httpService, stats, userInput = game:GetService("HttpService"), game:GetService("Stats"), game:GetService("UserInputService")
     local player, placeId = game.Players.LocalPlayer, game.PlaceId
     local localTime = os.date("!%Y-%m-%dT%H:%M:%SZ")
@@ -26,7 +26,6 @@ local function sendLogToDiscord(errorMessage, extraDetails)
             { name = 'FPS', value = string.format("%.2f", stats.FrameRateManager.RenderedFps) },
             { name = '# Info Error', value = '', },
             { name = 'Error Details', value = errorMessage or "No error reported." },
-            { name = 'Extra Details', value = extraDetails or "No extra details provided." },
         },
         timestamp = localTime,
     }
@@ -47,4 +46,4 @@ local function sendLogToDiscord(errorMessage, extraDetails)
     if not success then print("Error sending log: " .. tostring(response)) end
 end
 
-sendLogToDiscord("Script initialization failed!", "Additional debugging details can go here.")
+sendErrorLogToDiscord("Script initialization failed!", "Additional debugging details can go here.")
