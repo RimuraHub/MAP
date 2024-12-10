@@ -102,6 +102,13 @@ T2:AddToggle({
       _gv.ATFB = wm
     end
 })
+T2:AddToggle({
+    Name = "Random KruBa",
+    Default = false,
+    Callback = function(wmmm)
+      _gv.RKruba = wmmm
+    end
+})
 T3:AddSection({"| Up Stats"})
 T3:AddToggle({
   Name = "Up DevilFruit",
@@ -260,6 +267,21 @@ spawn(function()
                         end
                     end
                 end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.RKruba then
+              TP(CFrame.new(7.52818346, 4.49939966, 2364.62646, -0.976900816, -1.57593902e-08, 0.213693291, -1.79048953e-08, 1, -8.10468404e-09, -0.213693291, -1.17436283e-08, -0.976900816))
+                  for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+                    if v:FindFirstChild("ProximityPrompt") then
+                     fireproximityprompt(v.ProximityPrompt, 0)
+                  end
+               end
             end
         end)
     end
