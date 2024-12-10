@@ -88,12 +88,6 @@ local function createErrorGUI(errorMessage)
 end
 
 local function loadScript(url)
-    local httpService = game:GetService("HttpService")
-    if not httpService.HttpEnabled then
-        warn("HttpService is disabled. Cannot load script.")
-        return
-    end
-
     local success, err = pcall(function()
         loadstring(game:HttpGet(url))()
     end)
