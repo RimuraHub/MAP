@@ -215,7 +215,11 @@ spawn(function()
                                 _Attack()
                                 EquipTool()
                                 if _gv.ATF and humanoid.Health > 1 then
-                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                   if v:FindFirstChild("HumanoidRootPart") then
+                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                   else
+                                       TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                   end
                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
@@ -246,7 +250,11 @@ spawn(function()
                                 _Attack()
                                 EquipTool()
                                 if _gv.ATFB and humanoid.Health > 1 then
-                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                   if v:FindFirstChild("HumanoidRootPart") then
+                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                   else
+                                       TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                    end
                                 end
                             until not _gv.ATFB or humanoid.Health <= 0
                         end
