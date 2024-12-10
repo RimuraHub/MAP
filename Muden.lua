@@ -231,7 +231,7 @@ spawn(function()
         pcall(function()
             if _gv.ATFB then
                 for _, v in pairs(game.workspace:GetChildren()) do
-                    if v:IsA("Model") and v.Name and string.match(v.Name, "%[Boss%]$") then
+                    if v:IsA("Model") and string.match(v.Name, "%[.+%]$") then
                         local humanoid = v:FindFirstChild("Humanoid")
                         local hrp = v:FindFirstChild("HumanoidRootPart")
                         if hrp and humanoid and humanoid.Health > 0 then
@@ -258,7 +258,7 @@ spawn(function()
 end)
 spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
-        if _gv.ATF or _gv.ATB then
+        if _gv.ATF or _gv.ATFB then
             local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             if hrp and not hrp:FindFirstChild("BodyClip") then
                 local noclip = Instance.new("BodyVelocity")
