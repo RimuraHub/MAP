@@ -277,7 +277,7 @@ spawn(function()
         pcall(function()
             if _gv.RKruba then
               TP(CFrame.new(7.52818346, 4.49939966, 2364.62646, -0.976900816, -1.57593902e-08, 0.213693291, -1.79048953e-08, 1, -8.10468404e-09, -0.213693291, -1.17436283e-08, -0.976900816))
-                  for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+                  for i, v in pairs(game.workspace.Map.Shop["Doctor Dog"]:GetChildren()) do
                     if v:FindFirstChild("ProximityPrompt") then
                      fireproximityprompt(v.ProximityPrompt, 0)
                   end
