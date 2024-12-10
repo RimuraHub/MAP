@@ -47,9 +47,9 @@ end
 function BringMob()
     local monsterFolder = game.workspace.Map.Mon
     if not monsterFolder then return end
-    for _, v in pairs(monsterFolder:GetChildren()) do
+    for _, v in pairs(monsterFolder:GetDescendants()) do
         if v:IsA("Model") and v.Name == _gv.SLM and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
-            for _, y in pairs(monsterFolder:GetChildren()) do
+            for _, y in pairs(monsterFolder:GetDescendants()) do
                 if v:IsA("Model") and y.Name == _gv.SLM and y:FindFirstChild("HumanoidRootPart") then
                     v.HumanoidRootPart.CFrame = y.HumanoidRootPart.CFrame
                     v.HumanoidRootPart.CanCollide = false
@@ -297,9 +297,9 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.RKruba then
-                  for i, v in pairs(game.workspace.Map.Shop["Doctor Dog"]:GetChildren()) do
+                  for _, v in pairs(game.workspace.Map.Shop["Doctor Dog"]:GetChildren()) do
                     if v:FindFirstChild("ProximityPrompt") then
-                      TP(v.WorldPivot)
+                      TP(v.HumanoidRootPart.CFrame)
                      fireproximityprompt(v.ProximityPrompt, 0)
                   end
                end
