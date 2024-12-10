@@ -37,11 +37,29 @@ local function TP(cframe)
         local character = game.Players.LocalPlayer.Character
         if character and character.PrimaryPart then
             character:SetPrimaryPartCFrame(cframe)
+            
         end
     end)
 end
 function Up(a,b)
 game:GetService("ReplicatedStorage").RemoteEvents.UpPoint:FireServer(a,b)
+end
+function BringMob()
+    local monsterFolder = game.workspace.Map.Mon
+    if not monsterFolder then return end
+    for _, v in pairs(monsterFolder:GetChildren()) do
+        if v:IsA("Model") and v.Name == _gv.SLM and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
+            for _, y in pairs(monsterFolder:GetChildren()) do
+                if v:IsA("Model") and y.Name == _gv.SLM and y:FindFirstChild("HumanoidRootPart") then
+                    v.HumanoidRootPart.CFrame = y.HumanoidRootPart.CFrame
+                    v.HumanoidRootPart.CanCollide = false
+                    if sethiddenproperty then
+                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                    end
+                end
+            end
+        end
+    end
 end
 
 ------[[ Local Global ]]------
@@ -102,6 +120,7 @@ T2:AddToggle({
       _gv.ATFB = wm
     end
 })
+T2:AddSection({"| Random"})
 T2:AddToggle({
     Name = "Random KruBa",
     Default = false,
@@ -186,10 +205,17 @@ T4:AddButton({"Teleport Sign", function()
     end
   end
 })
-T5:AddSection({"| Tool"})
+T5:AddSection({"| Settings"})
 AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
     _G.Weapon = ooooo
 end)
+T5:AddToggle({
+    Name = "Bring Mob",
+    Default = true,
+    Callback = function(Nring)
+      _gv.BringMon = Nring
+    end
+})
 T5:AddSection({"| Code"})
 T5:AddButton({"Redeem All Code", function()
 for _, v in pairs(game.Players.LocalPlayer.Codes) do
@@ -221,12 +247,11 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
+                                if _gv.BringMon == true then
+                                  BringMob()
+                                end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                   if v:FindFirstChild("HumanoidRootPart") then
-                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                   else
-                                       TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                   end
+                                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
@@ -257,11 +282,7 @@ spawn(function()
                                 _Attack()
                                 EquipTool()
                                 if _gv.ATFB and humanoid.Health > 1 then
-                                   if v:FindFirstChild("HumanoidRootPart") then
-                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                   else
-                                       TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                    end
+                                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
                                 end
                             until not _gv.ATFB or humanoid.Health <= 0
                         end
@@ -276,9 +297,9 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.RKruba then
-              TP(CFrame.new(7.52818346, 4.49939966, 2364.62646, -0.976900816, -1.57593902e-08, 0.213693291, -1.79048953e-08, 1, -8.10468404e-09, -0.213693291, -1.17436283e-08, -0.976900816))
                   for i, v in pairs(game.workspace.Map.Shop["Doctor Dog"]:GetChildren()) do
                     if v:FindFirstChild("ProximityPrompt") then
+                      TP(v.WorldPivot)
                      fireproximityprompt(v.ProximityPrompt, 0)
                   end
                end
