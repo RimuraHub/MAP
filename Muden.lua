@@ -1,3 +1,5 @@
+local _gv = getgenv()
+
 ------[[ function ]]------
 
 local function GetN_Child(Folder, Class)
@@ -48,7 +50,7 @@ function BringMob()
     local monsterFolder = game.workspace.Map.Mon
     if not monsterFolder then return end
     for _, v in pairs(monsterFolder:GetDescendants()) do
-        if v:IsA("Model") and v.Name == _gv.SLM and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
+        if v:IsA("Model") and v.Name == _gv.SLM and v:FindFirstChild("HumanoidRootPart") then
             for _, y in pairs(monsterFolder:GetDescendants()) do
                 if v:IsA("Model") and y.Name == _gv.SLM and y:FindFirstChild("HumanoidRootPart") then
                     v.HumanoidRootPart.CFrame = y.HumanoidRootPart.CFrame
@@ -74,7 +76,6 @@ local SignalTable = GetN_Child(workspace.Map.Sign,"Model")
 local Shop = GetN_Child(game.workspace.Map.Shop,"Model")
 local Mon = {}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
-local _gv = getgenv()
 for _, v in pairs(game.workspace.Map.Mon:GetDescendants()) do
   if v:IsA("Model") then
     table.insert(Mon, v.Name)
@@ -297,9 +298,9 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.RKruba then
-                  for _, v in pairs(game.workspace.Map.Shop["Doctor Dog"]:GetChildren()) do
+               TP(CFrame.new(8.51999378, 4.49939966, 2362.82715, -0.989910245, 0, 0.141695946, 0, 1, -0, -0.141695946, 0, -0.989910245))
+                  for _, v in pairs(game.workspace.Map.Shop:GetDescendants()) do
                     if v:FindFirstChild("ProximityPrompt") then
-                      TP(v.HumanoidRootPart.CFrame)
                      fireproximityprompt(v.ProximityPrompt, 0)
                   end
                end
