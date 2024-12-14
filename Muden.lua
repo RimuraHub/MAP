@@ -34,12 +34,18 @@ function EquipTool()
     end
   end
 end
-local function TP(cframe)
+function EquipToolSele(NameWaepon)
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") and v.Name == NameWaepon then
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+    end
+  end
+end
+function TP(cframe)
     pcall(function()
         local character = game.Players.LocalPlayer.Character
         if character and character.PrimaryPart then
             character:SetPrimaryPartCFrame(cframe)
-            
         end
     end)
 end
@@ -119,6 +125,13 @@ T2:AddToggle({
     Default = false,
     Callback = function(wm)
       _gv.ATFB = wm
+    end
+})
+T2:AddToggle({
+    Name = "Farm Asta[Have SukunaV2]",
+    Default = false,
+    Callback = function(AstaX)
+      _G.X = AstaX
     end
 })
 T2:AddSection({"| Random"})
@@ -288,6 +301,22 @@ spawn(function()
                             until not _gv.ATFB or humanoid.Health <= 0
                         end
                     end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.X then
+              if game.workspace:FindFirstChild("Asta [Boss]") then
+                EquipToolSele("SukunaV2")
+                TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot)
+                task.wait(1)
+                   game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
+                   game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
                 end
             end
         end)
