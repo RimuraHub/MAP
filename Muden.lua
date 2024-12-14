@@ -170,10 +170,17 @@ T2:AddToggle({
 })
 T2:AddSection({"| Random"})
 T2:AddToggle({
-    Name = "Random KruBa",
+    Name = "Random KruBa[Money]",
     Default = false,
     Callback = function(wmmm)
       _gv.RKruba = wmmm
+    end
+})
+T2:AddToggle({
+    Name = "Random KruBa[Gem]",
+    Default = false,
+    Callback = function(G)
+      _gv.RKrubaG = G
     end
 })
 T3:AddSection({"| Up Stats"})
@@ -526,6 +533,21 @@ spawn(function()
         pcall(function()
             if _gv.RKruba then
                TP(workspace.Map.Shop["KruBa [250K Money]"].WorldPivot)
+                  for _, v in pairs(game.workspace.Map.Shop:GetDescendants()) do
+                    if v:FindFirstChild("ProximityPrompt") then
+                     fireproximityprompt(v.ProximityPrompt, 0)
+                  end
+               end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.RKrubaG then
+               TP(workspace.Map.Shop["KruBa [250K Gem]"].WorldPivot)
                   for _, v in pairs(game.workspace.Map.Shop:GetDescendants()) do
                     if v:FindFirstChild("ProximityPrompt") then
                      fireproximityprompt(v.ProximityPrompt, 0)
