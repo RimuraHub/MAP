@@ -100,6 +100,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local island = GetN_Child(game.workspace.Map.Island,"Model")
 local SignalTable = GetN_Child(workspace.Map.Sign,"Model")
 local Shop = GetN_Child(game.workspace.Map.Shop,"Model")
+local Bosslist = {"Ala God [Boss]","Asrof [Boss]","Asta [Boss]","Cid Kageno [Boss]","Core","Eugeo [Boss]","Gojo Ultimate [Boss]","Gojo [Boss]","Kirito [Boss]","Mahoraga [Boss]","Mr Bai [Boss]","Okarun [Boss]","Shanks [Boss]","Yuji [Boss]","Zoro[Lv10000000]"}
 local Mon = {}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 for _, v in pairs(game.workspace.Map.Mon:GetDescendants()) do
@@ -133,15 +134,25 @@ T2:AddSection({"| Auto Farm"})
 AddDropdownn(T2, "Select Monster", Mon, "nil", "Mon", function(q)
 _gv.SLM = q
 end)
+AddDropdownn(T2, "Select Boss", Bosslist, "nil", "Bosslist", function(qmj)
+_gv.seleboss = qmj
+end)
 T2:AddToggle({
-    Name = "Farm Select",
+    Name = "Farm Mon Select",
     Default = false,
     Callback = function(w)
       _gv.ATF = w
     end
 })
 T2:AddToggle({
-    Name = "Farm Boss",
+    Name = "Farm Boss Select",
+    Default = false,
+    Callback = function(mugkmm)
+      _gv.FSeleB = mugkmm
+    end
+})
+T2:AddToggle({
+    Name = "Farm AllBoss",
     Default = false,
     Callback = function(wm)
       _gv.ATFB = wm
@@ -166,6 +177,13 @@ T2:AddToggle({
     Default = false,
     Callback = function(FemtoV2)
       _gv.AFemtoV2 = FemtoV2
+    end
+})
+T2:AddToggle({
+    Name = "Auto Click and Find Easter Egg and Fake Easter Egg",
+    Default = false,
+    Callback = function(FAEE)
+      _gv.FEE = FAEE
     end
 })
 T2:AddSection({"| Random"})
@@ -340,6 +358,38 @@ spawn(function()
                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
                                 end
                             until not _gv.ATFB or humanoid.Health <= 0
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.FSeleB then
+                local Monster = game.workspace
+                for _, v in pairs(Monster:GetChildren()) do
+                    if v.Name == _gv.seleboss then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v.HumanoidRootPart.Size = Vector3.new(10, 30, 10)
+                      v.HumanoidRootPart.Transparency = 0.9
+                      v.HumanoidRootPart.CanCollide = false
+                      v.Head.CanCollide = false
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                if _gv.FSeleB and humanoid.Health > 1 then
+                                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                end
+                            until not _gv.FSeleB or humanoid.Health <= 0
                         end
                     end
                 end
@@ -558,8 +608,50 @@ spawn(function()
     end
 end)
 spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.FEE then
+                for _, v in pairs(game.Workspace:GetDescendants()) do
+                    if v:IsA("ClickDetector") and v.Parent and v.Parent:IsA("BasePart") then
+                        local part = v.Parent
+                        if part.Transparency == 1 then
+                            part.Transparency = 0
+                        end
+                        if not part.CanCollide then
+                            part.CanCollide = true
+                        end
+                        local originalColor = part.BrickColor
+                        local isHighlighted = false
+                        local pointLight = Instance.new("PointLight")
+                        pointLight.Parent = part
+                        pointLight.Color = Color3.fromRGB(255, 255, 0)
+                        pointLight.Range = 10
+                        pointLight.Brightness = 2
+                        for i = 1, 4 do
+                            if isHighlighted then
+                                part.BrickColor = originalColor
+                            else
+                                part.BrickColor = BrickColor.new("Bright yellow")
+                            end
+                            isHighlighted = not isHighlighted
+                            wait(0.3)
+                        end
+                        part.BrickColor = originalColor
+                        pointLight:Destroy()
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame
+                        wait(0.5)
+                        fireclickdetector(v)
+                        wait(1)
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
-        if _gv.ATF or _gv.ATFB then
+        if _gv.ATF or _gv.ATFB or _gv.FSeleB then
             local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             if hrp and not hrp:FindFirstChild("BodyClip") then
                 local noclip = Instance.new("BodyVelocity")
