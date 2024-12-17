@@ -29,7 +29,7 @@ function _Attack()
 end
 function EquipTool()
     for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-        if v:IsA("Tool") and v.Name == _G.Weapon then
+        if v:IsA("Tool") and v.Name == _gv.Weapon then
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
         end
     end
@@ -162,7 +162,7 @@ T2:AddToggle({
     Name = "Farm Asta",
     Default = false,
     Callback = function(AstaX)
-      _gv.X = AstaX
+      _gv.AstaX = AstaX
     end
 })
 T2:AddToggle({
@@ -200,6 +200,42 @@ T2:AddToggle({
     Callback = function(G)
       _gv.RKrubaG = G
     end
+})
+T2:AddSection({"| Auto Skill"})
+T2:AddToggle({
+  Name = "Z",
+  Default = false,
+  Callback = function(Z)
+    _G.Z = Z
+  end
+})
+T2:AddToggle({
+  Name = "X",
+  Default = false,
+  Callback = function(X)
+    _G.X = X
+  end
+})
+T2:AddToggle({
+  Name = "C",
+  Default = false,
+  Callback = function(C)
+    _G.C = C
+  end
+})
+T2:AddToggle({
+  Name = "V",
+  Default = false,
+  Callback = function(V)
+    _G.V = V
+  end
+})
+T2:AddToggle({
+  Name = "B",
+  Default = false,
+  Callback = function(B)
+    _G.B = B
+  end
 })
 T3:AddSection({"| Up Stats"})
 T3:AddToggle({
@@ -401,7 +437,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _gv.X then
+            if _gv.AstaX then
                     local backpackHasTool = hasTool(game:GetService("Players").LocalPlayer.Backpack)
                     local characterHasTool = game:GetService("Players").LocalPlayer.Character and hasTool(game:GetService("Players").LocalPlayer.Character)
                       if backpackHasTool or characterHasTool then
@@ -650,6 +686,61 @@ spawn(function()
     end
 end)
 spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.Z then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.X then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.C then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.V then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 118, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 118, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _G.B then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 98, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 98, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
         if _gv.ATF or _gv.ATFB or _gv.FSeleB then
             local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -668,3 +759,5 @@ spawn(function()
         end
     end)
 end)
+
+--310/980 เลขหวย/ถ้าเอาไปซื้อแล้วถูกแบ่งผมด้วย
