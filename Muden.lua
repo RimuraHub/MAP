@@ -206,35 +206,35 @@ T2:AddToggle({
   Name = "Z",
   Default = false,
   Callback = function(Z)
-    _G.Z = Z
+    _gv.Z = Z
   end
 })
 T2:AddToggle({
   Name = "X",
   Default = false,
   Callback = function(X)
-    _G.X = X
+    _gv.X = X
   end
 })
 T2:AddToggle({
   Name = "C",
   Default = false,
   Callback = function(C)
-    _G.C = C
+    _gv.C = C
   end
 })
 T2:AddToggle({
   Name = "V",
   Default = false,
   Callback = function(V)
-    _G.V = V
+    _gv.V = V
   end
 })
 T2:AddToggle({
   Name = "B",
   Default = false,
   Callback = function(B)
-    _G.B = B
+    _gv.B = B
   end
 })
 T3:AddSection({"| Up Stats"})
@@ -242,8 +242,8 @@ T3:AddToggle({
   Name = "Up DevilFruit",
   Default = false,
   Callback = function(DevilFruit)
-    _G.DevilFruit = DevilFruit
-      while _G.DevilFruit do task.wait()
+    _gv.DevilFruit = DevilFruit
+      while _gv.DevilFruit do task.wait()
         Up("DevilFruit", "1")
       end
   end
@@ -252,8 +252,8 @@ T3:AddToggle({
   Name = "Up Defense",
   Default = false,
   Callback = function(Defense)
-    _G.Defense = Defense
-      while _G.Defense do task.wait()
+    _gv.Defense = Defense
+      while _gv.Defense do task.wait()
         Up("Defense", "1")
       end
   end
@@ -262,8 +262,8 @@ T3:AddToggle({
   Name = "Up Sword",
   Default = false,
   Callback = function(Sword)
-    _G.Sword = Sword
-      while _G.Sword do task.wait()
+    _gv.Sword = Sword
+      while _gv.Sword do task.wait()
         Up("Sword","1")
       end
   end
@@ -272,8 +272,8 @@ T3:AddToggle({
   Name = "Up Melee",
   Default = false,
   Callback = function(Melee)
-    _G.Melee = Melee
-      while _G.Melee do task.wait()
+    _gv.Melee = Melee
+      while _gv.Melee do task.wait()
         Up("Melee","1")
       end
   end
@@ -316,7 +316,7 @@ T4:AddButton({"Teleport Sign", function()
 })
 T5:AddSection({"| Settings"})
 AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
-    _G.Weapon = ooooo
+    _gv.Weapon = ooooo
 end)
 T5:AddToggle({
     Name = "Bring Mob",
@@ -689,7 +689,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _G.Z then
+            if _gv.Z then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game)
             end
@@ -700,7 +700,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _G.X then
+            if _gv.X then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
             end
@@ -711,7 +711,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _G.C then
+            if _gv.C then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game)
             end
@@ -722,7 +722,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _G.V then
+            if _gv.V then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true, 118, false, game)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false, 118, false, game)
             end
@@ -733,7 +733,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _G.B then
+            if _gv.B then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true, 98, false, game)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false, 98, false, game)
             end
