@@ -100,7 +100,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local island = GetN_Child(game.workspace.Map.Island,"Model")
 local SignalTable = GetN_Child(workspace.Map.Sign,"Model")
 local Shop = GetN_Child(game.workspace.Map.Shop,"Model")
-local Bosslist = {"Ala God [Boss]","Asrof [Boss]","Asta [Boss]","Cid Kageno [Boss]","Core","Eugeo [Boss]","Gojo Ultimate [Boss]","Gojo [Boss]","Kirito [Boss]","Mahoraga [Boss]","Mr Bai [Boss]","Okarun [Boss]","Shanks [Boss]","Yuji [Boss]","Zoro[Lv10000000]"}
+local Bosslist = {"Ala God [Boss]","Asrof [Boss]","Asta [Boss]","Cid Kageno [Boss]","Core","Eugeo [Boss]","Gojo Ultimate [Boss]","Gojo [Boss]","Guts [Boss]","Kirito [Boss]","Mahoraga [Boss]","Mr Bai [Boss]","Okarun [Boss]","Shanks [Boss]","Yuji [Boss]","Zoro[Lv10000000]"}
 local Mon = {}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 for _, v in pairs(game.workspace.Map.Mon:GetDescendants()) do
