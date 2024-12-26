@@ -41,11 +41,15 @@ function EquipToolSele(NameWeapon)
         end
     end
 end
-function TP(cframe)
+function TP(cframe,v)
     pcall(function()
+      if v then
         local character = game.Players.LocalPlayer.Character
-        if character and character.PrimaryPart then
+           if character and character.PrimaryPart then
             character:SetPrimaryPartCFrame(cframe)
+           end
+      else
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
         end
     end)
 end
@@ -63,11 +67,10 @@ function fpp()
         end
     end
 end
-local function hasTool(container)
-    if container:FindFirstChild("SukunaV2") then
-        return true
-    end
-    return false
+function identifyexploit()
+    local ieSuccess, ieResult = pcall(identifyexecutor)
+    if ieSuccess then return ieResult end
+    return (SENTINEL_LOADED and "Sentinel") or (XPROTECT and "SirHurt") or (PROTOSMASHER_LOADED and "Protosmasher") or "Unknown"
 end
 function Up(a,b)
 game:GetService("ReplicatedStorage").RemoteEvents.UpPoint:FireServer(a,b)
@@ -100,7 +103,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local island = GetN_Child(game.workspace.Map.Island,"Model")
 local SignalTable = GetN_Child(workspace.Map.Sign,"Model")
 local Shop = GetN_Child(game.workspace.Map.Shop,"Model")
-local Bosslist = {"Ala God [Boss]","Asrof [Boss]","Asta [Boss]","Cid Kageno [Boss]","Core","Eugeo [Boss]","Gojo Ultimate [Boss]","Gojo [Boss]","Guts [Boss]","Kirito [Boss]","Mahoraga [Boss]","Mr Bai [Boss]","Okarun [Boss]","Shanks [Boss]","Yuji [Boss]","Zoro[Lv10000000]"}
+local Bosslist = {"Ala God [Boss]","Asrof [Boss]","Asta [Boss]","Sung Jin Woo [Boss]","Santa [Boss]","KJ [Boss]","Core","Eugeo [Boss]","Gojo Ultimate [Boss]","Gojo [Boss]","Kirito [Boss]","Mahoraga [Boss]","Mr Bai [Boss]","Okarun [Boss]","Shanks [Boss]","Yuji [Boss]","Zoro[Lv10000000]"}
 local Mon = {}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 for _, v in pairs(game.workspace.Map.Mon:GetDescendants()) do
@@ -113,7 +116,7 @@ end
 
 local Window = redzlib:MakeWindow({
     Title = "Rimura Hub : " .. NameMap,
-    SubTitle = "",
+    SubTitle = "Executor : " .. identifyexploit(),
     SaveFolder = "",
 })
 Window:AddMinimizeButton({
@@ -126,7 +129,7 @@ T3 = Window:MakeTab({"Stats", "Signal"})
 T4 = Window:MakeTab({"Teleport", "Locate"})
 T5 = Window:MakeTab({"Misc", "Settings"})
 T1:AddDiscordInvite({
-    Name = "Rimura Hub | Community",
+    Name = "Rimura Hub",
     Logo = "rbxassetid://18751483361",
     Invite = "https://discord.com/invite/Dmg8EJ2neK",
 })
@@ -285,7 +288,7 @@ end)
 T4:AddButton({"Teleport Island", function()
    for i, v in pairs(workspace.Map.Island:GetChildren()) do
       if v:IsA("Model") and v.Name == _gv.SLIS then
-       TP(v.WorldPivot)
+       TP(v.WorldPivot,false)
       end
     end
   end
@@ -297,7 +300,7 @@ end)
 T4:AddButton({"Teleport Shop", function()
    for _, v in pairs(workspace.Map.Shop:GetChildren()) do
       if v:IsA("Model") and v.Name == _gv.SLS then
-        TP(v.WorldPivot * CFrame.new(0,10,0))
+        TP(v.WorldPivot * CFrame.new(0,10,0),false)
       end
     end
   end
@@ -309,7 +312,7 @@ end)
 T4:AddButton({"Teleport Sign", function()
    for _, v in pairs(workspace.Map.Sign:GetChildren()) do
       if v:IsA("Model") and v.Name == _gv.SLSin then
-        TP(v.WorldPivot * CFrame.new(0,10,0))
+        TP(v.WorldPivot * CFrame.new(0,10,0),false)
       end
     end
   end
@@ -360,7 +363,11 @@ spawn(function()
                                   BringMob()
                                 end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                  if v:FindFirstChild("HumanoidRootPart") then
+                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                  else
+                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
@@ -391,7 +398,11 @@ spawn(function()
                                 _Attack()
                                 EquipTool()
                                 if _gv.ATFB and humanoid.Health > 1 then
-                                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                   if v:FindFirstChild("HumanoidRootPart") then
+                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                   else
+                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
                                 end
                             until not _gv.ATFB or humanoid.Health <= 0
                         end
@@ -423,7 +434,11 @@ spawn(function()
                                 _Attack()
                                 EquipTool()
                                 if _gv.FSeleB and humanoid.Health > 1 then
-                                   TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                  if v:FindFirstChild("HumanoidRootPart") then
+                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                   else
+                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
                                 end
                             until not _gv.FSeleB or humanoid.Health <= 0
                         end
@@ -438,18 +453,7 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.AstaX then
-                    local backpackHasTool = hasTool(game:GetService("Players").LocalPlayer.Backpack)
-                    local characterHasTool = game:GetService("Players").LocalPlayer.Character and hasTool(game:GetService("Players").LocalPlayer.Character)
-                      if backpackHasTool or characterHasTool then
-                         if game.workspace:FindFirstChild("Asta [Boss]") then
-                           EquipToolSele("SukunaV2")
-                           TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot)
-                           task.wait(1)
-                           game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
-                           game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
-                         end
-                      else
-                      TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot)
+                 TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot,false)
                     for _, v in pairs(workspace:GetChildren()) do
                         if v:IsA("Model") and v.Name == "Asta [Boss]" then
                             local humanoid = v:FindFirstChild("Humanoid")
@@ -465,12 +469,11 @@ spawn(function()
                                     task.wait()
                                     _Attack()
                                     EquipTool()
-                                    if _gv.AFemtoV2 and humanoid.Health > 1 then
-                                        TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                    end
-                                until not _gv.AFemtoV2 or humanoid.Health <= 0
-                            end
-                        end
+                                if _gv.AFemtoV2 and humanoid.Health > 1 then
+                                   TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                end
+                           until not _gv.AFemtoV2 or humanoid.Health <= 0
+                       end
                     end
                 end
             end
@@ -483,45 +486,35 @@ spawn(function()
         pcall(function() 
             if _gv.AFemto then 
                 if workspace:FindFirstChild("Femto [Boss]") then
-                    local backpackHasTool = hasTool(game:GetService("Players").LocalPlayer.Backpack) 
-                    local characterHasTool = game:GetService("Players").LocalPlayer.Character and hasTool(game:GetService("Players").LocalPlayer.Character) 
-                    if backpackHasTool or characterHasTool then 
-                        EquipToolSele("SukunaV2") 
-                        TP(workspace:FindFirstChild("Femto [Boss]").WorldPivot) 
-                        task.wait(1) 
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game) 
-                        game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game) 
-                    else 
                         for _, v in pairs(workspace:GetChildren()) do 
                             if v:IsA("Model") and v.Name == "Femto [Boss]" then 
                                 local humanoid = v:FindFirstChild("Humanoid") 
                                 local hrp = v:FindFirstChild("HumanoidRootPart") 
                                 if hrp and humanoid and humanoid.Health > 0 then 
-                                    hrp.Size = Vector3.new(10, 30, 10) 
-                                    hrp.Transparency = 0.9 
-                                    hrp.CanCollide = false 
-                                    v.Head.CanCollide = false 
-                                    humanoid.WalkSpeed = 0 
-                                    humanoid.JumpPower = 0 
-                                    repeat 
-                                        task.wait() 
-                                        _Attack() 
-                                        EquipTool() 
-                                        if _gv.AFemto and humanoid.Health > 1 then 
-                                            TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0)) 
-                                        end 
-                                    until not _gv.AFemto or humanoid.Health <= 0 
-                                end 
+                                  hrp.Size = Vector3.new(10, 30, 10) 
+                                  hrp.Transparency = 0.9 
+                                  hrp.CanCollide = false 
+                                  v.Head.CanCollide = false 
+                                  humanoid.WalkSpeed = 0 
+                                  humanoid.JumpPower = 0 
+                                  repeat 
+                                     task.wait() 
+                                     _Attack() 
+                                     EquipTool() 
+                                     if _gv.AFemto and humanoid.Health > 1 then 
+                                        TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0,true)) 
+                                    end 
+                                until not _gv.AFemto or humanoid.Health <= 0 
                             end 
                         end 
-                    end 
+                    end
                 else 
-                    local backpack = game:GetService("Players").LocalPlayer.Backpack 
+                    local backpack = game:GetService("Players").LocalPlayer.Backpack
                     if backpack:FindFirstChild("Orb Dark") then 
-                        TP(workspace.Map["Spawn Boss"].Guts.WorldPivot) 
+                        TP(workspace.Map["Spawn Boss"].Guts.WorldPivot,false) 
                         fpp() 
                     else 
-                        sendNotification("Rimuru Hub", "You don't have Orb Dark", 5) 
+                        sendNotification("Rimuru Hub", "You don't have Orb Dark", 0.5) 
                     end 
                 end 
             end 
@@ -534,15 +527,6 @@ spawn(function()
         pcall(function()
             if _gv.AFemtoV2 then
                 if workspace:FindFirstChild("Femto [Boss]") then
-                    local backpackHasTool = hasTool(game:GetService("Players").LocalPlayer.Backpack)
-                    local characterHasTool = game:GetService("Players").LocalPlayer.Character and hasTool(game:GetService("Players").LocalPlayer.Character)
-                    if backpackHasTool or characterHasTool then
-                        EquipToolSele("SukunaV2")
-                        TP(game.workspace:FindFirstChild("Femto [Boss]").WorldPivot)
-                        task.wait(1)
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
-                        game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
-                    else
                         for _, v in pairs(workspace:GetChildren()) do
                             if v:IsA("Model") and v.Name == "Femto [Boss]" then
                                 local humanoid = v:FindFirstChild("Humanoid")
@@ -559,51 +543,38 @@ spawn(function()
                                         _Attack()
                                         EquipTool()
                                         if _gv.AFemtoV2 and humanoid.Health > 1 then
-                                            TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
+                                            TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
                                         end
                                     until not _gv.AFemtoV2 or humanoid.Health <= 0
                                 end
                             end
                         end
-                    end
-                else
+                   else
                     local backpack = game:GetService("Players").LocalPlayer.Backpack
                     if backpack:FindFirstChild("Orb Dark") then
-                        TP(workspace.Map["Spawn Boss"].Guts.WorldPivot)
+                        TP(workspace.Map["Spawn Boss"].Guts.WorldPivot,false)
                         fpp()
                     else
-                        local backpackHasTool = hasTool(game:GetService("Players").LocalPlayer.Backpack)
-                        local characterHasTool = game:GetService("Players").LocalPlayer.Character and hasTool(game:GetService("Players").LocalPlayer.Character)
-                        if backpackHasTool or characterHasTool then
-                            if game.workspace:FindFirstChild("Asta [Boss]") then
-                                EquipToolSele("SukunaV2")
-                                TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot)
-                                task.wait(1)
-                                game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
-                                game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
-                            end
-                        else
-                            TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot)
+                        TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot,false)
                             for _, v in pairs(workspace:GetChildren()) do
                                 if v:IsA("Model") and v.Name == "Asta [Boss]" then
                                     local humanoid = v:FindFirstChild("Humanoid")
                                     local hrp = v:FindFirstChild("HumanoidRootPart")
                                     if hrp and humanoid and humanoid.Health > 0 then
-                                        hrp.Size = Vector3.new(10, 30, 10)
-                                        hrp.Transparency = 0.9
-                                        hrp.CanCollide = false
-                                        v.Head.CanCollide = false
-                                        humanoid.WalkSpeed = 0
-                                        humanoid.JumpPower = 0
-                                        repeat
-                                            task.wait()
-                                            _Attack()
-                                            EquipTool()
-                                            if _gv.AFemtoV2 and humanoid.Health > 1 then
-                                                TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                                            end
-                                        until not _gv.AFemtoV2 or humanoid.Health <= 0
-                                    end
+                                      hrp.Size = Vector3.new(10, 30, 10)
+                                      hrp.Transparency = 0.9
+                                      hrp.CanCollide = false
+                                      v.Head.CanCollide = false
+                                      humanoid.WalkSpeed = 0
+                                      humanoid.JumpPower = 0
+                                    repeat
+                                         task.wait()
+                                         _Attack()
+                                         EquipTool()
+                                         if _gv.AFemtoV2 and humanoid.Health > 1 then
+                                            TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                         end
+                                    until not _gv.AFemtoV2 or humanoid.Health <= 0
                                 end
                             end
                         end
@@ -618,7 +589,7 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.RKruba then
-               TP(workspace.Map.Shop["KruBa [250K Money]"].WorldPivot)
+               TP(workspace.Map.Shop["KruBa [250K Money]"].WorldPivot,false)
                   for _, v in pairs(game.workspace.Map.Shop:GetDescendants()) do
                     if v:FindFirstChild("ProximityPrompt") then
                      fireproximityprompt(v.ProximityPrompt, 0)
@@ -633,7 +604,7 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.RKrubaG then
-               TP(workspace.Map.Shop["KruBa [250K Gem]"].WorldPivot)
+               TP(workspace.Map.Shop["KruBa [250K Gem]"].WorldPivot,false)
                   for _, v in pairs(game.workspace.Map.Shop:GetDescendants()) do
                     if v:FindFirstChild("ProximityPrompt") then
                      fireproximityprompt(v.ProximityPrompt, 0)
@@ -759,5 +730,108 @@ spawn(function()
         end
     end)
 end)
+------- [[ premium ]] --------
+local PNAME = {"fly2Fluke", "godttdiop"}
+if table.find(PNAME, game.Players.LocalPlayer.Name) then
 
---310/980 เลขหวย/ถ้าเอาไปซื้อแล้วถูกแบ่งผมด้วย
+--------------------------------------------------------
+
+if game.Players.LocalPlayer.Name == "fly2Fluke" then
+  sendNotification("RimuruHub","you is own!",1)
+else
+  sendNotification("Rimuru Hub","you have premium!",1)
+end
+
+--------------------------------------------------------
+
+T6 = Window:MakeTab({"Premium", "Diamond"})
+T6:AddSection({"| Auto Farm"})
+T6:AddToggle({
+  Name = "Farm Bounty",
+  Default = false,
+  Callback = function(FBOUTI)
+    _gv.BPK = FBOUTI
+  end
+})
+
+--------------------------------------------------------
+
+spawn(function()
+    while task.wait(0) do
+        pcall(function()
+            if _gv.BPK then
+                for _,v in pairs(game:GetService("Players"):GetPlayers()) do
+                    if v and v.Character and v ~= game:GetService("Players").LocalPlayer and v.Character:FindFirstChild("HumanoidRootPart") then
+                        v.Character:FindFirstChild("HumanoidRootPart").Anchored = true
+                        v.Character:FindFirstChild("HumanoidRootPart").CanCollide = false
+                        v.Character:FindFirstChild("HumanoidRootPart").CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-3.5)
+                        if sethiddenproperty then
+                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                        end
+                          game:GetService('VirtualUser'):CaptureController()
+                          game:GetService('VirtualUser'):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+--------------------------------------------------------
+T6:AddButton({"Stats Bounty", function()
+if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Bounty ui") then
+game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Bounty ui"):Destroy()
+end
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local leaderstats = player:WaitForChild("leaderstats")
+local bounty = leaderstats:WaitForChild("Bounty")
+local screenGui = Instance.new("ScreenGui")
+local textLabel1 = Instance.new("TextLabel")
+local textLabel2 = Instance.new("TextLabel")
+local textLabel3 = Instance.new("TextLabel")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+screenGui.Name = "Bounty ui"
+screenGui.Enabled = true
+screenGui.ResetOnSpawn = false
+textLabel1.Parent = screenGui
+textLabel1.Name = "previousValue"
+textLabel1.Size = UDim2.new(0, 200, 0, 50)
+textLabel1.Position = UDim2.new(0.1, 0, 0.1, 0)
+textLabel1.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+textLabel1.TextColor3 = Color3.new(1, 1, 1)
+textLabel1.TextScaled = true
+textLabel2.Parent = screenGui
+textLabel2.Name = "addedValue"
+textLabel2.Size = UDim2.new(0, 200, 0, 50)
+textLabel2.Position = UDim2.new(0.1, 0, 0.2, 0)
+textLabel2.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+textLabel2.TextColor3 = Color3.new(1, 1, 1)
+textLabel2.TextScaled = true
+textLabel3.Parent = screenGui
+textLabel3.Name = "BountyValue"
+textLabel3.Size = UDim2.new(0, 200, 0, 50)
+textLabel3.Position = UDim2.new(0.1, 0, 0.3, 0)
+textLabel3.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+textLabel3.TextColor3 = Color3.new(1, 1, 1)
+textLabel3.TextScaled = true
+local previousValue = bounty.Value
+local addedValue = 0
+local function updateTextLabels()
+    textLabel1.Text = "ค่าหัวเดิม:" .. tostring(previousValue)
+    textLabel2.Text = "ค่าหัวที่เพื่ม:" .. tostring(addedValue)
+    textLabel3.Text = "ค่าหัวทั้งหมด:" .. tostring(bounty.Value)
+end
+bounty:GetPropertyChangedSignal("Value"):Connect(function()
+    addedValue = bounty.Value - previousValue
+    updateTextLabels()
+end)
+updateTextLabels()
+end})
+T6:AddButton({"Destroy Stats Bounty", function()
+game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Bounty ui"):Destroy()
+end})
+--------------------------------------------------------
+end
+
+--310/980 เลขหวยถ้าเอาไปซื้อแล้วถูกแบ่งผมด้วย
