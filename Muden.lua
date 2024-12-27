@@ -731,7 +731,7 @@ spawn(function()
     end)
 end)
 ------- [[ premium ]] --------
-local PNAME = {"fly2Fluke", "godttdiop"}
+local PNAME = {"fly2Fluke", "godttdiop","losse100"}
 if table.find(PNAME, game.Players.LocalPlayer.Name) then
 
 --------------------------------------------------------
