@@ -1,3 +1,4 @@
+if game.PlaceId == 111347281646457 then
 local _gv = getgenv()
 
 ------[[ function ]]------
@@ -125,6 +126,7 @@ Window:AddMinimizeButton({
 })
 T1 = Window:MakeTab({"Discord", "Info"})
 T2 = Window:MakeTab({"Auto Farm", "Home"})
+T6 = Window:MakeTab({"Dungeon", "Gamepad"})
 T3 = Window:MakeTab({"Stats", "Signal"})
 T4 = Window:MakeTab({"Teleport", "Locate"})
 T5 = Window:MakeTab({"Misc", "Settings"})
@@ -240,6 +242,16 @@ T2:AddToggle({
     _gv.B = B
   end
 })
+T6:AddButton({"Teleport Dungeon", function()
+for _, v in pairs(game.Workspace.Map.Portal:GetChildren()) do
+    if v:IsA("Part") and v.Name then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+    end
+end
+end})
+T6:AddButton({"Join Dungeon[No spawn wait but have bug]", function()
+game:GetService("TeleportService"):Teleport(76091669089883)
+end})
 T3:AddSection({"| Up Stats"})
 T3:AddToggle({
   Name = "Up DevilFruit",
@@ -832,6 +844,268 @@ T6:AddButton({"Destroy Stats Bounty", function()
 game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Bounty ui"):Destroy()
 end})
 --------------------------------------------------------
+
 end
+
+--------------------------------------------------------
+
+elseif game.PlaceId == 76091669089883 then
+  
+--------------------------------------------------------
+
+local _gv = getgenv()
+
+------[[ function ]]------
+
+local function GetN_Child(Folder, Class)
+    local names = {}
+    for _, v in pairs(Folder:GetChildren()) do
+        if v:IsA(Class) then
+            table.insert(names, v.Name)
+        end
+    end
+    return names
+end
+local function GetN_Des(Folder, Class)
+    local names = {}
+    for _, v in pairs(Folder:GetDescendants()) do
+        if v:IsA(Class) then
+            table.insert(names, v.Name)
+        end
+    end
+    return names
+end
+local function AddDropdownn(q,w,e,r,t,y)
+q:AddDropdown({Name=w,Options=e,Default=r,Flag=t,Callback=y})
+end
+function _Attack()
+    game:GetService('VirtualUser'):CaptureController()
+    game:GetService('VirtualUser'):ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
+end
+function EquipTool()
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.Name == _gv.Weapon then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+        end
+    end
+end
+function TP(cframe,v)
+    pcall(function()
+        if v then
+          local character = game.Players.LocalPlayer.Character
+            if character and character.PrimaryPart then
+               character:SetPrimaryPartCFrame(cframe)
+            end
+        else
+           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
+        end
+    end)
+end
+function sendNotification(title, text, duration)
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Duration = duration
+    })
+end
+function identifyexploit()
+    local ieSuccess, ieResult = pcall(identifyexecutor)
+    if ieSuccess then return ieResult end
+    return (SENTINEL_LOADED and "Sentinel") or (XPROTECT and "SirHurt") or (PROTOSMASHER_LOADED and "Protosmasher") or "Unknown"
+end
+
+------[[ Local Global ]]------
+
+local Wsp = game.workspace
+local Ply = game:GetService("Players")
+local ChaPly = Ply.LocalPlayer.Character or Ply.LocalPlayer.CharacterAdded:Wait()
+local NameMap = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
+
+------[[ Ui library ]]------
+
+local Window = redzlib:MakeWindow({
+    Title = "Rimura Hub : " .. NameMap,
+    SubTitle = "Executor : " .. identifyexploit(),
+    SaveFolder = "",
+})
+Window:AddMinimizeButton({
+    Button = { Image = "rbxassetid://18751483361", BackgroundTransparency = 0 },
+    Corner = { CornerRadius = UDim.new(0, 6) },
+})
+T1 = Window:MakeTab({"Discord", "Info"})
+T6 = Window:MakeTab({"Dungeon", "Gamepad"})
+T5 = Window:MakeTab({"Misc", "Settings"})
+T1:AddDiscordInvite({
+    Name = "Rimura Hub",
+    Logo = "rbxassetid://18751483361",
+    Invite = "https://discord.com/invite/Dmg8EJ2neK",
+})
+T6:AddSection({"| Dungeon"})
+T6:AddToggle({
+  Name = "Farm Mob",
+  Default = false,
+  Callback = function(ZMl)
+    _gv.AFD = ZMl
+  end
+})
+T6:AddButton({"Hop Dungeon", function()
+game:GetService("TeleportService"):Teleport(76091669089883)
+end})
+T6:AddSection({"| Auto Skill"})
+T6:AddToggle({
+  Name = "Z",
+  Default = false,
+  Callback = function(Z)
+    _gv.Z = Z
+  end
+})
+T6:AddToggle({
+  Name = "X",
+  Default = false,
+  Callback = function(X)
+    _gv.X = X
+  end
+})
+T6:AddToggle({
+  Name = "C",
+  Default = false,
+  Callback = function(C)
+    _gv.C = C
+  end
+})
+T6:AddToggle({
+  Name = "V",
+  Default = false,
+  Callback = function(V)
+    _gv.V = V
+  end
+})
+T6:AddToggle({
+  Name = "B",
+  Default = false,
+  Callback = function(B)
+    _gv.B = B
+  end
+})
+T5:AddSection({"| Settings"})
+AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
+    _gv.Weapon = ooooo
+end)
+
+------[[ Spawn function ]]------
+
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.AFD then
+                for _, v in pairs(workspace.Wave_Folders.Npcs:GetChildren()) do
+                    if v.Name then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v.HumanoidRootPart.Size = Vector3.new(10, 30, 10)
+                      v.HumanoidRootPart.Transparency = 0.9
+                      v.HumanoidRootPart.CanCollide = false
+                      v.Head.CanCollide = false
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                if _gv.AFD and humanoid.Health > 1 then
+                                  if v:FindFirstChild("HumanoidRootPart") then
+                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                  else
+                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                  end
+                               end
+                            until not _gv.AFD or humanoid.Health <= 0
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.Z then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 122, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 122, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.X then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 120, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 120, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.C then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 99, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 99, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.V then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 118, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 118, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.B then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true, 98, false, game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false, 98, false, game)
+            end
+        end)
+    end
+end)
+spawn(function()
+    game:GetService("RunService").Stepped:Connect(function()
+        if _gv.ATD then
+            local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp and not hrp:FindFirstChild("BodyClip") then
+                local noclip = Instance.new("BodyVelocity")
+                noclip.Name = "BodyClip"
+                noclip.Parent = hrp
+                noclip.MaxForce = Vector3.new(100000, 100000, 100000)
+                noclip.Velocity = Vector3.new(0, 0, 0)
+            end
+        else
+            local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp and hrp:FindFirstChild("BodyClip") then
+                hrp.BodyClip:Destroy()
+            end
+        end
+    end)
+end)
+end
+
 
 --310/980 เลขหวยถ้าเอาไปซื้อแล้วถูกแบ่งผมด้วย
