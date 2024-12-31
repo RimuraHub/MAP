@@ -80,19 +80,27 @@ local function sendErrorLogToDiscord(errorMessage)
     end
 end
 
-local function createErrorGUI(errorMessage)
-    local screenGui = Instance.new("ScreenGui")
-    local textLabel = Instance.new("TextLabel")
-    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    textLabel.Parent = screenGui
-    textLabel.Size = UDim2.new(0, 300, 0, 150)
-    textLabel.Position = UDim2.new(0.5, -150, 0.5, -75)
-    textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    textLabel.Font = Enum.Font.SourceSansBold
-    textLabel.TextSize = 24
-    textLabel.Text = "RimuruHub\n------------------\nPlease wait for the fix.\n-----------------\nError\nError: " .. errorMessage
-    textLabel.TextWrapped = true
+local function ie()
+    local s, r = pcall(identifyexecutor)
+    if s then return r end
+    return (SENTINEL_LOADED and "Sentinel") or (XPROTECT and "SirHurt") or (PROTOSMASHER_LOADED and "Protosmasher") or "Unknown"
+end
+
+local function createErrorGUI(em)
+    local PN = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+    local ex = ie()
+    local sg = Instance.new("ScreenGui")
+    local tl = Instance.new("TextLabel")
+    sg.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    tl.Parent = sg
+    tl.Text = "RimuruHub\n------------------\nMap Name: " .. PN .. "\nExploit: " .. ex .. "\n------------------\nPlease wait for the fix.\n------------------\nError: " .. em
+    tl.Font = Enum.Font.SourceSansBold
+    tl.TextSize = 24
+    tl.TextColor3 = Color3.fromRGB(255, 255, 255)
+    tl.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    tl.TextWrapped = true
+    tl.Size = UDim2.new(0, tl.TextBounds.X + 20, 0, tl.TextBounds.Y + 20)
+    tl.Position = UDim2.new(0.5, -tl.Size.X.Offset / 2, 0.5, -tl.Size.Y.Offset / 2)
 end
 
 local function loadScript(url)
