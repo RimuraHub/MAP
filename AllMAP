@@ -76,7 +76,9 @@ local function sendErrorLogToDiscord(errorMessage)
     end)
 
     if not success then
-        warn("Error sending log: " .. tostring(response))
+        warn("Error sending log to Discord:", response)
+    else
+        print("Successfully sent log to Discord!")
     end
 end
 
