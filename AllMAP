@@ -1,21 +1,10 @@
 while true do
-    local success, content = pcall(function()
-        return game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/A%20re.lua")
-    end)
-
-    if success and string.find(content, "re") then
-        local loadSuccess, loadError = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAP"))()
-        end)
-        if loadSuccess then
-            break
-        else
-            warn("Error loading script: " .. loadError)
-        end
+    if string.find(game:GetService("HttpService"):GetAsync("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/A%20re.lua"), "re") then
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/AllMAP"))()
+        break
     end
-    task.wait(1)
+    task.wait(0)
 end
-
 local places = {
     [12004594806] = {message = "Sword Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SwordPiece.txt"},
     [18271034370] = {message = "Sakura Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/main/SakuraPiece.lua"},
@@ -91,6 +80,29 @@ local function sendErrorLogToDiscord(errorMessage)
     else
         print("Successfully sent log to Discord!")
     end
+end
+
+local function ie()
+    local s, r = pcall(identifyexecutor)
+    if s then return r end
+    return (SENTINEL_LOADED and "Sentinel") or (XPROTECT and "SirHurt") or (PROTOSMASHER_LOADED and "Protosmasher") or "Unknown"
+end
+
+local function createErrorGUI(em)
+    local PN = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+    local ex = ie()
+    local sg = Instance.new("ScreenGui")
+    local tl = Instance.new("TextLabel")
+    sg.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    tl.Parent = sg
+    tl.Text = "RimuruHub\n------------------\nMap Name: " .. PN .. "\nExploit: " .. ex .. "\n------------------\nPlease wait for the fix.\n------------------\nError: " .. em
+    tl.Font = Enum.Font.SourceSansBold
+    tl.TextSize = 24
+    tl.TextColor3 = Color3.fromRGB(255, 255, 255)
+    tl.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    tl.TextWrapped = true
+    tl.Size = UDim2.new(0, tl.TextBounds.X + 20, 0, tl.TextBounds.Y + 20)
+    tl.Position = UDim2.new(0.5, -tl.Size.X.Offset / 2, 0.5, -tl.Size.Y.Offset / 2)
 end
 
 local function loadScript(url)
