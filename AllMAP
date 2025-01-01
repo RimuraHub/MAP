@@ -20,12 +20,22 @@ local places = {
     [76091669089883] = {message = "Moodeng Fruit Dungeon", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muden.lua"}
 }
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()
+local function loadScript(url)
+    local success, response = pcall(game.HttpGet, game, url)
+    if success and response then
+        local success, err = pcall(loadstring(response))
+        if not success then
+            warn("Failed to execute script: " .. err)
+        end
+    else
+        warn("Failed to fetch script: " .. tostring(response))
+    end
+end
 
 local place = places[game.PlaceId]
 if place then
     print(place.message)
     loadScript(place.url)
 else
-    game.Players.LocalPlayer:Kick("Game Not Supported")
+    game.Players.LocalPlayer:Kick("Not Supported")
 end
