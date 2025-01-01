@@ -27,5 +27,5 @@ if place then
     print(place.message)
     loadScript(place.url)
 else
-    game.Players.LocalPlayer:Kick("Not Supported")
+    game.Players.LocalPlayer:Kick("Game Not Supported")
 end
