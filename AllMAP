@@ -22,10 +22,6 @@ local places = {
 
 local function loadScript(url)
     local httpService = game:GetService("HttpService")
-    if not httpService.HttpEnabled then
-        warn("HttpService is disabled. Cannot load script.")
-        return
-    end
 
     local success, err = pcall(function()
         loadstring(game:HttpGet(url))()
@@ -56,5 +52,5 @@ if place then
     print(place.message)
     loadScript(place.url)
 else
-    game.Players.LocalPlayer:Kick("Not Supported")
+    game.Players.LocalPlayer:Kick("Not Supported Map")
 end
