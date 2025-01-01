@@ -342,7 +342,7 @@ T5:AddToggle({
 })
 T5:AddSection({"| Code"})
 T5:AddButton({"Redeem All Code", function()
-for _, v in pairs(game.Players.LocalPlayer.Codes) do
+for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
   if v.Name and v:IsA("BoolValue") then
      game:GetService("ReplicatedStorage").RedeemCode:FireServer(v.Name)
       end
