@@ -21,16 +21,35 @@ local places = {
 }
 
 local function loadScript(url)
-    local success, response = pcall(game.HttpGet, game, url)
-    if success and response then
-        local success, err = pcall(loadstring(response))
-        if not success then
-            warn("Failed to execute script: " .. err)
-        end
-    else
-        warn("Failed to fetch script: " .. tostring(response))
+    local httpService = game:GetService("HttpService")
+    if not httpService.HttpEnabled then
+        warn("HttpService is disabled. Cannot load script.")
+        return
+    end
+
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(url))()
+    end)
+
+    if not success then
+        warn("Error loading script: " .. err)
+
+        local screenGui = Instance.new("ScreenGui")
+        local textLabel = Instance.new("TextLabel")
+        screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        textLabel.Parent = screenGui
+        textLabel.Size = UDim2.new(0, 300, 0, 150)
+        textLabel.Position = UDim2.new(0.5, -150, 0.5, -75)
+        textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+        textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        textLabel.Font = Enum.Font.SourceSansBold
+        textLabel.TextSize = 24
+        textLabel.Text = "RimuruHub\n------------------\nPlease wait for the fix.\n-----------------\nError\nError: " .. err
+        textLabel.TextWrapped = true
     end
 end
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()
 
 local place = places[game.PlaceId]
 if place then
