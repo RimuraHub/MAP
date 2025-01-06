@@ -204,6 +204,7 @@ T2:AddToggle({
       _gv.cgifbox = mlhgdd
     end
 })
+--[[
 T2:AddSection({"| Fishing"})
 T2:AddTextBox({
   Name = "Dupe Count",
@@ -253,7 +254,7 @@ else
 sendNotification("RimuruHub",fishingGUICount,3)
 end
 end})
-]]
+]
 T2:AddButton({"Destroy Ui Pond", function()
 for _, g in ipairs(game.Players.LocalPlayer.Character.HumanoidRootPart:GetChildren()) do
     if string.find(g.Name, "Pond") then
@@ -267,7 +268,7 @@ for _, g in ipairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
         g:Destroy()
     end
 end
-end})
+end})]]
 T2:AddSection({"| Auto Skill"})
 AddDropdownn(T2, "Select Mod", {"Farm","skill"}, "Farm", "Modskill", function(selekey)
 _gv.keysele = selekey
@@ -752,6 +753,7 @@ spawn(function()
         end)
     end
 end)
+--[[
 spawn(function()
     while task.wait(0) do
         pcall(function()
@@ -771,7 +773,7 @@ spawn(function()
             end
         end)
     end
-end)
+end)]]
 spawn(function()
     while true do
         task.wait()
