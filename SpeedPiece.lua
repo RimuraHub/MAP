@@ -1,4 +1,3 @@
-
 local _gv = getgenv()
 
 ------[[ function ]]------
@@ -170,19 +169,33 @@ T2:AddToggle({
     end
 })
 T2:AddSection({"| Fishing"})
+T2:AddTextBox({
+  Name = "Dupe Count",
+  Description = "", 
+  PlaceholderText = "",
+  Callback = function(Value)
+    _gv.Count = Value
+  end})
+T2:AddButton({"DUPE", function()
+for i = 1, _gv.Count do
+    local player = game:GetService("Players").LocalPlayer
+    local character = player.Character
+
+    if character and character:FindFirstChild("Fishing rod") then
+        local fishingRod = character:FindFirstChild("Fishing rod")
+        if fishingRod:FindFirstChild("Main") and fishingRod.Main:FindFirstChild("RemoteFunction") then
+            fishingRod.Main.RemoteFunction:InvokeServer("Reward")
+         else
+           EquipToolSele("Fishing rod")
+        end
+    end
+end
+end})
 T2:AddToggle({
     Name = "Fishing Dupe",
     Default = false,
     Callback = function(klm)
       _gv.dupe = klm
-    end
-})
-
-T2:AddToggle({
-    Name = "Supe Fast Fishing Dupe",
-    Default = false,
-    Callback = function(klm2)
-      _gv.dupesf = klm2
     end
 })
 T2:AddSection({"| Auto Skill"})
@@ -217,7 +230,7 @@ T2:AddToggle({
     _gv.V = V
   end
 })
-T3:AddSection({"| Up Stats"})
+T3:AddSection({"| Up Stats[ยังใช้ไม่ได้]"})
 T3:AddToggle({
   Name = "Up Melee",
   Default = false,
@@ -403,26 +416,6 @@ spawn(function()
                 else
                   EquipToolSele("Fishing rod")
                 end
-            end
-        end)
-    end
-end)
-spawn(function()
-    while true do
-      task.wait()
-         pcall(function()
-           if _gv.dupesf then
-for i = 1, 50 do
-    local player = game:GetService("Players").LocalPlayer
-    local character = player.Character
-
-    if character and character:FindFirstChild("Fishing rod") then
-        local fishingRod = character:FindFirstChild("Fishing rod")
-        if fishingRod:FindFirstChild("Main") and fishingRod.Main:FindFirstChild("RemoteFunction") then
-            fishingRod.Main.RemoteFunction:InvokeServer("Reward")
-        end
-    end
-end
             end
         end)
     end
