@@ -169,11 +169,20 @@ T2:AddToggle({
       _gv.ATFA = wml
     end
 })
+T2:AddSection({"| Fishing"})
 T2:AddToggle({
-    Name = "FishingDupe",
+    Name = "Fishing Dupe",
     Default = false,
     Callback = function(klm)
       _gv.dupe = klm
+    end
+})
+
+T2:AddToggle({
+    Name = "Supe Fast Fishing Dupe",
+    Default = false,
+    Callback = function(klm2)
+      _gv.dupesf = klm2
     end
 })
 T2:AddSection({"| Auto Skill"})
@@ -394,6 +403,26 @@ spawn(function()
                 else
                   EquipToolSele("Fishing rod")
                 end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+      task.wait()
+         pcall(function()
+           if _gv.dupesf then
+for i = 1, 50 do
+    local player = game:GetService("Players").LocalPlayer
+    local character = player.Character
+
+    if character and character:FindFirstChild("Fishing rod") then
+        local fishingRod = character:FindFirstChild("Fishing rod")
+        if fishingRod:FindFirstChild("Main") and fishingRod.Main:FindFirstChild("RemoteFunction") then
+            fishingRod.Main.RemoteFunction:InvokeServer("Reward")
+        end
+    end
+end
             end
         end)
     end
