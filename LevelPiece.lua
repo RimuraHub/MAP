@@ -9,7 +9,6 @@ local Tab1 = Window:MakeTab({"Auto Farm", "swords"})
 local Tab2 = Window:MakeTab({"Spin", "swords"})
 
 
---redzlib:SetTheme("Dark")
 
 
 local Section = Tab1:AddSection({"Select Weapon - เลือกอาวุธ"})
