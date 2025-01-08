@@ -154,8 +154,8 @@ T2:AddToggle({
 T2:AddToggle({
     Name = "Farm Six kagayno",
     Default = false,
-    Callback = function(wml)
-      _gv.ATFA = wml
+    Callback = function(klmi)
+      _gv.ATFSD = klmi
     end
 })
 T2:AddSection({"| Fishing"})
@@ -447,11 +447,6 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
-                                local Humanoids = v:FindFirstChildOfClass("Humanoid")
-                                if _gv.OneHit and Humanoids.Health < Humanoids.MaxHealth and Humanoids.Health > 0 then sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                      task.wait(0.1)
-                                    Humanoids.Health = 0
-                                end
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
