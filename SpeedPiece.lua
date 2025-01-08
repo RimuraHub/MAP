@@ -154,8 +154,8 @@ T2:AddToggle({
 T2:AddToggle({
     Name = "Farm Six kagayno",
     Default = false,
-    Callback = function(klmi)
-      _gv.ATFSD = klmi
+    Callback = function(wmlklmi)
+      _gv.ATFSD = wmlklmi
     end
 })
 T2:AddSection({"| Fishing"})
@@ -412,7 +412,7 @@ spawn(function()
 end)
 spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
-        if _gv.ATF or _gv.ATFA or _gv ATFSD then
+        if _gv.ATF or _gv.ATFA or _gv.ATFSD then
             local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             if hrp and not hrp:FindFirstChild("BodyClip") then
                 local noclip = Instance.new("BodyVelocity")
@@ -447,11 +447,16 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
+                                local Humanoids = v:FindFirstChildOfClass("Humanoid")
+                                if _gv.OneHit and Humanoids.Health < Humanoids.MaxHealth and Humanoids.Health > 0 then sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                      task.wait(0.1)
+                                    Humanoids.Health = 0
+                                end
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
                                 if _gv.ATFSD and humanoid.Health > 1 then
-                                  if v:workspace.NPC["???"]("HumanoidRootPart") then
+                                  if v:FindFirstChild("HumanoidRootPart") then
                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 3, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
                                   else
                                      TP(v.WorldPivot * CFrame.new(0, 3, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
