@@ -1,3 +1,4 @@
+
 local _gv = getgenv()
 
 ------[[ function ]]------
@@ -93,24 +94,6 @@ function SendKeyEvent(keyCode)
     game:GetService("VirtualInputManager"):SendKeyEvent(true, keyCode, false, game)
     game:GetService("VirtualInputManager"):SendKeyEvent(false, keyCode, false, game)
 end
-function CheckLevel()
-    local levelValue = game.Players.LocalPlayer.Data.Levels.Value
-    local closestQuest = nil
-    local closestLevelDiff = math.huge
-    for _, npc in pairs(game:GetService("Workspace").NPCS.Quest:GetChildren()) do
-        local npcLevel = tonumber(string.match(npc.Name, "%d+"))
-        if npcLevel and npcLevel <= levelValue then
-            local levelDifference = levelValue - npcLevel
-            if levelDifference < closestLevelDiff then
-                closestLevelDiff = levelDifference
-                closestQuest = npc
-            end
-        end
-    end
-    local questGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestBar")
-    local monsterName = questGui and questGui:FindFirstChild("NameMon") and questGui.NameMon.Value or nil
-    return closestQuest, monsterName
-end
 
 ------[[ Local Global ]]------
 
@@ -163,6 +146,13 @@ T2:AddToggle({
 })
 T2:AddToggle({
     Name = "Farm All Mon",
+    Default = false,
+    Callback = function(wml)
+      _gv.ATFA = wml
+    end
+})
+T2:AddToggle({
+    Name = "Farm Six kagayno",
     Default = false,
     Callback = function(wml)
       _gv.ATFA = wml
@@ -422,7 +412,7 @@ spawn(function()
 end)
 spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
-        if _gv.ATF or _gv.ATFA then
+        if _gv.ATF or _gv.ATFA or _gv ATFSD then
             local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             if hrp and not hrp:FindFirstChild("BodyClip") then
                 local noclip = Instance.new("BodyVelocity")
@@ -439,3 +429,57 @@ spawn(function()
         end
     end)
 end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.ATFSD then
+                local Monster = workspace.Monster.Boss
+                if Monster:FindFirstChild("Six kagayno [Lv.1500]") then
+                for _, v in pairs(Monster:GetChildren()) do
+                    if v:IsA("Model") and v.Name == "Six kagayno [Lv.1500]" then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                local Humanoids = v:FindFirstChildOfClass("Humanoid")
+                                if _gv.OneHit and Humanoids.Health < Humanoids.MaxHealth and Humanoids.Health > 0 then sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                      task.wait(0.1)
+                                    Humanoids.Health = 0
+                                end
+                                if _gv.keysele == "Farm" then
+                                    HandleKeyPress()
+                                end
+                                if _gv.ATFSD and humanoid.Health > 1 then
+                                  if v:workspace.NPC["???"]("HumanoidRootPart") then
+                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 3, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                  else
+                                     TP(v.WorldPivot * CFrame.new(0, 3, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
+                                end
+                            until not _gv.ATFSD or humanoid.Health <= 0
+                        end
+                    end
+                end
+                else
+                  if game.Player.LocalPlayer.Character:FindFirstChild("Shadow Orb") then
+                    TP(workspace.NPC["???"].WorldPivot,false)
+                    fpp()
+                    else
+                      EquipToolSele("Shadow Orb")
+                    end
+                end
+          end
+        end)
+    end
+end)
+--[[
+workspace.Monster.Boss["Six kagayno [Lv.1500]"]
+workspace.NPC["???"].EPart.ProximityPrompt
+Shadow Orb
+]]
