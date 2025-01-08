@@ -468,7 +468,7 @@ spawn(function()
                 end
                 else
                   if game.Player.LocalPlayer.Character:FindFirstChild("Shadow Orb") then
-                    TP(workspace.NPC["???"].WorldPivot,false)
+                    TP(workspace.NPC["???"].EPart.CFrameq,false)
                     fpp()
                     else
                       EquipToolSele("Shadow Orb")
