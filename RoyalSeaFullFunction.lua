@@ -1,5 +1,8 @@
 
+------[[ getgenv() ]]------
+
 local _gv = getgenv()
+_gv.DistanceMob = 7
 
 ------[[ function ]]------
 
@@ -121,6 +124,7 @@ local ChaPly = Ply.LocalPlayer.Character or Ply.LocalPlayer.CharacterAdded:Wait(
 local NameMap = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local Awaken = {}
+local Method = {"Upper","Behind","Below"}
 local island = GetN_Child(game.workspace.GPS,"Part")
 local Shop = GetN_Child(game.workspace.NPCS,"Model")
 local Mon = GetN_Des(game.workspace.Mon_Folder.Mon,"Model")
@@ -204,6 +208,13 @@ T2:AddToggle({
       _gv.cgifbox = mlhgdd
     end
 })
+T2:AddToggle({
+    Name = "Auto WinterStalker",
+    Default = false,
+    Callback = function(klafws)
+      _gv.AFWS = klafws
+    end
+})
 --[[
 T2:AddSection({"| Fishing"})
 T2:AddTextBox({
@@ -240,7 +251,6 @@ T2:AddToggle({
       _gv.ADF = ADF
     end
 })
---[[
 T2:AddButton({"Check DUPE COUNT", function()
 local fishingGUICount = 0
 for _, gui in ipairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
@@ -254,7 +264,7 @@ else
 sendNotification("RimuruHub",fishingGUICount,3)
 end
 end})
-]
+
 T2:AddButton({"Destroy Ui Pond", function()
 for _, g in ipairs(game.Players.LocalPlayer.Character.HumanoidRootPart:GetChildren()) do
     if string.find(g.Name, "Pond") then
@@ -268,35 +278,36 @@ for _, g in ipairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
         g:Destroy()
     end
 end
-end})]]
+end})
+]]
 T2:AddSection({"| Auto Skill"})
 AddDropdownn(T2, "Select Mod", {"Farm","skill"}, "Farm", "Modskill", function(selekey)
 _gv.keysele = selekey
 end)
 T2:AddToggle({
   Name = "Z",
-  Default = false,
+  Default = true,
   Callback = function(Z)
     _gv.Z = Z
   end
 })
 T2:AddToggle({
   Name = "X",
-  Default = false,
+  Default = true,
   Callback = function(X)
     _gv.X = X
   end
 })
 T2:AddToggle({
   Name = "C",
-  Default = false,
+  Default = true,
   Callback = function(C)
     _gv.C = C
   end
 })
 T2:AddToggle({
   Name = "V",
-  Default = false,
+  Default = true,
   Callback = function(V)
     _gv.V = V
   end
@@ -387,6 +398,21 @@ T5:AddSection({"| Settings"})
 AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
     _gv.Weapon = ooooo
 end)
+AddDropdownn(T5, "Select Method", Method,"Upper", "Method", function(kkllpo)
+    _gv.Method = kkllpo
+end)
+pcall(function()
+T5:AddSlider({"Farm Distance", 1, 30, 1, 7, function(VALUE)
+_gv.DistanceMob = VALUE
+end})
+end)
+T5:AddToggle({
+  Name = "White_Screen",
+  Default = false,
+  Callback = function(White_Screen)
+    _gv.White_Screen = White_Screen
+  end
+})
 
 ------[[ Spawn function ]]------
 
@@ -411,11 +437,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
@@ -449,11 +471,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.AFLV and humanoid.Health > 1 then
-                                    if hrp then
-                                        TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0), true)
-                                    else
-                                        TP(monster.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0), false)
-                                    end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.AFLV or humanoid.Health <= 0
                         end
@@ -492,11 +510,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.ATB and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.ATB or humanoid.Health <= 0
                         end
@@ -528,11 +542,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.Awaken and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.Awelen or humanoid.Health <= 0
                         end
@@ -568,11 +578,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
@@ -603,11 +609,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.AFBS and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.AFBS or humanoid.Health <= 0
                         end
@@ -674,11 +676,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.Awaken and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.Awelen or humanoid.Health <= 0
                         end
@@ -714,11 +712,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.fmraid and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
                                 end
                             until not _gv.fmraid or humanoid.Health <= 0
                         end
@@ -740,20 +734,23 @@ spawn(function()
 end)
 spawn(function()
     while true do
-      task.wait()
+      task.wait(1)
          pcall(function()
             if _gv.cgifbox then
                for _,v in pairs(workspace.GiftBox:GetChildren()) do
                   if v:IsA("Model") and v.Name then
-                    TP(v.WorldPivot,false)
-                    fpp()
+                     TP(v.WorldPivot,false)
+                     for _, y in pairs(workspace.GiftBox :GetDescendants()) do
+                        if y:IsA("ProximityPrompt") then
+                           fireproximityprompt(y)
+                        end
+                     end
                   end
                end
             end
         end)
     end
 end)
---[[
 spawn(function()
     while task.wait(0) do
         pcall(function()
@@ -773,7 +770,7 @@ spawn(function()
             end
         end)
     end
-end)]]
+end)
 spawn(function()
     while true do
         task.wait()
@@ -829,12 +826,8 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.AFRGU and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
-                                end
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                 end
                             until not _gv.AFRGU or humanoid.Health <= 0
                         end
                     end
@@ -846,8 +839,69 @@ spawn(function()
     end
 end) 
 spawn(function()
+    while true do
+      task.wait()
+        pcall(function()
+           if _gv.AFWS then
+               local Monster = workspace.Mon_Folder.BossServer
+               if Monster:FindFirstChild("WinterStalker") then
+                for _, v in pairs(Monster:GetChildren()) do
+                    if v:IsA("Model") and v.Name == "WinterStalker" then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                if _gv.keysele == "Farm" then
+                                    HandleKeyPress()
+                                end
+                                if _gv.AFWS and humanoid.Health > 1 then
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                end
+                            until not _gv.AFWS or humanoid.Health <= 0
+                        end
+                    end
+                end
+                  else
+                    TP(game:GetService("Workspace").NPCS["Summon WinterStalker"].HumanoidRootPart.CFrame,true)
+                    fpp()
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+        while wait() do 
+            pcall(function()
+                if _gv.Method == "Behind" then
+                    MethodFarm = CFrame.new(-1,0,_gv.DistanceMob)
+                elseif _gv.Method == "Below" then
+                    MethodFarm = CFrame.new(-1,-_gv.DistanceMob,0) * CFrame.Angles(math.rad(90),0,0)
+                elseif _gv.Method == "Upper" then
+                    MethodFarm = CFrame.new(-1,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                else
+                    MethodFarm = CFrame.new(-1,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                end
+            end)
+        end
+    end)
+spawn(function()
+    while true do
+        task.wait()
+        if _gv.White_Screen then
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        else
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
+    end
+end)
+spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
-        if _gv.AFLV or _gv.AFBS or _gv.ATF or _gv.ATFB or _gv.FSeleB or _gv.AFRGO then
+        if _gv.AFWS or _gv.AFLV or _gv.AFBS or _gv.ATF or _gv.ATFB or _gv.FSeleB or _gv.AFRGO then
             local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
             if hrp and not hrp:FindFirstChild("BodyClip") then
                 local noclip = Instance.new("BodyVelocity")
