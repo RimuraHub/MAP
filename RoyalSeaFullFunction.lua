@@ -454,15 +454,17 @@ spawn(function()
             if _gv.AFLV then
                 local Quest, Mon = CheckLevel()
                 local QuestName = Quest
+                local MonName = Mon
                 if game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestBar") then
-                local monstersFolder = workspace.Mon_Folder
-                for _, monster in pairs(monstersFolder:GetDescendants()) do
-                    if monster:IsA("Model") and monster.Name == Mon then
-                        local humanoid = monster:FindFirstChild("Humanoid")
-                        local hrp = monster:FindFirstChild("HumanoidRootPart")
+                  if game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestBar").NameMon.Value == MonName then
+                local Monster = workspace.Mon_Folder
+                for _, v in pairs(Monster:GetDescendants()) do
+                    if v:IsA("Model") and v.Name == Mon then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
                         if hrp and humanoid and humanoid.Health > 0 then
-                            humanoid.WalkSpeed = 0
-                            humanoid.JumpPower = 0
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
                             repeat
                                 task.wait()
                                 _Attack()
@@ -476,6 +478,12 @@ spawn(function()
                             until not _gv.AFLV or humanoid.Health <= 0
                         end
                     end
+                end
+                else
+                local args = {
+                    [1] = game:GetService("Players").LocalPlayer
+                }
+                game:GetService("Players").LocalPlayer.PlayerGui.QuestBar.Frame.Close.LocalScript.RemoteEvent:FireServer(unpack(args))
                 end
                 else
                   for _,v in pairs(game.workspace.NPCS.Quest:GetChildren()) do
