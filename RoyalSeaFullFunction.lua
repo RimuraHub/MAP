@@ -200,7 +200,7 @@ T2:AddToggle({
       _gv.AFRGU = kjh
     end
 })
-T2:AddSection({"| Event"})
+--[[T2:AddSection({"| Event"})
 T2:AddToggle({
     Name = "Auto Claim GiftBox",
     Default = false,
@@ -214,7 +214,7 @@ T2:AddToggle({
     Callback = function(klafws)
       _gv.AFWS = klafws
     end
-})
+})]]
 --[[
 T2:AddSection({"| Fishing"})
 T2:AddTextBox({
@@ -437,13 +437,13 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
                     end
                 end
-            end
+             end
         end)
     end
 end)
@@ -471,7 +471,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.AFLV and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.AFLV or humanoid.Health <= 0
                         end
@@ -510,7 +510,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.ATB and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.ATB or humanoid.Health <= 0
                         end
@@ -542,7 +542,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.Awaken and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.Awelen or humanoid.Health <= 0
                         end
@@ -578,7 +578,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
@@ -609,7 +609,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.AFBS and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.AFBS or humanoid.Health <= 0
                         end
@@ -641,7 +641,7 @@ spawn(function()
                                 end
                                 if _gv.ATB and humanoid.Health > 1 then
                                   if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * MethodFarm,true)
                                   else
                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
                                    end
@@ -676,7 +676,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.Awaken and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.Awelen or humanoid.Health <= 0
                         end
@@ -712,7 +712,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.fmraid and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.fmraid or humanoid.Health <= 0
                         end
@@ -732,6 +732,7 @@ spawn(function()
         end)
     end
 end)
+--[[
 spawn(function()
     while true do
       task.wait(1)
@@ -770,7 +771,7 @@ spawn(function()
             end
         end)
     end
-end)
+end)]]
 spawn(function()
     while true do
         task.wait()
@@ -826,7 +827,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.AFRGU and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                  end
                             until not _gv.AFRGU or humanoid.Health <= 0
                         end
@@ -838,6 +839,7 @@ spawn(function()
         end)
     end
 end) 
+--[[
 spawn(function()
     while true do
       task.wait()
@@ -860,7 +862,7 @@ spawn(function()
                                     HandleKeyPress()
                                 end
                                 if _gv.AFWS and humanoid.Health > 1 then
-                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,false)
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
                             until not _gv.AFWS or humanoid.Health <= 0
                         end
@@ -873,7 +875,7 @@ spawn(function()
             end
         end)
     end
-end)
+end)]]
 spawn(function()
         while wait() do 
             pcall(function()
