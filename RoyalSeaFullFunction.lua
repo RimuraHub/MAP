@@ -162,8 +162,8 @@ T2:AddSection({"| Auto Farm"})
 T2:AddToggle({
     Name = "Farm Level",
     Default = false,
-    Callback = function(lvmm)
-      _gv.AFLV = lvmm
+    Callback = function(Level)
+      _gv.AUTOFARMLEVE = Level
     end
 })
 AddDropdownn(T2, "Select Monster", Mon, "nil", "Mon", function(q)
@@ -176,28 +176,35 @@ T2:AddToggle({
     Name = "Farm Mon Select",
     Default = false,
     Callback = function(w)
-      _gv.ATF = w
+      _gv.AUTOFARMMON = w
     end
 })
 T2:AddToggle({
     Name = "Farm Boss Select",
     Default = false,
     Callback = function(wn)
-      _gv.ATB = wn
+      _gv.AUTOFARMBOSS = wn
+    end
+})
+T2:AddToggle({
+    Name = "Farm All Boss",
+    Default = false,
+    Callback = function(wnk)
+      _gv.AUTOFARMALLBOSS = wnk
     end
 })
 T2:AddToggle({
     Name = "Farm All BossServer",
     Default = false,
     Callback = function(wnmlk)
-      _gv.AFBS = wnmlk
+      _gv.AUTOFARMALLBOSSSERVER = wnmlk
     end
 })
 T2:AddToggle({
     Name = "Auto Rengoku",
     Default = false,
     Callback = function(kjh)
-      _gv.AFRGU = kjh
+      _gv.AUTOFARMRENGOKU = kjh
     end
 })
 --[[T2:AddSection({"| Event"})
@@ -420,7 +427,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _gv.ATF then
+            if _gv.AUTOFARMMON then
                 local Monster = workspace.Mon_Folder.Mon
                 for _, v in pairs(Monster:GetDescendants()) do
                     if v:IsA("Model") and v.Name == _gv.SLM then
@@ -436,10 +443,10 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.ATF and humanoid.Health > 1 then
+                                if _gv.AUTOFARMMON and humanoid.Health > 1 then
                                   TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
-                            until not _gv.ATF or humanoid.Health <= 0
+                            until not _gv.AUTOFARMMON or humanoid.Health <= 0
                         end
                     end
                 end
@@ -451,7 +458,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _gv.AFLV then
+            if _gv.AUTOFARMLEVE then
                 local Quest, Mon = CheckLevel()
                 local QuestName = Quest
                 local MonName = Mon
@@ -472,10 +479,10 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.AFLV and humanoid.Health > 1 then
+                                if _gv.AUTOFARMLEVE and humanoid.Health > 1 then
                                   TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
-                            until not _gv.AFLV or humanoid.Health <= 0
+                            until not _gv.AUTOFARMLEVE or humanoid.Health <= 0
                         end
                     end
                 end
@@ -501,7 +508,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _gv.ATB then
+            if _gv.AUTOFARMBOSS then
                 local Monster = workspace.Mon_Folder.Boss
                 for _, v in pairs(Monster:GetChildren()) do
                     if v:IsA("Model") and v.Name == _gv.SLB then
@@ -517,10 +524,10 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.ATB and humanoid.Health > 1 then
+                                if _gv.AUTOFARMBOSS and humanoid.Health > 1 then
                                   TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
-                            until not _gv.ATB or humanoid.Health <= 0
+                            until not _gv.AUTOFARMBOSS or humanoid.Health <= 0
                         end
                     end
                 end
@@ -585,10 +592,10 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.ATF and humanoid.Health > 1 then
+                                if _gv.AUTOFARMMON and humanoid.Health > 1 then
                                   TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
-                            until not _gv.ATF or humanoid.Health <= 0
+                            until not _gv.AUTOFARMMON or humanoid.Health <= 0
                         end
                     end
                 end
@@ -600,7 +607,7 @@ spawn(function()
     while true do
       task.wait()
         pcall(function()
-           if _gv.AFBS then
+           if _gv.AUTOFARMALLBOSSSERVER then
                local Monster = workspace.Mon_Folder.BossServer
                 for _, v in pairs(Monster:GetChildren()) do
                     if v:IsA("Model") and v.Name then
@@ -616,10 +623,41 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.AFBS and humanoid.Health > 1 then
+                                if _gv.AUTOFARMALLBOSSSERVER and humanoid.Health > 1 then
                                   TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                 end
-                            until not _gv.AFBS or humanoid.Health <= 0
+                            until not _gv.AUTOFARMALLBOSSSERVER or humanoid.Health <= 0
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+      task.wait()
+        pcall(function()
+           if _gv.AUTOFARMALLBOSS then
+               local Monster = workspace.Mon_Folder.Boss
+                for _, v in pairs(Monster:GetChildren()) do
+                    if v:IsA("Model") and v.Name then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                if _gv.keysele == "Farm" then
+                                    HandleKeyPress()
+                                end
+                                if _gv.AUTOFARMALLBOSS and humanoid.Health > 1 then
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
+                                end
+                            until not _gv.AUTOFARMALLBOSS or humanoid.Health <= 0
                         end
                     end
                 end
@@ -631,7 +669,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _gv.ATB then
+            if _gv.AUTOFARMBOSS then
                 local Monster = workspace.Mon_Folder.Boss
                 for _, v in pairs(Monster:GetDescendants()) do
                     if v:IsA("Model") and v.Name == _gv.SLB then
@@ -647,14 +685,14 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.ATB and humanoid.Health > 1 then
+                                if _gv.AUTOFARMBOSS and humanoid.Health > 1 then
                                   if v:FindFirstChild("HumanoidRootPart") then
                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * MethodFarm,true)
                                   else
                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
                                    end
                                 end
-                            until not _gv.ATB or humanoid.Health <= 0
+                            until not _gv.AUTOFARMBOSS or humanoid.Health <= 0
                         end
                     end
                 end
@@ -784,7 +822,7 @@ spawn(function()
     while true do
         task.wait()
         pcall(function()
-            if _gv.AFRGU then
+            if _gv.AUTOFARMRENGOKU then
               if workspace.Mon_Folder.BossServer:FindFirstChild("Rengoku") then
                local Monster = workspace.Mon_Folder.BossServer
                 for _, v in pairs(Monster:GetChildren()) do
@@ -801,14 +839,14 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.AFRGU and humanoid.Health > 1 then
+                                if _gv.AUTOFARMRENGOKU and humanoid.Health > 1 then
                                   if v:FindFirstChild("HumanoidRootPart") then
                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
                                   else
                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
                                    end
                                 end
-                            until not _gv.AFRGU or humanoid.Health <= 0
+                            until not _gv.AUTOFARMRENGOKU or humanoid.Health <= 0
                         end
                     end
                 end
@@ -834,10 +872,10 @@ spawn(function()
                                 if _gv.keysele == "Farm" then
                                     HandleKeyPress()
                                 end
-                                if _gv.AFRGU and humanoid.Health > 1 then
+                                if _gv.AUTOFARMRENGOKU and humanoid.Health > 1 then
                                   TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                  end
-                            until not _gv.AFRGU or humanoid.Health <= 0
+                            until not _gv.AUTOFARMRENGOKU or humanoid.Health <= 0
                         end
                     end
                 end
@@ -910,21 +948,21 @@ spawn(function()
     end
 end)
 spawn(function()
-    game:GetService("RunService").Stepped:Connect(function()
-        if _gv.AFWS or _gv.AFLV or _gv.AFBS or _gv.ATF or _gv.ATFB or _gv.FSeleB or _gv.AFRGO then
-            local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            if hrp and not hrp:FindFirstChild("BodyClip") then
-                local noclip = Instance.new("BodyVelocity")
-                noclip.Name = "BodyClip"
-                noclip.Parent = hrp
-                noclip.MaxForce = Vector3.new(100000, 100000, 100000)
-                noclip.Velocity = Vector3.new(0, 0, 0)
+    pcall(function()
+        game:GetService("RunService").Stepped:Connect(function()
+            if _gv.AUTOFARMLEVE or _gv.AUTOFARMBOSS or _gv.AUTOFARMALLBOSS or _gv.AUTOFARMALLBOSSSERVER or _gv.AUTOFARMRENGOKU or _gv.Awelen or _gv.fmraid then
+                if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                    local Noclip = Instance.new("BodyVelocity")
+                    Noclip.Name = "BodyClip"
+                    Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+                    Noclip.MaxForce = Vector3.new(100000, 100000, 100000)
+                    Noclip.Velocity = Vector3.new(0, 0, 0)
+                end
+            else    
+                if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+                end
             end
-        else
-            local hrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            if hrp and hrp:FindFirstChild("BodyClip") then
-                hrp.BodyClip:Destroy()
-            end
-        end
+        end)
     end)
 end)
