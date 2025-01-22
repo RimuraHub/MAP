@@ -18,7 +18,10 @@ local places = {
     [100340127867802] = {message = "ZaroSea", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Zaroseam.lua"},
     [111347281646457] = {message = "Moodeng Fruit", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muden.lua"},
     [76091669089883] = {message = "Moodeng Fruit Dungeon", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Muden.lua"},
-    [17545130379] = {message = "Royal Sea", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/RoyalSeaFullFunction.lua"}
+    [17545130379] = {message = "Royal Sea", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/RoyalSeaFullFunction.lua"},
+    [74193535211122] = {message = "Speed Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/SpeedPiece.lua"},
+    [7716726054068] = {message = "Speed Piece Dungeon 1", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/SpeedPiece.lua"},
+    [77167260540689] = {message = "Speed Piece Dungeon 2", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/SpeedPiece.lua"}
 }
 
 local function loadScript(url)
