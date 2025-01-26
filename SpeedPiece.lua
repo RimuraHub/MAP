@@ -1,3 +1,4 @@
+-- skid = gay
 local _SpeedPiece = 74193535211122
 local _DungeonID = 7716726054068
 local _DungeonID2 = 77167260540689
@@ -663,11 +664,14 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
+                                if _gv.keysele == "Farm" then
+                                    HandleKeyPress()
+                                end
                                 if _gv.AFD and humanoid.Health > 1 then
                                   if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 3, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
                                   else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                     TP(v.WorldPivot * CFrame.new(0, 3, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
                                   end
                                end
                             until not _gv.AFD or humanoid.Health <= 0
