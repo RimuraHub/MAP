@@ -159,9 +159,10 @@ T2:AddSection({"| Dungeon"})
 T2:AddButton({"Teleport TO Dungeon", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Other["Dungeon Portal"].CFrame
 end})
-T2:AddSection({"| Fishing"})
-T2:AddButton({"Unlock gamepass AutoFish", function()
+--T2:AddSection({"| Fishing"})
+T5:AddButton({"Unlock gamepass Auto Fish&Dig", function()
   game:GetService("Players").LocalPlayer.Gamepass["Auto Fish"].Value = true
+  game:GetService("Players").LocalPlayer.Gamepass["Auto Dig"].Value = true
 end})
 --[[
 T2:AddTextBox({
