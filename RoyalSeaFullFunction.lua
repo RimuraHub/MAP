@@ -98,22 +98,22 @@ function SendKeyEvent(keyCode)
     game:GetService("VirtualInputManager"):SendKeyEvent(false, keyCode, false, game)
 end
 function CheckLevel()
-    local levelValue = game.Players.LocalPlayer.Data.Levels.Value
-    local closestQuest = nil
-    local closestLevelDiff = math.huge
-    for _, npc in pairs(game:GetService("Workspace").NPCS.Quest:GetChildren()) do
-        local npcLevel = tonumber(string.match(npc.Name, "%d+"))
-        if npcLevel and npcLevel <= levelValue then
-            local levelDifference = levelValue - npcLevel
-            if levelDifference < closestLevelDiff then
-                closestLevelDiff = levelDifference
-                closestQuest = npc
+    local LV = game.Players.LocalPlayer.Data.Levels.Value
+    local NameQuest = nil
+    local CLVDIFF = math.huge
+    for _, v in pairs(game:GetService("Workspace").NPCS.Quest:GetChildren()) do
+        local NPCLV = tonumber(string.match(v.Name, "%d+"))
+        if NPCLV and NPCLV <= LV then
+            local LVQuest = LV - NPCLV
+            if LVQuest < CLVDIFF then
+                CLVDIFF = LVQuest
+                NameQuest = v
             end
         end
     end
-    local questGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestBar")
-    local monsterName = questGui and questGui:FindFirstChild("NameMon") and questGui.NameMon.Value or nil
-    return closestQuest, monsterName
+    local UIQuest = game.Players.LocalPlayer.PlayerGui:FindFirstChild("QuestBar")
+    local NameMon = UIQuest and UIQuest:FindFirstChild("NameMon") and UIQuest.NameMon.Value or nil
+    return NameQuest, NameMon
 end
 
 ------[[ Local Global ]]------
@@ -123,7 +123,11 @@ local Ply = game:GetService("Players")
 local ChaPly = Ply.LocalPlayer.Character or Ply.LocalPlayer.CharacterAdded:Wait()
 local NameMap = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
+local Playerall = {}
+local DataAll = {}
+local itemAll = {}
 local Awaken = {}
+local SummonBoss = GetN_Child(game:GetService("ReplicatedStorage").Mon_Storage.BossSummon,"Model")
 local Method = {"Upper","Behind","Below"}
 local island = GetN_Child(game.workspace.GPS,"Part")
 local Shop = GetN_Child(game.workspace.NPCS,"Model")
@@ -133,6 +137,21 @@ local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Rimur
 for _, v in pairs(workspace.NPCS:GetChildren()) do
     if string.find(v.Name, "Awakening") then
         table.insert(Awaken, v.Name)
+    end
+end
+for _, v in pairs(game:GetService("Players").LocalPlayer.Data:GetChildren()) do
+    if v.Name then
+        table.insert(DataAll, v.Name)
+    end
+end
+for _, v in pairs(game:GetService("Players").LocalPlayer.ItemList:GetChildren()) do
+    if v.Name then
+        table.insert(itemAll, v.Name)
+    end
+end
+for _, v in pairs(game:GetService("Players"):GetChildren()) do
+    if v.Name then
+        table.insert(Playerall, v.Name)
     end
 end
 
@@ -205,6 +224,30 @@ T2:AddToggle({
     Default = false,
     Callback = function(kjh)
       _gv.AUTOFARMRENGOKU = kjh
+    end
+})
+T2:AddToggle({
+    Name = "Auto Quest BountyMan",
+    Default = false,
+    Callback = function(kuynakubna)
+      _gv.AUTOFARMSUMMONORB = kuynakubna
+    end
+})
+AddDropdownn(T2, "Select BossSummon", SummonBoss, "nil", "SummonBoss", function(kuyna)
+_gv.SLBSM = kuyna
+end)
+T2:AddToggle({
+    Name = "Auto Summon Boss",
+    Default = false,
+    Callback = function(bsms)
+      _gv.AUTOFARMSELECTBOSSSUMMON = bsms
+    end
+})
+T2:AddToggle({
+    Name = "Farm BossSummon",
+    Default = false,
+    Callback = function(bsms)
+      _gv.AUTOFARMALLBOSSSUMMON = bsms
     end
 })
 --[[T2:AddSection({"| Event"})
@@ -420,6 +463,64 @@ T5:AddToggle({
     _gv.White_Screen = White_Screen
   end
 })
+T5:AddButton({"Redeem All Code", function()
+for _, v in pairs(game:GetService("Players").LocalPlayer.CodesFolder:GetChildren()) do
+   if v.Name then
+      game:GetService("ReplicatedStorage").RemoteEvents.CodeRedeemed:FireServer(v.Name)
+   end
+end
+end})
+T5:AddSection({"| Visual"})
+T5:AddButton({"Fake Unlock All Sword", function()
+for _,v in pairs(game:GetService("Players").LocalPlayer.SwordList:GetChildren()) do
+  if v.Name then
+    v.Value = true
+  end
+end
+end})
+T5:AddButton({"Fake Unlock All Style", function()
+for _,v in pairs(game:GetService("Players").LocalPlayer.MeleeList:GetChildren()) do
+  if v.Name then
+    v.Value = true
+  end
+end
+end})
+T5:AddButton({"Fake Unlock All Title", function()
+for _,v in pairs(game:GetService("Players").LocalPlayer.Ranks:GetChildren()) do
+  if v.Name then
+    v.Value = true
+  end
+end
+end})
+AddDropdownn(T5, "Select Item", itemAll,"nil", "Weapon", function(mklme)
+    _gv.fakeitem = mklme
+end)
+T5:AddTextBox({
+  Name = "Item Count",
+  Description = "", 
+  PlaceholderText = "",
+  Callback = function(itc)
+    _gv.Countitem = itc
+end})
+T5:AddButton({"Fake item", function()
+game:GetService("Players").LocalPlayer.ItemList[_gv.fakeitem].Value = _gv.Countitem
+end})
+AddDropdownn(T5, "Select Data", DataAll,"nil", "Weapon", function(mklmekuy)
+    _gv.fakedata = mklmekuy
+end)
+T5:AddTextBox({
+  Name = "Data Count",
+  Description = "", 
+  PlaceholderText = "",
+  Callback = function(itc)
+    _gv.Countdata = itc
+end})
+T5:AddButton({"Fake Data", function()
+pcall(function()
+game:GetService("Players").LocalPlayer.Data[_gv.fakedata].Value = true
+game:GetService("Players").LocalPlayer.Data[_gv.fakedata].Value = _gv.Countdata
+end)
+end})
 
 ------[[ Spawn function ]]------
 
@@ -687,13 +788,175 @@ spawn(function()
                                 end
                                 if _gv.AUTOFARMBOSS and humanoid.Health > 1 then
                                   if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * MethodFarm,true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                     TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                    end
                                 end
                             until not _gv.AUTOFARMBOSS or humanoid.Health <= 0
                         end
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.AUTOFARMSELECTBOSSSUMMON then
+                local Monster = workspace.Mon_Folder:FindFirstChild("BossSummon")
+                
+                if Monster and _gv.SELECTBOSSSUMMON then
+                    local targetBoss = Monster:FindFirstChild(_gv.SLBSM)
+
+                    if targetBoss then
+                        local humanoid = targetBoss:FindFirstChild("Humanoid")
+                        local hrp = targetBoss:FindFirstChild("HumanoidRootPart")
+
+                        if humanoid and hrp and humanoid.Health > 0 then
+                            humanoid.WalkSpeed = 0
+                            humanoid.JumpPower = 0
+                            
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+
+                                if _gv.keysele == "Farm" then
+                                    HandleKeyPress()
+                                end
+
+                                if _gv.AUTOFARMSELECTBOSSSUMMON and humanoid.Health > 1 then
+                                    TP(hrp.CFrame * MethodFarm, true)
+                                end
+                            until not _gv.AUTOFARMSELECTBOSSSUMMON or humanoid.Health <= 0
+                        end
+                    end
+                else
+                    game:GetService("ReplicatedStorage").RemoteEvents.SummonEvent:FireServer(_gv.SLBSM)
+                end
+            end
+        end)
+    end
+end)
+--[[spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.AUTOFARMSUMMONORB then
+                local Monster = workspace.Mon_Folder
+                if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("QuestBar") then
+                for _, v in pairs(Monster:GetDescendants()) do
+                    if v:IsA("Model") and v.Name == game:GetService("Players").LocalPlayer.PlayerGui.QuestBar.NameMon.Value then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v:FindFirstChildOfClass("Humnoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                if _gv.keysele == "Farm" then
+                                    HandleKeyPress()
+                                end
+                                if _gv.AUTOFARMSUMMONORB and humanoid.Health > 1 then
+                                  if v:FindFirstChild("HumanoidRootPart") then
+                                     TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
+                                   end
+                                end
+                            until not _gv.AUTOFARMSUMMONORB or humanoid.Health <= 0
+                        end
+                    end
+                end
+             else
+               TP(workspace.NPCS.BountyMan.HumanoidRootPart.CFrame,true)
+               fpp()
+               end
+            end
+        end)
+    end
+end)]]
+spawn(function()
+    while true do
+      task.wait()
+        pcall(function()
+           if _gv.AUTOFARMALLBOSSSUMMON then
+               local Monster = workspace.Mon_Folder.BossSummon
+                for _, v in pairs(Monster:GetChildren()) do
+                    if v:IsA("Model") and v.Name then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                if _gv.keysele == "Farm" then
+                                    HandleKeyPress()
+                                end
+                                if _gv.AUTOFARMALLBOSSSUMMON and humanoid.Health > 1 then
+                                  TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
+                                end
+                            until not _gv.AUTOFARMALLBOSSSUMMON or humanoid.Health <= 0
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while true do
+        task.wait()
+        pcall(function()
+            if _gv.AUTOFARMSUMMONORB then
+                local Monster = workspace.Mon_Folder
+                local playerGui = game:GetService("Players").LocalPlayer.PlayerGui
+                
+                if playerGui:FindFirstChild("QuestBar") then
+                    local questBar = playerGui.QuestBar
+                    local targetName = questBar:FindFirstChild("NameMon") and questBar.NameMon.Value
+                    
+                    if targetName then
+                        for _, v in pairs(Monster:GetDescendants()) do
+                            if v:IsA("Model") and v.Name == targetName then
+                                local humanoid = v:FindFirstChild("Humanoid")
+                                local hrp = v:FindFirstChild("HumanoidRootPart")
+                                
+                                if hrp and humanoid and humanoid.Health > 0 then
+                                    local foundHumanoid = v:FindFirstChildOfClass("Humanoid")
+                                    if foundHumanoid then
+                                        foundHumanoid.WalkSpeed = 0
+                                        foundHumanoid.JumpPower = 0
+                                    end
+                                    
+                                    repeat
+                                        task.wait()
+                                        _Attack()
+                                        EquipTool()
+                                        
+                                        if _gv.keysele == "Farm" then
+                                            HandleKeyPress()
+                                        end
+                                        
+                                        if _gv.AUTOFARMSUMMONORB and humanoid.Health > 1 then
+                                            if hrp then
+                                                TP(hrp.CFrame * MethodFarm, true)
+                                            end
+                                        end
+                                    until not _gv.AUTOFARMSUMMONORB or humanoid.Health <= 0
+                                end
+                            end
+                        end
+                    end
+                else
+                    local bountyMan = workspace.NPCS:FindFirstChild("BountyMan")
+                    if bountyMan and bountyMan:FindFirstChild("HumanoidRootPart") then
+                        TP(bountyMan.HumanoidRootPart.CFrame, true)
+                        fpp()
                     end
                 end
             end
@@ -926,13 +1189,13 @@ spawn(function()
         while wait() do 
             pcall(function()
                 if _gv.Method == "Behind" then
-                    MethodFarm = CFrame.new(-1,0,_gv.DistanceMob)
+                    MethodFarm = CFrame.new(0,0,_gv.DistanceMob)
                 elseif _gv.Method == "Below" then
-                    MethodFarm = CFrame.new(-1,-_gv.DistanceMob,0) * CFrame.Angles(math.rad(90),0,0)
+                    MethodFarm = CFrame.new(0,-_gv.DistanceMob,0) * CFrame.Angles(math.rad(90),0,0)
                 elseif _gv.Method == "Upper" then
-                    MethodFarm = CFrame.new(-1,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                    MethodFarm = CFrame.new(0,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
                 else
-                    MethodFarm = CFrame.new(-1,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                    MethodFarm = CFrame.new(0,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
                 end
             end)
         end
