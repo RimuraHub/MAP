@@ -1,22 +1,58 @@
 if not getgenv().Config then
   getgenv().Config = {
     ["Misc"] = {
-      ["Distance"] = 5,
+      ["Distance"] = 7,
       ["Method Farm"] = "Upper",
       ["Weapon"] = "Style",
-      ["Darg Mob"] = true
     };
     ["Discord Webhook"] = {
       ["Link Webhook"] = "nil" -- Bit Kub
     };
     ["Auto Farm"] = {
-      ["Auto Farm Level"] = false,
-      ["Auto Farm Boss"] = false,
-      ["nil"] = false
+      AutoFarm = {
+        ["Auto Farm Level"] = false,
+        ["Auto Farm Boss"] = false
+        },
+      Touch = {
+        ["Auto Collect Chest"] = false,
+        ["Auto Collect Fruits"] = false
+      }
+    };
+    ["Stats"] = {
+      ["Up Number"] = 1,
+      Up = {
+        ["Strength"] = false,
+        ["Defense"] = false,
+        ["Weapon"] =  false,
+        ["Ability"] = false
+      }
     };
   }
 end
-
+local SwordGet = {}
+for _, v in pairs(game:GetService("ReplicatedStorage").Assets.Animations.Weapon:GetChildren()) do
+  if v:IsA("Folder") then
+    table.insert(SwordGet, v.Name)
+  end
+end
+local AccessoryGet = {}
+for _, v in pairs(game:GetService("ReplicatedStorage").Assets.Models.Accessory:GetChildren()) do
+  if v:IsA("Model") then
+    table.insert(AccessoryGet, v.Name)
+  end
+end
+local Island, NPC = {}, {}
+for _, Value in pairs({"Islands", "NPCs"}) do
+    for _, v in pairs(workspace[Value]:GetChildren()) do
+        if v:IsA("Model") then
+            if Value == "Islands" then
+                table.insert(Island, v.Name)
+            elseif Value == "NPCs" and not v.Name:match("^Quest") then
+                table.insert(NPC, v.Name)
+            end
+        end
+    end
+end
 local TP = function(cframe)
   pcall(function()
     game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(cframe)
@@ -94,16 +130,17 @@ Window:AddMinimizeButton({
 
 T1 = Window:MakeTab({"Discord", "Info"})
 T2 = Window:MakeTab({"Auto Farm", "Home"})
-T4 = Window:MakeTab({"Stats", "Signal"})
-T5 = Window:MakeTab({"Telepot", "Locate"})
-T6 = Window:MakeTab({"Misc", "Settings"})
+Item = Window:MakeTab({"Item", "Sword"})
+T3 = Window:MakeTab({"Stats", "Signal"})
+T4 = Window:MakeTab({"Telepot", "Locate"})
+T5 = Window:MakeTab({"Misc", "Settings"})
 
 T1:AddDiscordInvite({
   Name = "Rimura Hub | Community",
   Logo = "rbxassetid://18751483361",
   Invite = "https://discord.com/invite/Dmg8EJ2neK"
 })
-
+T2:AddSection({"| Auto Farm ๐’ฅ"})
 T2:AddToggle({
   Name = "Auto Farm Level",
   Default = getgenv().Config["Auto Farm"]["Auto Farm Level"] or false,
@@ -118,7 +155,144 @@ T2:AddToggle({
     _G.AutoFarmBoss = _eL93_Xm7QpB1
   end
 })
-T6:AddSlider({
+T2:AddSection({"| Touch ๐ฟ"})
+T2:AddToggle({
+  Name = "Auto Collect Chest",
+  Default = getgenv().Config["Auto Farm"].Touch["Auto Collect Chest"] or false,
+  Callback = function(_zQ83_Lm7XpB5)
+    _G.AutoChest = _zQ83_Lm7XpB5
+  end
+})
+T2:AddToggle({
+  Name = "Auto Collect Fruits",
+  Default = getgenv().Config["Auto Farm"].Touch["Auto Collect Fruits"] or false,
+  Callback = function(_vM64_Qp2LxK9)
+    _G.AutoFruit = _vM64_Qp2LxK9
+  end
+})
+Item:AddSection({"| Get a Sword ๐—ก๏ธ"})
+Item:AddDropdown({
+  Name = "Select Sword",
+  Options = SwordGet,
+  Default = "nil",
+  Flag = nil,
+  Callback = function(S)
+  _G.GetSword = S
+  end
+})
+Item:AddButton({
+  Name = "Get a Sword",
+  Callback = function()
+    for _, v in pairs(game:GetService("ReplicatedStorage").Assets.Animations.Weapon:GetChildren()) do
+      if v:IsA("Folder") and v.Name == _G.GetSword then
+        game:GetService("ReplicatedStorage").Remotes.Functions.Input:InvokeServer("Equip", v,"Weapon")
+      end
+    end
+  end
+})
+Item:AddSection({"| Get a Accessory โก"})
+Item:AddDropdown({
+  Name = "Select Sword",
+  Options = AccessoryGet,
+  Default = "nil",
+  Flag = nil,
+  Callback = function(A)
+  _G.GetAccessory = A
+  end
+})
+Item:AddButton({
+  Name = "Get a Accessory",
+  Callback = function()
+    for _, v in pairs(game:GetService("ReplicatedStorage").Assets.Models.Accessory:GetChildren()) do
+      if v:IsA("Model") and v.Name == _G.GetAccessory then
+        game:GetService("ReplicatedStorage").Remotes.Functions.Input:InvokeServer("Equip", v,"Accessory")
+      end
+    end
+  end
+})
+
+
+T3:AddSection({"| Stats ๐ก๏ธ"})
+T3:AddSlider({
+  Name = "Up Number",
+  Min = 1,
+  Max = 1000,
+  Increase = 1,
+  Default = getgenv().Config["Stats"]["Up Number"] or 1,
+  Callback = function(_tG51_Qm9LpX3)
+    _G.NumberUp = _tG51_Qm9LpX3
+  end
+})
+T3:AddSection({"| Up ๐“"})
+T3:AddToggle({
+  Name = "Auto Up Strength",
+  Default = getgenv().Config["Stats"].Up.Strength or false,
+  Callback = function(Strength)
+    _G.Strength = Strength
+  end
+})
+
+T3:AddToggle({
+  Name = "Auto Up Defense",
+  Default = getgenv().Config["Stats"].Up.Defense or false,
+  Callback = function(Defense)
+    _G.Defense = Defense
+  end
+})
+
+T3:AddToggle({
+  Name = "Auto Up Weapon",
+  Default = getgenv().Config["Stats"].Up.Weapon or false,
+  Callback = function(Weapon)
+    _G.Weapon = Weapon
+  end
+})
+
+T3:AddToggle({
+  Name = "Auto Up Ability",
+  Default = getgenv().Config["Stats"].Up.Ability or false,
+  Callback = function(Ability)
+    _G.Ability = Ability
+  end
+})
+T4:AddSection({"| Islands ๐๏ธ"})
+T4:AddDropdown({
+  Name = "Select Island",
+  Options = Island,
+  Default = "nil",
+  Flag = nil,
+  Callback = function(x)
+  _G.Islands = x
+  end
+})
+T4:AddButton({
+  Name = "Teleport Island",
+  Callback = function()
+    for _, v in pairs(workspace.Islands:GetChildren()) do
+      if v:IsA("Model") and v.Name == _G.Islands then
+        TP((v:FindFirstChildOfClass("MeshPart") or v:FindFirstChildOfClass("Part")).CFrame * CFrame.new(0, 100, 0))
+      end
+    end
+  end
+})
+T4:AddSection({"| NPC ๐ช"})
+T4:AddDropdown({
+  Name = "Select NPC",
+  Options = NPC,
+  Default = "nil",
+  Flag = nil,
+  Callback = function(i)
+  _G.NPC = i
+  end
+})
+T4:AddButton({
+  Name = "Teleport NPC",
+  Callback = function()
+    TP(workspace.NPCs[_G.NPC].HumanoidRootPart.CFrame*CFrame.new(0,10,0))
+  end
+})
+T5:AddSection({"| Settings โ๏ธ"})
+T5:AddSlider({
   Name = "Distance Farm",
   Min = 1,
   Max = 20,
@@ -128,8 +302,7 @@ T6:AddSlider({
     _G.Distance = _cX81_Lz9QpM2
   end
 })
-
-T6:AddDropdown({
+T5:AddDropdown({
   Name = "Method Farm",
   Options = {"Upper","Behind","Below"},
   Default = getgenv().Config["Misc"]["Method Farm"] or "Upper",
@@ -138,7 +311,7 @@ T6:AddDropdown({
     _G.Method = _xP91_Lq8Zm42
   end
 })
-T6:AddDropdown({
+T5:AddDropdown({
   Name = "Select Weapon",
   Options = {"Style","Ability","Weapon"},
   Default = getgenv().Config["Misc"]["Weapon"] or "Style",
@@ -147,6 +320,7 @@ T6:AddDropdown({
     _G.Weapon = _dP72_Mq8XnL5
   end
 })
+
 
 
 task.spawn(function()
@@ -202,7 +376,34 @@ else
     end, print)
   end
 end)
-
+task.spawn(function()
+  while wait() do
+    pcall(function()
+      if _G.AutoChest then
+        for _, v in pairs(workspace.Extra.Chests:GetChildren()) do  
+          if v:IsA("Part") then  
+          firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 1)  
+          firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v, 0)  
+          end
+        end
+      end
+    end)
+  end
+end)
+task.spawn(function()
+  while wait() do
+    pcall(function()
+      if _G.AutoFruit then
+        for _, v in pairs(workspace.Extra.Fruits:GetChildren()) do  
+          if v:IsA("Tool") then  
+          firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Handle, 1)  
+          firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Handle, 0)  
+          end
+        end
+      end
+    end)
+  end
+end)
 task.spawn(function()
     game:GetService("TextChatService").MessageReceived:Connect(function(message)
         if string.find(message.Text, "%[BOSS%]") then
@@ -253,6 +454,24 @@ task.spawn(function()
         end)
     end
 end)
+task.spawn(function()
+  while wait() do
+    pcall(function()
+      if _G.Strength then
+        game:GetService("ReplicatedStorage").Remotes.Functions.Input:InvokeServer("AddPoint", "Strength", _G.NumberUp)
+      end
+      if _G.Defense then
+        game:GetService("ReplicatedStorage").Remotes.Functions.Input:InvokeServer("AddPoint", "Defense", _G.NumberUp)
+      end
+      if _G.Weapon then
+        game:GetService("ReplicatedStorage").Remotes.Functions.Input:InvokeServer("AddPoint", "Weapon", _G.NumberUp)
+      end
+      if _G.Ability then
+        game:GetService("ReplicatedStorage").Remotes.Functions.Input:InvokeServer("AddPoint", "Ability", _G.NumberUp)
+      end
+    end)
+  end
+end)
 
 task.spawn(function()
     game:GetService("RunService").Stepped:Connect(function()
@@ -274,3 +493,4 @@ task.spawn(function()
     end)
 end)
 
+_G.Weapon = false
