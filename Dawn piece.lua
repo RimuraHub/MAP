@@ -155,7 +155,7 @@ T2:AddToggle({
     _G.AutoFarmBoss = _eL93_Xm7QpB1
   end
 })
-T2:AddSection({"| Touch 🌿"}
+T2:AddSection({"| Touch 🌿"})
 T2:AddToggle({
   Name = "Auto Collect Chest",
   Default = getgenv().Config["Auto Farm"].Touch["Auto Collect Chest"] or false,
