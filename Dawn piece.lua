@@ -140,7 +140,7 @@ T1:AddDiscordInvite({
   Logo = "rbxassetid://18751483361",
   Invite = "https://discord.com/invite/Dmg8EJ2neK"
 })
-T2:AddSection({"| Auto Farm ๐’ฅ"})
+T2:AddSection({"| Auto Farm 💥"})
 T2:AddToggle({
   Name = "Auto Farm Level",
   Default = getgenv().Config["Auto Farm"]["Auto Farm Level"] or false,
@@ -155,7 +155,7 @@ T2:AddToggle({
     _G.AutoFarmBoss = _eL93_Xm7QpB1
   end
 })
-T2:AddSection({"| Touch ๐ฟ"})
+T2:AddSection({"| Touch 🌿"}
 T2:AddToggle({
   Name = "Auto Collect Chest",
   Default = getgenv().Config["Auto Farm"].Touch["Auto Collect Chest"] or false,
@@ -170,7 +170,7 @@ T2:AddToggle({
     _G.AutoFruit = _vM64_Qp2LxK9
   end
 })
-Item:AddSection({"| Get a Sword ๐—ก๏ธ"})
+Item:AddSection({"| Get a Sword 🗡️"})
 Item:AddDropdown({
   Name = "Select Sword",
   Options = SwordGet,
@@ -190,7 +190,7 @@ Item:AddButton({
     end
   end
 })
-Item:AddSection({"| Get a Accessory โก"})
+Item:AddSection({"| Get a Accessory ⚡"})
 Item:AddDropdown({
   Name = "Select Sword",
   Options = AccessoryGet,
@@ -212,7 +212,7 @@ Item:AddButton({
 })
 
 
-T3:AddSection({"| Stats ๐ก๏ธ"})
+T3:AddSection({"| Stats 🌡️"})
 T3:AddSlider({
   Name = "Up Number",
   Min = 1,
@@ -223,7 +223,7 @@ T3:AddSlider({
     _G.NumberUp = _tG51_Qm9LpX3
   end
 })
-T3:AddSection({"| Up ๐“"})
+T3:AddSection({"| Up 📊"})
 T3:AddToggle({
   Name = "Auto Up Strength",
   Default = getgenv().Config["Stats"].Up.Strength or false,
@@ -255,7 +255,7 @@ T3:AddToggle({
     _G.Ability = Ability
   end
 })
-T4:AddSection({"| Islands ๐๏ธ"})
+T4:AddSection({"| Islands 🏝️"})
 T4:AddDropdown({
   Name = "Select Island",
   Options = Island,
@@ -275,7 +275,7 @@ T4:AddButton({
     end
   end
 })
-T4:AddSection({"| NPC ๐ช"})
+T4:AddSection({"| NPC 🏪"})
 T4:AddDropdown({
   Name = "Select NPC",
   Options = NPC,
@@ -291,7 +291,7 @@ T4:AddButton({
     TP(workspace.NPCs[_G.NPC].HumanoidRootPart.CFrame*CFrame.new(0,10,0))
   end
 })
-T5:AddSection({"| Settings โ๏ธ"})
+T5:AddSection({"| Settings ⚙️"})
 T5:AddSlider({
   Name = "Distance Farm",
   Min = 1,
