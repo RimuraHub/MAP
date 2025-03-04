@@ -107,8 +107,8 @@ local Shop = GetN_Child(game.workspace.Map.Shop,"Model")
 local Bosslist = {"Ala God [Boss]","Asrof [Boss]","Asta [Boss]","Sung Jin Woo [Boss]","Santa [Boss]","KJ [Boss]","Core","Eugeo [Boss]","Gojo Ultimate [Boss]","Gojo [Boss]","Kirito [Boss]","Mahoraga [Boss]","Mr Bai [Boss]","Okarun [Boss]","Shanks [Boss]","Yuji [Boss]","Zoro[Lv10000000]"}
 local Mon = {}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
-for _, v in pairs(game.workspace.Map.Mon:GetDescendants()) do
-  if v:IsA("Model") then
+for _, v in pairs(workspace.SpawnEnemy:GetChildren()) do
+  if v:IsA("Part") then
     table.insert(Mon, v.Name)
   end
 end
@@ -143,7 +143,7 @@ AddDropdownn(T2, "Select Boss", Bosslist, "nil", "Bosslist", function(qmj)
 _gv.seleboss = qmj
 end)
 T2:AddToggle({
-    Name = "Farm Mon Select",
+    Name = "Farm Mon Select [bug]",
     Default = false,
     Callback = function(w)
       _gv.ATF = w
@@ -343,20 +343,22 @@ T5:AddToggle({
 T5:AddSection({"| Code"})
 T5:AddButton({"Redeem All Code", function()
 for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
-  if v.Name and v:IsA("BoolValue") then
+  if v.Name then
      game:GetService("ReplicatedStorage").RedeemCode:FireServer(v.Name)
       end
    end
 end})
 ------[[ Spawn function ]]------
 
+--[[
 spawn(function()
     while true do
         task.wait()
         pcall(function()
             if _gv.ATF then
-                local Monster = game.workspace.Map.Mon
-                for _, v in pairs(Monster:GetDescendants()) do
+                local Monster = game.workspace.SpawnEnemy
+                if Monster[_gv.SLM]:FindFirstChild(_gv.SLM) then
+                for _, v in pairs(Monster:GetChildren()) do
                     if v.Name == _gv.SLM then
                         local humanoid = v:FindFirstChild("Humanoid")
                         local hrp = v:FindFirstChild("HumanoidRootPart")
@@ -375,19 +377,70 @@ spawn(function()
                                   BringMob()
                                 end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
-                                   end
-                                end
+                                     TP(v[_gv.SLM].HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                 end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
                     end
                 end
-            end
+                else
+                  TP(Monster[_gv.SLM].CFrame,false)
+                end
+          end
         end)
     end
+end)
+]]
+spawn(function()  
+    while true do  
+        task.wait()  
+        pcall(function()  
+            if _gv.ATF then  
+                print("เริ่มทำงาน!")  
+                local Monster = game.workspace.SpawnEnemy  
+                local validMonsters = {}  
+
+                for _, v in pairs(Monster:GetChildren()) do  
+                    if v:IsA("Model") and v.Name == _gv.SLM then  
+                        print("เจอ Model: ", v.Name)  
+                        local subMonster = v:FindFirstChild(_gv.SLM)  
+                        if subMonster then  
+                            print("มีลูกที่เป็น ".._gv.SLM.." อยู่ข้างใน!")  
+                            table.insert(validMonsters, v)  
+                        end  
+                    end  
+                end  
+
+                print("จำนวนมอนสเตอร์ที่ผ่านเงื่อนไข:", #validMonsters)  
+                for _, v in pairs(validMonsters) do  
+                    local humanoid = v:FindFirstChild("Humanoid")  
+                    local hrp = v:FindFirstChild("HumanoidRootPart")  
+                    if hrp and humanoid and humanoid.Health > 0 then  
+                        print("เจอศัตรูที่เฮลธ์มากกว่า 0!")  
+                        v.HumanoidRootPart.Size = Vector3.new(10, 30, 10)  
+                        v.HumanoidRootPart.Transparency = 0.9  
+                        v.HumanoidRootPart.CanCollide = false  
+                        v.Head.CanCollide = false  
+                        humanoid.WalkSpeed = 0  
+                        humanoid.JumpPower = 0  
+                        repeat  
+                            task.wait()  
+                            print("โจมตีศัตรูอยู่!")  
+                            _Attack()  
+                            EquipTool()  
+                            if _gv.BringMon then  
+                                BringMob()  
+                            end  
+                            if _gv.ATF and humanoid.Health > 1 then  
+                                print("กำลังเทเลพอร์ตไปหา!")  
+                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0), true)  
+                            end  
+                        until not _gv.ATF or humanoid.Health <= 0  
+                    end  
+                end  
+            end  
+        end)  
+    end  
 end)
 spawn(function()
     while true do
@@ -633,31 +686,6 @@ spawn(function()
             if _gv.FEE then
                 for _, v in pairs(game.Workspace:GetDescendants()) do
                     if v:IsA("ClickDetector") and v.Parent and v.Parent:IsA("BasePart") then
-                        local part = v.Parent
-                        if part.Transparency == 1 then
-                            part.Transparency = 0
-                        end
-                        if not part.CanCollide then
-                            part.CanCollide = true
-                        end
-                        local originalColor = part.BrickColor
-                        local isHighlighted = false
-                        local pointLight = Instance.new("PointLight")
-                        pointLight.Parent = part
-                        pointLight.Color = Color3.fromRGB(255, 255, 0)
-                        pointLight.Range = 10
-                        pointLight.Brightness = 2
-                        for i = 1, 4 do
-                            if isHighlighted then
-                                part.BrickColor = originalColor
-                            else
-                                part.BrickColor = BrickColor.new("Bright yellow")
-                            end
-                            isHighlighted = not isHighlighted
-                            wait(0.3)
-                        end
-                        part.BrickColor = originalColor
-                        pointLight:Destroy()
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame
                         wait(0.5)
                         fireclickdetector(v)
