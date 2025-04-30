@@ -23,7 +23,8 @@ local places = {
     [7716726054068] = {message = "Speed Piece Dungeon 1", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/SpeedPiece.lua"},
     [77167260540689] = {message = "Speed Piece Dungeon 2", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/SpeedPiece.lua"},
     [130992896367999] = {message = "Dawn Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Dawn%20piece.lua"},
-    [17263800225] = {message = "Zeno Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/zeno%20piece%2094%25.lua"}
+    [17263800225] = {message = "Zeno Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/zeno%20piece%2094%25.lua"},
+    [108256266368095] = {message = "TRAMADEX PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/TarmadexPiece.lua.txt"}
 }
 
 local function loadScript(url)
@@ -50,8 +51,6 @@ local function loadScript(url)
         textLabel.TextWrapped = true
     end
 end
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Log.lua"))()
 
 local place = places[game.PlaceId]
 if place then
