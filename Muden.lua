@@ -76,23 +76,6 @@ end
 function Up(a,b)
 game:GetService("ReplicatedStorage").RemoteEvents.UpPoint:FireServer(a,b)
 end
-function BringMob()
-    local monsterFolder = game.workspace.Map.Mon
-    if not monsterFolder then return end
-    for _, v in pairs(monsterFolder:GetDescendants()) do
-        if v:IsA("Model") and v.Name == _gv.SLM and v:FindFirstChild("HumanoidRootPart") then
-            for _, y in pairs(monsterFolder:GetDescendants()) do
-                if v:IsA("Model") and y.Name == _gv.SLM and y:FindFirstChild("HumanoidRootPart") then
-                    v.HumanoidRootPart.CFrame = y.HumanoidRootPart.CFrame
-                    v.HumanoidRootPart.CanCollide = false
-                    if sethiddenproperty then
-                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                    end
-                end
-            end
-        end
-    end
-end
 
 ------[[ Local Global ]]------
 
@@ -104,7 +87,7 @@ local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
 local island = GetN_Child(game.workspace.Map.Island,"Model")
 local SignalTable = GetN_Child(workspace.Map.Sign,"Model")
 local Shop = GetN_Child(game.workspace.Map.Shop,"Model")
-local Bosslist = {"Ala God [Boss]","Asrof [Boss]","Asta [Boss]","Sung Jin Woo [Boss]","Santa [Boss]","KJ [Boss]","Core","Eugeo [Boss]","Gojo Ultimate [Boss]","Gojo [Boss]","Kirito [Boss]","Mahoraga [Boss]","Mr Bai [Boss]","Okarun [Boss]","Shanks [Boss]","Yuji [Boss]","Zoro[Lv10000000]"}
+local Bosslist = {"Asta [Boss]", "King Human", "Zoro[Lv10000000]", "Gojo Ultimate [Boss]", "Yuji [Boss]", "Asrof [Boss]", "AizenV2 [Boss]", "Kirito [Boss]", "Moodeng [Boss]", "Okarun [Boss]", "KJ [Boss]", "Gojo [Boss]", "Frieren[Boss]", "Shanks [Boss]", "Black Goku [Boss]", "Core", "Madara [Boss]", "Yhwach[Boss]", "Ala God [Boss]", "Eugeo [Boss]", "Alucard [Boss]", "Sukuna [Boss]", "Starrk [Boss]", "Mr Bai [Boss]", "Mahoraga [Boss]"}
 local Mon = {}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 for _, v in pairs(workspace.SpawnEnemy:GetChildren()) do
@@ -143,7 +126,7 @@ AddDropdownn(T2, "Select Boss", Bosslist, "nil", "Bosslist", function(qmj)
 _gv.seleboss = qmj
 end)
 T2:AddToggle({
-    Name = "Farm Mon Select [bug]",
+    Name = "Farm Mon Select",
     Default = false,
     Callback = function(w)
       _gv.ATF = w
@@ -163,6 +146,7 @@ T2:AddToggle({
       _gv.ATFB = wm
     end
 })
+--[[
 T2:AddToggle({
     Name = "Farm Asta",
     Default = false,
@@ -205,7 +189,7 @@ T2:AddToggle({
     Callback = function(G)
       _gv.RKrubaG = G
     end
-})
+})]]
 T2:AddSection({"| Auto Skill"})
 T2:AddToggle({
   Name = "Z",
@@ -333,13 +317,6 @@ T5:AddSection({"| Settings"})
 AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
     _gv.Weapon = ooooo
 end)
-T5:AddToggle({
-    Name = "Bring Mob",
-    Default = true,
-    Callback = function(Nring)
-      _gv.BringMon = Nring
-    end
-})
 T5:AddSection({"| Code"})
 T5:AddButton({"Redeem All Code", function()
 for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
@@ -395,59 +372,49 @@ spawn(function()
     while true do  
         task.wait()  
         pcall(function()  
-            if _gv.ATF then  
-                print("เริ่มทำงาน!")  
+            if _gv.ATF then
                 local Monster = game.workspace.SpawnEnemy  
-                local validMonsters = {}  
-
-                for _, v in pairs(Monster:GetChildren()) do  
-                    if v:IsA("Model") and v.Name == _gv.SLM then  
-                        print("เจอ Model: ", v.Name)  
-                        local subMonster = v:FindFirstChild(_gv.SLM)  
-                        if subMonster then  
-                            print("มีลูกที่เป็น ".._gv.SLM.." อยู่ข้างใน!")  
-                            table.insert(validMonsters, v)  
-                        end  
-                    end  
-                end  
-
-                print("จำนวนมอนสเตอร์ที่ผ่านเงื่อนไข:", #validMonsters)  
-                for _, v in pairs(validMonsters) do  
-                    local humanoid = v:FindFirstChild("Humanoid")  
-                    local hrp = v:FindFirstChild("HumanoidRootPart")  
-                    if hrp and humanoid and humanoid.Health > 0 then  
-                        print("เจอศัตรูที่เฮลธ์มากกว่า 0!")  
-                        v.HumanoidRootPart.Size = Vector3.new(10, 30, 10)  
-                        v.HumanoidRootPart.Transparency = 0.9  
-                        v.HumanoidRootPart.CanCollide = false  
-                        v.Head.CanCollide = false  
-                        humanoid.WalkSpeed = 0  
-                        humanoid.JumpPower = 0  
-                        repeat  
-                            task.wait()  
-                            print("โจมตีศัตรูอยู่!")  
-                            _Attack()  
-                            EquipTool()  
-                            if _gv.BringMon then  
-                                BringMob()  
-                            end  
-                            if _gv.ATF and humanoid.Health > 1 then  
-                                print("กำลังเทเลพอร์ตไปหา!")  
-                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0), true)  
-                            end  
-                        until not _gv.ATF or humanoid.Health <= 0  
-                    end  
-                end  
-            end  
-        end)  
-    end  
+for _, v in pairs(workspace.SpawnEnemy:GetChildren()) do
+    if v.Name == _gv.SLM then
+        local children = v:GetChildren()
+        if #children == 0 then
+            TP(Monster[_gv.SLM].CFrame,false)
+        else
+                for _, v in pairs(Monster:GetDescendants()) do
+                    if v.Name == _gv.SLM then
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        local hrp = v:FindFirstChild("HumanoidRootPart")
+                        if hrp and humanoid and humanoid.Health > 0 then
+                      v.HumanoidRootPart.Size = Vector3.new(10, 30, 10)
+                      v.HumanoidRootPart.Transparency = 0.9
+                      v.HumanoidRootPart.CanCollide = false
+                      v.Head.CanCollide = false
+                      v:FindFirstChildOfClass("Humanoid").WalkSpeed = 0
+                      v:FindFirstChildOfClass("Humanoid").JumpPower = 0
+                            repeat
+                                task.wait()
+                                _Attack()
+                                EquipTool()
+                                if _gv.ATF and humanoid.Health > 1 then
+                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                 end
+                            until not _gv.ATF or humanoid.Health <= 0
+                        end
+                    end
+                end
+        end
+    end
+    end
+        end
+        end)
+    end 
 end)
 spawn(function()
     while true do
         task.wait()
         pcall(function()
             if _gv.ATFB then
-                for _, v in pairs(game.workspace:GetChildren()) do
+                for _, v in pairs(workspace.Map["Boss Spawn"]:GetDescendants()) do
                     if v:IsA("Model") and string.match(v.Name, "%[.+%]$") then
                         local humanoid = v:FindFirstChild("Humanoid")
                         local hrp = v:FindFirstChild("HumanoidRootPart")
@@ -482,7 +449,7 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.FSeleB then
-                local Monster = game.workspace
+                local Monster = game.workspace.Map["Boss Spawn"].Summons
                 for _, v in pairs(Monster:GetChildren()) do
                     if v.Name == _gv.seleboss then
                         local humanoid = v:FindFirstChild("Humanoid")
@@ -518,7 +485,7 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.AstaX then
-                 TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot,false)
+                 TP(game.workspace.Map["Boss Spawn"].Summons:FindFirstChild("Asta [Boss]").WorldPivot,false)
                     for _, v in pairs(workspace:GetChildren()) do
                         if v:IsA("Model") and v.Name == "Asta [Boss]" then
                             local humanoid = v:FindFirstChild("Humanoid")
@@ -550,7 +517,7 @@ spawn(function()
         task.wait() 
         pcall(function() 
             if _gv.AFemto then 
-                if workspace:FindFirstChild("Femto [Boss]") then
+                if workspace.Map["Boss Spawn"].Summons:FindFirstChild("Femto [Boss]") then
                         for _, v in pairs(workspace:GetChildren()) do 
                             if v:IsA("Model") and v.Name == "Femto [Boss]" then 
                                 local humanoid = v:FindFirstChild("Humanoid") 
@@ -591,7 +558,7 @@ spawn(function()
         task.wait()
         pcall(function()
             if _gv.AFemtoV2 then
-                if workspace:FindFirstChild("Femto [Boss]") then
+                if workspace.Map["Boss Spawn"].Summons:FindFirstChild("Femto [Boss]") then
                         for _, v in pairs(workspace:GetChildren()) do
                             if v:IsA("Model") and v.Name == "Femto [Boss]" then
                                 local humanoid = v:FindFirstChild("Humanoid")
@@ -620,7 +587,7 @@ spawn(function()
                         TP(workspace.Map["Spawn Boss"].Guts.WorldPivot,false)
                         fpp()
                     else
-                        TP(game.workspace:FindFirstChild("Asta [Boss]").WorldPivot,false)
+                        TP(game.workspace.Map["Boss Spawn"].Summons:FindFirstChild("Asta [Boss]").WorldPivot,false)
                             for _, v in pairs(workspace:GetChildren()) do
                                 if v:IsA("Model") and v.Name == "Asta [Boss]" then
                                     local humanoid = v:FindFirstChild("Humanoid")
@@ -786,6 +753,32 @@ end
 
 T6 = Window:MakeTab({"Premium", "Diamond"})
 T6:AddSection({"| Auto Farm"})
+T6:AddTextBox({
+  Name = "Get Gem/Exp/Money Count",
+  Description = "1 = 100Gem", 
+  PlaceholderText = "",
+  Callback = function(Value)
+    _gv.countgem = Value
+  end})
+T6:AddToggle({
+  Name = "Farm Gem/Exp/Money",
+  Default = false,
+  Callback = function(a)
+    _gv.PAFGEM = a
+  end
+})
+T6:AddButton({"Click to get Gem/Exp/Money", function()
+TP(workspace.Map["Free Rewerds and EasterEgg"].M1Q9_M1Q9.HumanoidRootPart.CFrame,false)
+if _gv.countgem == nil then
+for i = 1,1 do
+fireproximityprompt(workspace.Map["Free Rewerds and EasterEgg"].M1Q9_M1Q9.ProximityPrompt)
+end
+else
+for i = 1,_gv.countgem do
+fireproximityprompt(workspace.Map["Free Rewerds and EasterEgg"].M1Q9_M1Q9.ProximityPrompt)
+end
+end
+end})
 T6:AddToggle({
   Name = "Farm Bounty",
   Default = false,
@@ -796,6 +789,16 @@ T6:AddToggle({
 
 --------------------------------------------------------
 
+spawn(function()
+    while task.wait(0) do
+        pcall(function()
+            if _gv.PAFGEM then
+                TP(workspace.Map["Free Rewerds and EasterEgg"].M1Q9_M1Q9.HumanoidRootPart.CFrame,false)
+                fireproximityprompt(workspace.Map["Free Rewerds and EasterEgg"].M1Q9_M1Q9.ProximityPrompt)
+            end
+        end)
+    end
+end)
 spawn(function()
     while task.wait(0) do
         pcall(function()
