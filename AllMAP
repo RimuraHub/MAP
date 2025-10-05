@@ -24,7 +24,8 @@ local places = {
     [77167260540689] = {message = "Speed Piece Dungeon 2", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/SpeedPiece.lua"},
     [130992896367999] = {message = "Dawn Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Dawn%20piece.lua"},
     [17263800225] = {message = "Zeno Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/zeno%20piece%2094%25.lua"},
-    [108256266368095] = {message = "TRAMADEX PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/TarmadexPiece.lua.txt"}
+    [108256266368095] = {message = "TRAMADEX PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/TarmadexPiece.lua.txt"},
+    [130745629665129] = {message = "Godvers PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Godevser.lua"}
 }
 
 local function loadScript(url)
