@@ -35,6 +35,9 @@ function EquipTool()
         end
     end
 end
+local FireTouch = function(Part1,Part2,Time)
+  firetouchinterest(Part1,Part2,Time)
+end
 function EquipToolSele(NameWeapon)
     for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         if v:IsA("Tool") and v.Name == NameWeapon then
@@ -325,6 +328,13 @@ for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
       end
    end
 end})
+T5:AddToggle({
+    Name = "bring item",
+    Default = false,
+    Callback = function(item)
+      _gv.gtd = item
+    end
+})
 ------[[ Spawn function ]]------
 
 --[[
@@ -337,7 +347,7 @@ spawn(function()
                 if Monster[_gv.SLM]:FindFirstChild(_gv.SLM) then
                 for _, v in pairs(Monster:GetChildren()) do
                     if v.Name == _gv.SLM then
-                        local humanoid = v:FindFirstChild("Humanoid")
+local humanoid = v:FindFirstChild("Humanoid")
                         local hrp = v:FindFirstChild("HumanoidRootPart")
                         if hrp and humanoid and humanoid.Health > 0 then
                       v.HumanoidRootPart.Size = Vector3.new(10, 30, 10)
@@ -662,6 +672,19 @@ spawn(function()
             end
         end)
     end
+end)
+spawn(function()
+  while wait() do 
+    pcall(function()
+      if _gv.gtd then
+       for _, v in pairs(workspace:GetChildren()) do
+         if v:IsA("Tool") and not v:FindFirstChild("Active") then
+             v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+          end
+        end
+      end
+    end)
+  end
 end)
 spawn(function()
     while true do
@@ -1095,6 +1118,7 @@ spawn(function()
         end)
     end
 end)
+
 spawn(function()
     while true do
         task.wait()
