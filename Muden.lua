@@ -674,17 +674,20 @@ spawn(function()
     end
 end)
 spawn(function()
-  while wait() do 
-    pcall(function()
-      if _gv.gtd then
-       for _, v in pairs(game.Workspace:GetDescendants()) do
-         if v:IsA("Tool") and not v:FindFirstChild("Active") then
-             v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-          end
-        end
-      end
-    end)
-  end
+	while task.wait() do
+		pcall(function()
+			if _gv.gtd then
+				for _, v in pairs(workspace:GetDescendants()) do
+					if v:IsA("Tool") and v:FindFirstChild("Handle") then
+						local parent = v.Parent
+						if not (parent:FindFirstChildOfClass("Humanoid")) then
+							v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+						end
+					end
+				end
+			end
+		end)
+	end
 end)
 spawn(function()
     while true do
