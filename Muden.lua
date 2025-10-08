@@ -329,7 +329,7 @@ for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
    end
 end})
 T5:AddToggle({
-    Name = "bring item",
+    Name = "Find Chest",
     Default = false,
     Callback = function(item)
       _gv.gtd = item
@@ -405,9 +405,11 @@ for _, v in pairs(workspace.SpawnEnemy:GetChildren()) do
                                 task.wait()
                                 _Attack()
                                 EquipTool()
+                                if not _gv.gtd then
                                 if _gv.ATF and humanoid.Health > 1 then
                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                 end
+                                end
+                             end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
                     end
@@ -439,6 +441,7 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
+                                if not _gv.gtd then
                                 if _gv.ATFB and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
@@ -446,6 +449,7 @@ spawn(function()
                                       TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
                                    end
                                 end
+                              end
                             until not _gv.ATFB or humanoid.Health <= 0
                         end
                     end
@@ -475,6 +479,7 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
+                                if not _gv.gtd then
                                 if _gv.FSeleB and humanoid.Health > 1 then
                                   if v:FindFirstChild("HumanoidRootPart") then
                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
@@ -482,6 +487,7 @@ spawn(function()
                                       TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
                                    end
                                 end
+                               end
                             until not _gv.FSeleB or humanoid.Health <= 0
                         end
                     end
@@ -677,25 +683,23 @@ spawn(function()
 	while task.wait() do
 		pcall(function()
 			if _gv.gtd then
-
-			    if game.workspace.Drop.DropSpawn:FindFirstChildOfClass("Tool") then
-       for _, v in pairs(workspace.Drop.DropSpawn:GetChildren()) do
-         if v:IsA("Tool") then
-             v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-            end
-          end
-				end
-			    if game.workspace:FindFirstChildOfClass("Tool") then
-       for _, v in pairs(workspace:GetChildren()) do
-         if v:IsA("Tool") then
-             v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-            end
-          end
-				end
+			    a = workspace.Drop:FindFirstChildOfClass("Part")
+			    TP(a.CFrame,false)for _,a in ipairs(workspace.Drop:GetChildren()) do
+	if a:IsA("Part") then
+		TP(a.CFrame,false)
+		task.wait(1)
+		local p = a:FindFirstChildOfClass("ProximityPrompt")
+		if p then
+		    fpp(p)
+		    end
+		task.wait(1)
+	end
+end
 			end
 		end)
 	end
-end)spawn(function()
+end)
+spawn(function()
     while true do
         task.wait()
         pcall(function()
