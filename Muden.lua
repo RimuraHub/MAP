@@ -30,7 +30,7 @@ function _Attack()
 end
 function EquipTool()
     for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-        if v:IsA("Tool") and v.Name == _gv.Weapon then
+        if v:IsA("Tool") and v.ToolTip == _gv.Weapon then
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
         end
     end
@@ -86,7 +86,7 @@ local Wsp = game.workspace
 local Ply = game:GetService("Players")
 local ChaPly = Ply.LocalPlayer.Character or Ply.LocalPlayer.CharacterAdded:Wait()
 local NameMap = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
-local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
+local Wea = {"Melee","Sword","DevilFruit","Gun"}
 local island = GetN_Child(game.workspace.Map.Island,"Model")
 local SignalTable = GetN_Child(workspace.Map.Sign,"Model")
 local Shop = GetN_Child(game.workspace.Map.Shop,"Model")
@@ -240,13 +240,16 @@ T6:AddButton({"Join Dungeon[No spawn wait but have bug]", function()
 game:GetService("TeleportService"):Teleport(76091669089883)
 end})
 T3:AddSection({"| Up Stats"})
+T3:AddSlider({"Up Number", 1, 1000, 1, 1, function(VALUE)
+_gv.UPNUM = VALUE
+end})
 T3:AddToggle({
-  Name = "Up DevilFruit",
+  Name = "Up Melee",
   Default = false,
-  Callback = function(DevilFruit)
-    _gv.DevilFruit = DevilFruit
-      while _gv.DevilFruit do task.wait()
-        Up("DevilFruit", "1")
+  Callback = function(Melee)
+    _gv.Melee = Melee
+      while _gv.Melee do task.wait()
+        Up("Melee",_gv.UPNUM)
       end
   end
 })
@@ -256,7 +259,7 @@ T3:AddToggle({
   Callback = function(Defense)
     _gv.Defense = Defense
       while _gv.Defense do task.wait()
-        Up("Defense", "1")
+        Up("Defense",_gv.UPNUM)
       end
   end
 })
@@ -266,17 +269,27 @@ T3:AddToggle({
   Callback = function(Sword)
     _gv.Sword = Sword
       while _gv.Sword do task.wait()
-        Up("Sword","1")
+        Up("Sword",_gv.UPNUM)
       end
   end
 })
 T3:AddToggle({
-  Name = "Up Melee",
+  Name = "Up DevilFruit",
   Default = false,
-  Callback = function(Melee)
-    _gv.Melee = Melee
-      while _gv.Melee do task.wait()
-        Up("Melee","1")
+  Callback = function(DevilFruit)
+    _gv.DevilFruit = DevilFruit
+      while _gv.DevilFruit do task.wait()
+        Up("DevilFruit",_gv.UPNUM)
+      end
+  end
+})
+T3:AddToggle({
+  Name = "Up Gun",
+  Default = false,
+  Callback = function(Gun)
+    _gv.Gun = Gun
+      while _gv.Gun do task.wait()
+        Up("Gun",_gv.UPNUM)
       end
   end
 })
@@ -320,6 +333,33 @@ T5:AddSection({"| Settings"})
 AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
     _gv.Weapon = ooooo
 end)
+AddDropdownn(T5, "Select Method", Method,"Upper", "Method", function(kkllpo)
+    _gv.Method = kkllpo
+end)
+T5:AddSlider({"Farm Distance", 1, 30, 1, 7, function(VALUE)
+_gv.DistanceMob = VALUE
+end})
+T5:AddToggle({
+  Name = "White_Screen",
+  Default = false,
+  Callback = function(White_Screen)
+    _gv.White_Screen = White_Screen
+  end
+})
+T5:AddToggle({
+    Name = "Find Chest",
+    Default = true,
+    Callback = function(item)
+      _gv.gtd = item
+    end
+})
+T5:AddToggle({
+  Name = "auto store item",
+  Default = true,
+  Callback = function(store)
+    _gv.stonitem = store
+  end
+})
 T5:AddSection({"| Code"})
 T5:AddButton({"Redeem All Code", function()
 for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
@@ -328,13 +368,7 @@ for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
       end
    end
 end})
-T5:AddToggle({
-    Name = "Find Chest",
-    Default = true,
-    Callback = function(item)
-      _gv.gtd = item
-    end
-})
+
 ------[[ Spawn function ]]------
 
 --[[
@@ -364,7 +398,7 @@ local humanoid = v:FindFirstChild("Humanoid")
                                   BringMob()
                                 end
                                 if _gv.ATF and humanoid.Health > 1 then
-                                     TP(v[_gv.SLM].HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                     TP(v[_gv.SLM].HumanoidRootPart.CFrame * MethodFarm,true)
                                  end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
@@ -404,23 +438,34 @@ for _, v in pairs(workspace.SpawnEnemy:GetChildren()) do
                             repeat
                                 task.wait()
                                 _Attack()
+if _gv.stonitem then  
+    for _, t in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+        if t:IsA("Tool") and t.ToolTip == "" then  
+            for _, x in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+                if x:IsA("Tool") and x.ToolTip ~= "" then  
+                    x.Parent = game.Players.LocalPlayer.Backpack  
+                end  
+            end  
+        else  
+            EquipTool()  
+        end  
+    end  
+else  
+    EquipTool()  
+end
                                 if _gv.gtd then
                                  if workspace.Drop:FindFirstChildOfClass("Part") then
                                      else
-                                if _gv.ATFB and humanoid.Health > 1 then
+                                if _gv.ATF and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
-                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                   else
-                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                      TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                    end
                                 end
                                  end
                                 else
-                                if _gv.ATFB and humanoid.Health > 1 then
+                                if _gv.ATF and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
-                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                   else
-                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                      TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                    end
                                 end
                               end
@@ -454,24 +499,34 @@ spawn(function()
                             repeat
                                 task.wait()
                                 _Attack()
-                                EquipTool()
+if _gv.stonitem then  
+    for _, t in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+        if t:IsA("Tool") and t.ToolTip == "" then  
+            for _, x in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+                if x:IsA("Tool") and x.ToolTip ~= "" then  
+                    x.Parent = game.Players.LocalPlayer.Backpack  
+                end  
+            end  
+        else  
+            EquipTool()  
+        end  
+    end  
+else  
+    EquipTool()  
+end
                                 if _gv.gtd then
                                  if workspace.Drop:FindFirstChildOfClass("Part") then
                                      else
                                 if _gv.ATFB and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
-                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                   else
-                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                      TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                    end
                                 end
                                  end
                                 else
                                 if _gv.ATFB and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
-                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                   else
-                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                      TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                    end
                                 end
                               end
@@ -503,24 +558,34 @@ spawn(function()
                             repeat
                                 task.wait()
                                 _Attack()
-                                EquipTool()
+if _gv.stonitem then  
+    for _, t in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+        if t:IsA("Tool") and t.ToolTip == "" then  
+            for _, x in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+                if x:IsA("Tool") and x.ToolTip ~= "" then  
+                    x.Parent = game.Players.LocalPlayer.Backpack  
+                end  
+            end  
+        else  
+            EquipTool()  
+        end  
+    end  
+else  
+    EquipTool()  
+end
                                 if _gv.gtd then
                                  if workspace.Drop:FindFirstChildOfClass("Part") then
                                      else
-                                if _gv.ATFB and humanoid.Health > 1 then
+                                if _gv.FSeleB and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
-                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                   else
-                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                      TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                    end
                                 end
                                  end
                                 else
-                                if _gv.ATFB and humanoid.Health > 1 then
+                                if _gv.FSeleB and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
-                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                   else
-                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                      TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                    end
                                 end
                               end
@@ -554,7 +619,7 @@ spawn(function()
                                     _Attack()
                                     EquipTool()
                                 if _gv.AFemtoV2 and humanoid.Health > 1 then
-                                   TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                   TP(hrp.CFrame * MethodFarm,true)
                                 end
                            until not _gv.AFemtoV2 or humanoid.Health <= 0
                        end
@@ -627,7 +692,7 @@ spawn(function()
                                         _Attack()
                                         EquipTool()
                                         if _gv.AFemtoV2 and humanoid.Health > 1 then
-                                            TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                            TP(hrp.CFrame * MethodFarm,true)
                                         end
                                     until not _gv.AFemtoV2 or humanoid.Health <= 0
                                 end
@@ -656,7 +721,7 @@ spawn(function()
                                          _Attack()
                                          EquipTool()
                                          if _gv.AFemtoV2 and humanoid.Health > 1 then
-                                            TP(hrp.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                            TP(hrp.CFrame * MethodFarm,true)
                                          end
                                     until not _gv.AFemtoV2 or humanoid.Health <= 0
                                 end
@@ -666,6 +731,52 @@ spawn(function()
                 end
             end
         end)
+    end
+end)
+task.spawn(function()
+    while true do
+      task.wait()
+         pcall(function()
+            if _gv.stonitem then
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == "" then
+            for _, x in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+                if x:IsA("Tool") and x.ToolTip ~= "" then  
+                    x.Parent = game.Players.LocalPlayer.Backpack  
+                end  
+            end
+            v.Parent = game.Players.LocalPlayer.Character
+            game:GetService("ReplicatedStorage").RemoteFunctions.Inventory:InvokeServer("Add")
+        end
+    end
+            end
+        end)
+    end
+end)
+
+task.spawn(function()
+        while wait() do 
+            pcall(function()
+                if _gv.Method == "Behind" then
+                    MethodFarm = CFrame.new(0,0,_gv.DistanceMob)
+                elseif _gv.Method == "Below" then
+                    MethodFarm = CFrame.new(0,-_gv.DistanceMob,0) * CFrame.Angles(math.rad(90),0,0)
+                elseif _gv.Method == "Upper" then
+                    MethodFarm = CFrame.new(0,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                else
+                    MethodFarm = CFrame.new(0,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                end
+            end)
+        end
+    end)
+task.spawn(function()
+    while true do
+        task.wait()
+        if _gv.White_Screen then
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        else
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
     end
 end)
 spawn(function()
@@ -987,7 +1098,7 @@ function _Attack()
 end
 function EquipTool()
     for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-        if v:IsA("Tool") and v.Name == _gv.Weapon then
+        if v:IsA("Tool") and v.ToolTip == _gv.Weapon then
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
         end
     end
@@ -1023,7 +1134,7 @@ local Wsp = game.workspace
 local Ply = game:GetService("Players")
 local ChaPly = Ply.LocalPlayer.Character or Ply.LocalPlayer.CharacterAdded:Wait()
 local NameMap = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
-local Wea = GetN_Child(game.Players.LocalPlayer.Backpack,"Tool")
+local Wea = {"Melee","Sword","DevilFruit","Gun"}
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/RimuraHub/Redz-Ui/refs/heads/main/Ui.lua"))()
 
 ------[[ Ui library ]]------
@@ -1096,6 +1207,26 @@ T5:AddSection({"| Settings"})
 AddDropdownn(T5, "Select Weapon", Wea,"nil", "Weapon", function(ooooo)
     _gv.Weapon = ooooo
 end)
+AddDropdownn(T5, "Select Method", Method,"Upper", "Method", function(kkllpo)
+    _gv.Method = kkllpo
+end)
+T5:AddSlider({"Farm Distance", 1, 30, 1, 7, function(VALUE)
+_gv.DistanceMob = VALUE
+end})
+T5:AddToggle({
+  Name = "White_Screen",
+  Default = false,
+  Callback = function(White_Screen)
+    _gv.White_Screen = White_Screen
+  end
+})
+T5:AddToggle({
+  Name = "auto store item",
+  Default = true,
+  Callback = function(store)
+    _gv.stonitem = store
+  end
+})
 
 ------[[ Spawn function ]]------
 
@@ -1118,12 +1249,24 @@ spawn(function()
                             repeat
                                 task.wait()
                                 _Attack()
-                                EquipTool()
+if _gv.stonitem then  
+    for _, t in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+        if t:IsA("Tool") and t.ToolTip == "" then  
+            for _, x in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+                if x:IsA("Tool") and x.ToolTip ~= "" then  
+                    x.Parent = game.Players.LocalPlayer.Backpack  
+                end  
+            end  
+        else  
+            EquipTool()  
+        end  
+    end  
+else  
+    EquipTool()  
+end
                                 if _gv.AFD and humanoid.Health > 1 then
                                   if v:FindFirstChild("HumanoidRootPart") then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
-                                  else
-                                     TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                     TP(v.HumanoidRootPart.CFrame * MethodFarm,true)
                                   end
                                end
                             until not _gv.AFD or humanoid.Health <= 0
@@ -1132,6 +1275,52 @@ spawn(function()
                 end
             end
         end)
+    end
+end)
+task.spawn(function()
+    while true do
+      task.wait()
+         pcall(function()
+            if _gv.stonitem then
+    for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == "" then
+            for _, x in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do  
+                if x:IsA("Tool") and x.ToolTip ~= "" then  
+                    x.Parent = game.Players.LocalPlayer.Backpack  
+                end  
+            end
+            v.Parent = game.Players.LocalPlayer.Character
+            game:GetService("ReplicatedStorage").RemoteFunctions.Inventory:InvokeServer("Add")
+        end
+    end
+            end
+        end)
+    end
+end)
+
+task.spawn(function()
+        while wait() do 
+            pcall(function()
+                if _gv.Method == "Behind" then
+                    MethodFarm = CFrame.new(0,0,_gv.DistanceMob)
+                elseif _gv.Method == "Below" then
+                    MethodFarm = CFrame.new(0,-_gv.DistanceMob,0) * CFrame.Angles(math.rad(90),0,0)
+                elseif _gv.Method == "Upper" then
+                    MethodFarm = CFrame.new(0,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                else
+                    MethodFarm = CFrame.new(0,_gv.DistanceMob,0)  * CFrame.Angles(math.rad(-90),0,0)
+                end
+            end)
+        end
+    end)
+task.spawn(function()
+    while true do
+        task.wait()
+        if _gv.White_Screen then
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        else
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
     end
 end)
 spawn(function()
