@@ -330,7 +330,7 @@ for _, v in pairs(game.Players.LocalPlayer.Codes:GetChildren()) do
 end})
 T5:AddToggle({
     Name = "Find Chest",
-    Default = false,
+    Default = true,
     Callback = function(item)
       _gv.gtd = item
     end
@@ -404,12 +404,26 @@ for _, v in pairs(workspace.SpawnEnemy:GetChildren()) do
                             repeat
                                 task.wait()
                                 _Attack()
-                                EquipTool()
-                                if not _gv.gtd then
-                                if _gv.ATF and humanoid.Health > 1 then
-                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                if _gv.gtd then
+                                 if workspace.Drop:FindFirstChildOfClass("Part") then
+                                     else
+                                if _gv.ATFB and humanoid.Health > 1 then
+                                   if v:FindFirstChild("HumanoidRootPart") then
+                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                   else
+                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
                                 end
-                             end
+                                 end
+                                else
+                                if _gv.ATFB and humanoid.Health > 1 then
+                                   if v:FindFirstChild("HumanoidRootPart") then
+                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                   else
+                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
+                                end
+                              end
                             until not _gv.ATF or humanoid.Health <= 0
                         end
                     end
@@ -441,7 +455,18 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
-                                if not _gv.gtd then
+                                if _gv.gtd then
+                                 if workspace.Drop:FindFirstChildOfClass("Part") then
+                                     else
+                                if _gv.ATFB and humanoid.Health > 1 then
+                                   if v:FindFirstChild("HumanoidRootPart") then
+                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                   else
+                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
+                                end
+                                 end
+                                else
                                 if _gv.ATFB and humanoid.Health > 1 then
                                    if v:FindFirstChild("HumanoidRootPart") then
                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
@@ -479,15 +504,26 @@ spawn(function()
                                 task.wait()
                                 _Attack()
                                 EquipTool()
-                                if not _gv.gtd then
-                                if _gv.FSeleB and humanoid.Health > 1 then
-                                  if v:FindFirstChild("HumanoidRootPart") then
+                                if _gv.gtd then
+                                 if workspace.Drop:FindFirstChildOfClass("Part") then
+                                     else
+                                if _gv.ATFB and humanoid.Health > 1 then
+                                   if v:FindFirstChild("HumanoidRootPart") then
                                       TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
                                    else
                                       TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
                                    end
                                 end
-                               end
+                                 end
+                                else
+                                if _gv.ATFB and humanoid.Health > 1 then
+                                   if v:FindFirstChild("HumanoidRootPart") then
+                                      TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),true)
+                                   else
+                                      TP(v.WorldPivot * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0),false)
+                                   end
+                                end
+                              end
                             until not _gv.FSeleB or humanoid.Health <= 0
                         end
                     end
