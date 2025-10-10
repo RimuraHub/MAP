@@ -25,7 +25,8 @@ local places = {
     [130992896367999] = {message = "Dawn Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Dawn%20piece.lua"},
     [17263800225] = {message = "Zeno Piece", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/zeno%20piece%2094%25.lua"},
     [108256266368095] = {message = "TRAMADEX PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/TarmadexPiece.lua.txt"},
-    [130745629665129] = {message = "Godvers PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Godevser.lua"}
+    [130745629665129] = {message = "Godvers PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Godevser.lua"},
+    [88448392840247] = {message = "Honey PIECE", url = "https://raw.githubusercontent.com/RimuraHub/MAP/refs/heads/main/Honey%20piece.lua"}
 }
 
 local function loadScript(url)
